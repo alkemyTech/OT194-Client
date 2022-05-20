@@ -6,6 +6,7 @@ import { GrClose } from 'react-icons/gr';
 
 //TiThMenu
 import {
+	ButtonsContainer,
 	HeaderContainer,
 	Link,
 	Logo,
@@ -14,11 +15,19 @@ import {
 	MenuList,
 	MenuMobile,
 	MenuMobileList,
+	MyButton,
 } from './StyledHeader';
 
 export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
-	const mockedLinks = ['About', 'Contact', 'More Info'];
+	const mockedLinks = [
+		'Inicio',
+		'Nosotros',
+		'Novedades',
+		'Testimonios',
+		'Contacto',
+		'Contribuye',
+	];
 
 	const handleMenu = () => {
 		console.log('ckic');
@@ -43,14 +52,20 @@ export const Header = () => {
 	// ];
 	return (
 		<HeaderContainer>
-			<Logo style={{ backgroundImage: 'url(/images/assets/logo.png)' }} />
+			<Logo
+				style={{ backgroundImage: 'url(/images/assets/logo_somos_mas.png)' }}
+			/>
+
 			<MenuList>
 				{mockedLinks.map((link) => (
 					<MenuItem key={link}>
 						<Link href='https://www.google.com'>{link}</Link>
 					</MenuItem>
 				))}
-
+				<ButtonsContainer>
+					<MyButton red={false}>Log in</MyButton>
+					<MyButton red>Registrate</MyButton>
+				</ButtonsContainer>
 				{/* TODO: LINKS FROM REACT ROUTER */}
 				{/* {navLinks.map((link,i) => (
 					<MenuItem key={i}>
@@ -76,6 +91,10 @@ export const Header = () => {
 							</MenuItem>
 						))}
 					</MenuMobileList>
+					<ButtonsContainer>
+						<MyButton red={false}>Log in</MyButton>
+						<MyButton red>Registrate</MyButton>
+					</ButtonsContainer>
 				</MenuMobile>
 			)}
 		</HeaderContainer>

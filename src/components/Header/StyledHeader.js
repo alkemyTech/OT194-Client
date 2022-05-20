@@ -11,6 +11,7 @@ export const HeaderContainer = styled.div`
 	height: 80px;
 	${sharedProps};
 	padding: 10px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const Logo = styled.div`
@@ -36,6 +37,8 @@ export const MenuItem = styled.li`
 export const Link = styled.a`
 	text-decoration: none;
 	color: black;
+	font-style: 16px;
+	font-weight: bold;
 `;
 
 export const MenuHambIcon = styled.div`
@@ -63,4 +66,29 @@ export const MenuMobileList = styled.ul`
 	list-style: none;
 	${sharedProps};
 	flex-direction: column;
+	padding: 0;
+`;
+
+export const MyButton = styled.button`
+	background-color: ${(props) => (props.red ? '#FF0000' : 'white')};
+	border: ${(props) => (props.red ? 'none' : '1px black solid')};
+	border-radius: 20px;
+	color: ${(props) => (props.red ? 'white' : 'black')};
+	padding: 10px 20px;
+	cursor: pointer;
+	margin-bottom: 10px;
+	@media screen and (min-width: 450px) {
+		margin-right: 10px;
+	}
+`;
+
+export const ButtonsContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+
+	@media screen and (min-width: 450px) {
+		flex-direction: row;
+	}
 `;
