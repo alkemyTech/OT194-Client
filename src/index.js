@@ -5,11 +5,14 @@ import App from './App';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import AlertsProvider from './providers/AlertsProvider'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <AlertsProvider>
+         <App />
+      </AlertsProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
