@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import SweetAlert from "sweetalert2-react";
+import { hideAlert, showAlert } from "../actions/alertsActions";
 
 class AlertsProvider extends Component {
     constructor(props) {
@@ -11,17 +13,17 @@ class AlertsProvider extends Component {
     }
 
     confirm = () => {
-        console.log('confirm');
-        this.setState({ show: false })
+        console.log('Oculta la Alerta');
+        this.props.hideAlert();
     }
 
     openAlert = () => {
-        this.setState({ show: true })
+        console.log('Muestra la Alerta');
+        this.props.showAlert(true, 'Probando la Alerta', 'Acá la información de la alerta')
     }
 
     render() {
-        const {children} = this.props;
-        const {show} = this.state;
+        const {children, alert} = this.props;
 
         return (
             <>
@@ -29,9 +31,9 @@ class AlertsProvider extends Component {
                 <button onClick={this.openAlert}>Abre la Alerta</button>
                 {children}
                 <SweetAlert
-                    show = {show}
-                    text = "Mostrando las Alertas que la app necesita"
-                    title = "Sistema de alertas"
+                    show = {alert.show}
+                    text = {alert.text}
+                    title = {alert.title}
                     onConfirm= {this.confirm}
                 />
                 
@@ -40,4 +42,22 @@ class AlertsProvider extends Component {
     }
 }
 
-export default AlertsProvider;
+const mapStateToProps = (state) => {
+    return {
+        alert: state.alerts,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showAlert: (show, title, text) => dispatch(showAlert(show, title, text)),
+        hideAlert: () => dispatch(hideAlert())
+    }
+}
+
+const AlertsProviderLink = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AlertsProvider);
+
+export default AlertsProviderLink;
