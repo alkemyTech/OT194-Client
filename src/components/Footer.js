@@ -16,15 +16,11 @@ export const Footer = () => {
         link: ''
       },
       {
+        title: 'Nosotros',
+        link: ''
+      },
+      {
         title: 'Novedades',
-        link: ''
-      },
-      {
-        title: 'Actividades',
-        link: ''
-      },
-      {
-        title: 'Miembros',
         link: ''
       },
       {
@@ -33,6 +29,10 @@ export const Footer = () => {
       },
       {
         title: 'Contacto',
+        link: ''
+      },
+      {
+        title: 'Contribuye',
         link: ''
       },
     ],
@@ -52,31 +52,32 @@ export const Footer = () => {
 
   return (
     <div 
-      className="sm:grid sm:grid-cols-3 sm:gap-0 flex flex-col gap-6 bg-violet-500 py-10 text-white text-center"
+      className="flex flex-col gap-6 py-10 bg-gray-100 text-center"
     >
-      <div className="flex flex-col items-center gap-1">
-        <img src="/favicon.ico" width={70} alt="logo de la fundacion" />
-        <p className="font-bold">{publicData.name}</p>
+      <div className="flex items-center gap-1">
+        <div className="w-full mx-auto rounded-md h-0.5 bg-redOng flex" />
+        <img src="/logo-fundacion.png" height={100} alt="logo de la fundacion" />
+        <div className="w-full mx-auto rounded-md h-0.5 bg-blueOng flex" />
       </div>
-      <div className="w-20 mx-auto rounded-md h-0.5 bg-white flex sm:hidden" />
-      <div className="flex flex-col gap-1">
+      <div className="w-20 mx-auto rounded-md h-0.5 bg-black flex sm:hidden" />
+      <div className="flex flex-col sm:flex-row mx-auto gap-2 sm:gap-8">
         {
           publicData.sections.map(section => (
             <p className="hover:scale-105 transition-transform font-medium">
-              <a href={section.link}>{section.title}</a>
+              <a className="transition-colors no-underline visited:text-gray-500" href={section.link}>{section.title}</a>
             </p>
           ))
         }
       </div>
-      <div className="w-20 mx-auto rounded-md h-0.5 bg-white flex sm:hidden" />
-      <div className="flex flex-col gap-3">
+      <div className="w-20 mx-auto rounded-md h-0.5 bg-black flex sm:hidden" />
+      <div className="flex mx-auto gap-8">
         {
           publicData.socials.map(social => (
             <span className="flex flex-col">
-              <p className="font-bold">
+              <p className="font-bold text-sky-500">
                 {social.web}
               </p>
-              <a href={social.link}>{social.name}</a>
+              <a className="transition-colors no-underline visited:text-gray-500" href={social.link}>{social.name}</a>
             </span>
           ))
         }
