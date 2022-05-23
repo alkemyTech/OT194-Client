@@ -9,8 +9,14 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^4.3.1",
     "react-redux": "^7.1.3",
+<<<<<<< HEAD
     "react-scripts": "^5.0.1"
+=======
+    "react-scripts": "3.4.3",
+    "styled-components": "^5.3.5"
+>>>>>>> 92e759d3835d2d04c8d5074fce5be3554c92c0eb
   },
   "scripts": {
     "start": "react-scripts start",
