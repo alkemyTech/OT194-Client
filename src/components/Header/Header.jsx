@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 
-//TiThMenu
+// TiThMenu
 import {
 	ButtonsContainer,
 	HeaderContainer,
@@ -15,7 +15,7 @@ import {
 	MenuList,
 	MenuMobile,
 	MenuMobileList,
-	MyButton,
+	MyButton
 } from './StyledHeader';
 
 export const Header = () => {
@@ -26,7 +26,7 @@ export const Header = () => {
 		'Novedades',
 		'Testimonios',
 		'Contacto',
-		'Contribuye',
+		'Contribuye'
 	];
 
 	const handleMenu = () => {
@@ -34,7 +34,7 @@ export const Header = () => {
 		setMenuOpen(!menuOpen);
 	};
 
-	//TODO: Links=> object Array
+	// TODO: Links=> object Array
 	// const navLinks = [
 	// 	{
 	// 		text: 'About',
@@ -76,11 +76,13 @@ export const Header = () => {
 				))} */}
 			</MenuList>
 			<MenuHambIcon>
-				{menuOpen ? (
-					<GrClose fontSize={25} onClick={handleMenu} />
-				) : (
-					<GiHamburgerMenu fontSize={25} onClick={handleMenu} />
-				)}
+				{menuOpen
+					? (
+						<GrClose fontSize={25} onClick={handleMenu} />
+					)
+					: (
+						<GiHamburgerMenu fontSize={25} onClick={handleMenu} />
+					)}
 			</MenuHambIcon>
 			{menuOpen && (
 				<MenuMobile>

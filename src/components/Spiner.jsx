@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Spiner() {
+function Spiner () {
   return (
     <div className='relative grid place-items-center h-screen'>
       <div className='flex items-center justify-center space-x-2 animate-bounce '>
