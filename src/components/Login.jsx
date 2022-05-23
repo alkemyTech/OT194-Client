@@ -1,73 +1,61 @@
-import React, {useState} from 'react'
-import { Formik, Form } from 'formik'
-
+import React, { useState } from "react";
+import { Formik, Field, Form } from "formik";
+import { Header } from "./Header/Header";
 
 export const Login = () => {
-    const [formValues, setFormValues] = useState({
-        email:'',
-        constraseña:''
-    })
+  const validateEmail = (value) => {
+    let errorMessageEmail;
 
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+      errorMessageEmail = "Email invalido";
+    }
+
+    return errorMessageEmail;
+  };
+  const validatePassword = (value) => {
+    let errorMessagePassword;
+
+    if (value.length < 6) {
+      errorMessagePassword = "Constraseña invalida";
+    }
+    return errorMessagePassword;
+  };
+  const [formValues, setFormValues] = useState({
+    email: "",
+    constraseña: "",
+  });
 
   return (
-    <div>Login
+    <div>
+      <Header></Header>
 
-    <Formik initialValues={{email:'',constraseña:''}}
-     validate={values => {
-        const errors = {};
-        if (!values.email) {
-          errors.email = 'Required';
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = 'Correo invalido.';
-        }
-        if (!values.constraseña){
-            errors.constraseña = 'Required';
-          } else if (values.constraseña.length < 6){
-              errors.constraseña = 'La contraseña debe tener al menos 6 caracteres.'
-          }
-        return errors;
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}>
-           {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        /* and other goodies */
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-          />
-          {errors.email && touched.email && errors.email}
-          <input
-            type="password"
-            name="password"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-          />
-          {errors.password && touched.password && errors.password}
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-        </form>
-      )}
-    </Formik>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => {
+          setFormValues({ email: values.email, password: values.password });
+        }}
+      >
+        {({ errors }) => (
+          <Form>
+            <Field
+              validate={validateEmail}
+              type="email"
+              name="email"
+              placeholder="Email"
+            />
+            {errors.email ? <div>{errors.email}</div> : null}
+            <Field
+              validate={validatePassword}
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Contraseña"
+            />
+            {errors.password ? <div>{errors.password}</div> : null}
+            <button type="submit">Submit</button>
+          </Form>
+        )}
+      </Formik>
     </div>
-  )
-}
+  );
+};
