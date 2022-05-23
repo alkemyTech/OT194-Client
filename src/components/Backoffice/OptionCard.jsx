@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from "prop-types";
 import { FaArrowRight } from "react-icons/fa"
 
 export const OptionCard = ({title, icon}) => {
@@ -20,4 +21,9 @@ export const OptionCard = ({title, icon}) => {
       </div>
     </div>
   )
+}
+
+OptionCard.propTypes = {
+  title: PropTypes.string,
+  icon: PropTypes.object
 }
