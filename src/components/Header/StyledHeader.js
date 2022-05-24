@@ -1,25 +1,25 @@
 import styled, { css } from 'styled-components';
 
 const sharedProps = css`
-	display: flex;
 	align-items: center;
+	display: flex;
 	justify-content: space-between;
 `;
 
 export const HeaderContainer = styled.div`
 	/* background-color: red; */
-	height: 80px;
-	${sharedProps};
-	padding: 10px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	${sharedProps};
+	height: 80px;
+	padding: 10px;
 `;
 
 export const Logo = styled.div`
-	width: 80px;
-	height: 80px;
-	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
+	background-size: contain;
+	height: 80px;
+	width: 80px;
 `;
 
 export const MenuList = styled.ul`
@@ -35,60 +35,60 @@ export const MenuItem = styled.li`
 `;
 
 export const Link = styled.a`
-	text-decoration: none;
 	color: black;
 	font-style: 16px;
 	font-weight: bold;
+	text-decoration: none;
 `;
 
 export const MenuHambIcon = styled.div`
-	width: 60px;
 	height: 60px;
-	${sharedProps};
 	justify-content: center;
+	${sharedProps};
+	width: 60px;
 	@media screen and (min-width: 450px) {
 		display: none;
 	}
 `;
 
 export const MenuMobile = styled.div`
-	position: absolute;
-	top: 100px;
-	left: 0;
 	bottom: 0;
+	left: 0;
+	position: absolute;
 	right: 0;
+	top: 100px;
 	@media screen and (min-width: 450px) {
 		display: none;
 	}
 `;
 
 export const MenuMobileList = styled.ul`
-	list-style: none;
-	${sharedProps};
 	flex-direction: column;
+	${sharedProps};
+	list-style: none;
 	padding: 0;
 `;
 
 export const MyButton = styled.button`
-	background-color: ${(props) => (props.red ? '#FF0000' : 'white')};
-	border: ${(props) => (props.red ? 'none' : '1px black solid')};
-	border-radius: 20px;
-	color: ${(props) => (props.red ? 'white' : 'black')};
-	padding: 10px 20px;
-	cursor: pointer;
-	margin-bottom: 10px;
-	@media screen and (min-width: 450px) {
-		margin-right: 10px;
-	}
+background-color: ${(props) => (props.red ? '#FF0000' : 'white')};
+border: ${(props) => (props.red ? 'none' : '1px black solid')};
+border-radius: 20px;
+color: ${(props) => (props.red ? 'white' : 'black')};
+cursor: pointer;
+margin-bottom: 10px;
+padding: 10px 20px;
+@media screen and (min-width: 450px) {
+margin-right: 10px;
+}
 `;
 
 export const ButtonsContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-direction: column;
+align-items: center;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 
-	@media screen and (min-width: 450px) {
-		flex-direction: row;
-	}
+@media screen and (min-width: 450px) {
+flex-direction: row;
+}
 `;

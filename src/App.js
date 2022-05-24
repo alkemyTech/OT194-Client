@@ -1,9 +1,8 @@
 import React from 'react';
-
 import './App.css';
 import { Header } from './components/Header/Header';
 
-function App() {
+function App () {
 	return <Header />;
 }
 
