@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'redPure':'#FF0000',
         'redOng': '#DB5752',
         'yellowOng': '#FAFA88',
         'blueOng': '#9AC9FB',
