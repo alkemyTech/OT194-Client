@@ -1,17 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SweetAlert from "sweetalert2-react";
 import { hideAlert, showAlert } from "../actions/alertsActions";
 
-function AlertsProvider (props) {
+function AlertsProvider(props) {
+    const dispatch = useDispatch()
+    const alert = useSelector(store => store.alerts);
+    
     const confirm = () => {
         console.log('Oculta la Alerta');
-        props.hideAlert();
+        dispatch(hideAlert());
     }
 
     const openAlert = () => {
         console.log('Muestra la Alerta');
-        props.showAlert(true, 'Probando la Alerta', 'Acá la información de la alerta')
+        dispatch(showAlert(true, 'Probando la Alerta', 'Acá la información de la alerta'))
     }
 
     return (
@@ -20,9 +23,9 @@ function AlertsProvider (props) {
             <button onClick={openAlert}>Abre la Alerta</button>
             {props.children}
             <SweetAlert
-                show = {props.alert.show}
-                text = {props.alert.text}
-                title = {props.alert.title}
+                show = {alert.show}
+                text = {alert.text}
+                title = {alert.title}
                 onConfirm= {confirm}
             />
             
@@ -30,22 +33,4 @@ function AlertsProvider (props) {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        alert: state.alerts,
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        showAlert: (show, title, text) => dispatch(showAlert(show, title, text)),
-        hideAlert: () => dispatch(hideAlert())
-    }
-}
-
-const AlertsProviderLink = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AlertsProvider);
-
-export default AlertsProviderLink;
+export default AlertsProvider;
