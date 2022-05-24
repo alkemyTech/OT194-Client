@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'redOng': '#DB5752',
-        'yellowOng': '#FAFA88',
-        'blueOng': '#9AC9FB',
+        redOng: "#DB5752",
+        yellowOng: "#FAFA88",
+        blueOng: "#9AC9FB",
       },
     },
   },
   plugins: [],
-}
+};
