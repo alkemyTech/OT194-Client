@@ -44,7 +44,7 @@ export const HomeFormAdmin = () => {
 		};
 	};
 	return (
-		<div className='container mx-auto md:flex-row md:justify-between max-w-xl'>
+		<div className='container w-5/6 mx-auto md:flex-row md:justify-between max-w-xl'>
 			<form onSubmit={onSubmit} className='w-full items-center flex flex-col md:flex-row'>
 				<div className='w-5/6 flex flex-col  md:flew-row  md:justify-between'>
 					<div className='w-full flex flex-col items-center justify-start'>
@@ -60,7 +60,7 @@ export const HomeFormAdmin = () => {
 							className='rounded focus:outline-blueOng w-5/6 mx-auto'
 						></textarea>
 					</div>
-					{errors.home_description && <h1 className='text-redOng'>{errors.home_description}</h1>}
+					{errors.home_description && <h5 className='text-redOng text-center'>{errors.home_description}</h5>}
 					<div className='w-full flex flex-col items-center justify-center' >
 						<div className='w-full mx-auto flex flex-col items-center justify-center'>
 							<h4 className='text-3xl'>Image {imageNumber}/3:</h4>
@@ -87,7 +87,7 @@ export const HomeFormAdmin = () => {
 							<textarea
 								placeholder='Image description...'
 								name='campo'
-								cols='30'
+								// cols='30'
 								rows='10'
 								value={image.campo}
 								onChange={onchangeImage}
