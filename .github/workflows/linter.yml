@@ -1,0 +1,40 @@
+name: linter
+
+permission:
+  checks: write
+  contents: write
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs: 
+  linter-test:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 15.x, 16.x, 17.x, 18.x]
+
+    steps:
+      -name: Checkout Git main
+       uses: actions/checkout@v2
+    
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install packages
+        run: npm i
+
+      -name: Linter Run
+        run: wearerequired/lint-action@v2
+        with:
+         eslint: true
+         auto_fix: true
