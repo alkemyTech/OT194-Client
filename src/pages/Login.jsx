@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { LoginFormik } from '../components/Login';
-import Spiner from '../components/Spiner';
+import Spinner from '../components/Spinner';
 
 export const Login = () => {
 	const { isLoading } = useSelector((state) => state.auth);
@@ -12,7 +12,7 @@ export const Login = () => {
 
 	return (
 		<div className="h-full">
-			{isLoading && <Spiner />}
+			{isLoading && <Spinner />}
 			<div className="flex justify-center items-center md:grid md:grid-cols-2">
 				<div className="m-auto ">
 					<p className="form-login">Bienvenido</p>
