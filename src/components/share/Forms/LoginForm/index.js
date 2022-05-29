@@ -33,6 +33,16 @@ export const LoginForm = ({
 			errors={errors.password}
 			isRequired={true}
 		/>
+		<input
+			onChange={handleChange}
+			type="checkbox"
+			name="rememberMe"
+			id="rememberMe"
+			defaultChecked={values.rememberMe}
+		/>
+		<label htmlFor="rememberMe">
+      Recordarme
+		</label>
 		<div className="rounded w-full border-transparent py-3 px-2 m-2">
 			<button
 				type="submit"
