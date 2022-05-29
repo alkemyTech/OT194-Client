@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const sharedProps = css`
 	align-items: center;
@@ -30,15 +31,21 @@ export const MenuList = styled.ul`
 	}
 `;
 
-export const MenuItem = styled.li`
+export const MenuItem = styled.li.attrs(props => ({
+	active: props.active
+}))`
 	padding: 10px 20px;
+	${props => props.active && `
+		background-color: rgba(0, 0, 0, 0.1);
+		border-radius: 20px;
+	`}
 `;
 
-export const Link = styled.a`
+export const MyLink = styled(Link)`
 	color: black;
 	font-style: 16px;
 	font-weight: bold;
-	text-decoration: none;
+	text-decoration: none; 
 `;
 
 export const MenuHambIcon = styled.div`
@@ -70,25 +77,25 @@ export const MenuMobileList = styled.ul`
 `;
 
 export const MyButton = styled.button`
-background-color: ${(props) => (props.red ? '#FF0000' : 'white')};
-border: ${(props) => (props.red ? 'none' : '1px black solid')};
-border-radius: 20px;
-color: ${(props) => (props.red ? 'white' : 'black')};
-cursor: pointer;
-margin-bottom: 10px;
-padding: 10px 20px;
-@media screen and (min-width: 450px) {
-margin-right: 10px;
-}
+	background-color: ${(props) => (props.red ? '#FF0000' : 'white')};
+	border: ${(props) => (props.red ? 'none' : '1px black solid')};
+	border-radius: 20px;
+	color: ${(props) => (props.red ? 'white' : 'black')};
+	cursor: pointer;
+	margin-bottom: 10px;
+	padding: 10px 20px;
+	@media screen and (min-width: 450px) {
+	margin-right: 10px;
+	}
 `;
 
 export const ButtonsContainer = styled.div`
-align-items: center;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 
-@media screen and (min-width: 450px) {
-flex-direction: row;
-}
+	@media screen and (min-width: 450px) {
+	flex-direction: row;
+	}
 `;
