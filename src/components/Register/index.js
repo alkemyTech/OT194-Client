@@ -12,7 +12,8 @@ export const RegisterFormik = () => {
 		firstName: '',
 		lastName: '',
 		email: '',
-		password: ''
+		password: '',
+		password2: ''
 	};
 	const { user, isError, isSuccess, message } = useSelector(
 		(state) => state.auth
