@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { register, resetAuthReq } from '../../features/auth/authSlice';
+import { login, resetAuthReq } from '../../features/auth/authSlice';
 import { showAlert } from '../../actions/alertsActions';
 import { Formik } from 'formik';
-import { RegisterForm } from '../share/Forms/RegisterForm';
-import { registerFormSchema } from '../share/Forms/RegisterForm/schemaRegisterForm';
+import { LoginForm } from '../share/Forms/LoginForm';
+import { loginFormSchema } from '../share/Forms/LoginForm/schemaLoginForm';
 
-export const RegisterFormik = () => {
+export const LoginFormik = () => {
 	const startValues = {
 		firstName: '',
 		lastName: '',
@@ -33,15 +33,15 @@ export const RegisterFormik = () => {
 	return (
 		<>
 			<Formik
-				data-testid="test-id-formik"
+				data-testid="login-test-id-formik"
 				enableReinitialize
 				initialValues={startValues}
-				validationSchema={registerFormSchema}
+				validationSchema={loginFormSchema}
 				onSubmit={(values, { setSubmitting }) => {
-					dispatch(register(values));
+					dispatch(login(values));
 					setSubmitting(false);
 				}}
-				component={RegisterForm}
+				component={LoginForm}
 				validateOnChange={false}
 				validateOnBlur={false}
 			/>
