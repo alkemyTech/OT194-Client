@@ -1,7 +1,7 @@
 import api from '../axios';
 import { useEffect, useState } from 'react';
 
-// baseURL = http://localhost:8080/api
+// baseURL = http://localhost:8080/api/
 
 export const useFetch = (url, method, body = null) => {
 	const [state, setState] = useState({
