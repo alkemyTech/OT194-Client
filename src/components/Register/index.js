@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { RegisterForm } from '../share/Forms/RegisterForm';
 import { registerFormSchema } from '../share/Forms/RegisterForm/schemaRegisterForm';
 
-export const Register = () => {
+export const RegisterFormik = () => {
 	const startValues = {
 		firstName: '',
 		lastName: '',
