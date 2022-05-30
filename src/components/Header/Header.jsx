@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -49,13 +49,13 @@ export const Header = () => {
 		</div>
 		{
 			menuOpen &&
-			<div className="w-full h-screen absolute menuTop left-0 right-0 bottom-0 block flex-grow lg:flex lg:items-center lg:w-auto ">
+			<div className="w-full h-screen absolute z-50 menuTop left-0 right-0 bottom-0 block flex-grow lg:flex lg:items-center lg:w-auto bg-white ">
 				<div className="flex flex-col items-center justify-center text-sm lg:flex-grow opacity-100 lg:opacity-100 ">
 					<ul className='list-none my-5 text-center p-0'>
 						{
 							navLinks.map((link, i) => (
 								<li key={i} className='my-10 text-lg first:font-bold '>
-									<Link className='text-black hover:text-redOng no-underline' to={`${link.route}`}>{link.text}</Link>
+									<a className='text-black hover:text-redOng no-underline' href={`${link.route}`}>{link.text}</a>
 								</li>))
 						}
 					</ul>
