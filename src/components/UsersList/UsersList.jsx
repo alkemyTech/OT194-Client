@@ -6,57 +6,8 @@ const Button = ({ cb, text, className }) => {
 };
 
 export const UsersList = () => {
-	const data = [
-		{
-			id: 1,
-			name: 'Lucas',
-			lastName: 'Sequeira',
-			email: 'lucas@mail.com'
-		},
-		{
-			id: 2,
-			name: 'Ana',
-			lastName: 'Luzardo',
-			email: 'ana@mail.com'
-		},
-		{
-			id: 3,
-			name: 'Francisco',
-			lastName: 'Urrea',
-			email: 'francisco@mail.com'
-		},
-		{
-			id: 4,
-			name: 'Andres',
-			lastName: 'Siri',
-			email: 'andres@mail.com'
-		},
-		{
-			id: 5,
-			name: 'Mateo',
-			lastName: 'Gomez',
-			email: 'mateo@mail.com'
-		},
-		{
-			id: 6,
-			name: 'Mijael',
-			lastName: 'Flores Vega',
-			email: 'mijael@mail.com'
-		},
-		{
-			id: 7,
-			name: 'Martin',
-			lastName: 'Farres',
-			email: 'martin@mail.com'
-		},
-		{
-			id: 8,
-			name: 'Lina',
-			lastName: 'Gutierrez',
-			email: 'lina@mail.com'
-		}
-	];
-
+	const users = useFetch('/users',' get', {})
+	
 	const handleNewsUpdate = (id) => {
 		console.log('Update id: ', id);
 	};
@@ -76,13 +27,13 @@ export const UsersList = () => {
 			</thead>
 			<tbody>
 				{
-					data.map((item, i) =>	(
-						<tr key={i}>
-							<td className='border px-8 py-4 text-sm'>{item.name}</td>
-							<td className='border px-8 py-4 text-sm'>{item.lastName}</td>
-							<td className='border px-8 py-4 text-sm'>{item.email}</td>
-							<td className='text-center'><Button className='border-0 px-6 py-2 rounded bg-blueOng text-white cursor-pointer text-sm' cb={handleNewsUpdate.bind(null, item.id)} text='Editar'/></td>
-							<td className='text-center'><Button className='border-0 px-6 py-2 rounded bg-redOng text-white cursor-pointer text-sm' cb={handleNewsDelete.bind(null, item.id)} text='Eliminar'/></td>
+					users.map((user) =>	(
+						<tr key={user.id}>
+							<td className='border px-8 py-4 text-sm'>{user.name}</td>
+							<td className='border px-8 py-4 text-sm'>{user.lastName}</td>
+							<td className='border px-8 py-4 text-sm'>{user.email}</td>
+							<td className='text-center'><Button className='border-0 px-6 py-2 rounded bg-blueOng text-white cursor-pointer text-sm' cb={handleNewsUpdate.bind(null, user.id)} text='Editar'/></td>
+							<td className='text-center'><Button className='border-0 px-6 py-2 rounded bg-redOng text-white cursor-pointer text-sm' cb={handleNewsDelete.bind(null, user.id)} text='Eliminar'/></td>
 						</tr>))
 				}
 
