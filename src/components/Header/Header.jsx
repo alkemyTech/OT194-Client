@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -55,7 +55,7 @@ export const Header = () => {
 						{
 							navLinks.map((link, i) => (
 								<li key={i} className='my-10 text-lg first:font-bold '>
-									<a className='text-black hover:text-redOng no-underline' href={`${link.route}`}>{link.text}</a>
+									<Link className='text-black hover:text-redOng no-underline' to={`${link.route}`}>{link.text}</Link>
 								</li>))
 						}
 					</ul>
