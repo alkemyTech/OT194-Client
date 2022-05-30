@@ -12,27 +12,27 @@ export const Footer = () => {
 		sections: [
 			{
 				title: 'Inicio',
-				link: ''
+				route: '/'
 			},
 			{
 				title: 'Nosotros',
-				link: ''
+				route: '/staff'
 			},
 			{
 				title: 'Novedades',
-				link: ''
+				route: '/news'
 			},
 			{
 				title: 'Testimonios',
-				link: ''
+				route: '/reviews'
 			},
 			{
 				title: 'Contacto',
-				link: ''
+				route: '/#'
 			},
 			{
 				title: 'Contribuye',
-				link: ''
+				route: '/donate'
 			}
 		],
 		socials: [
@@ -63,7 +63,7 @@ export const Footer = () => {
 				{
 					publicData.sections.map((section, i) => (
 						<p className="hover:scale-105 transition-transform font-medium" key={i}>
-							<a className="transition-colors no-underline visited:text-gray-500" href={section.link}>{section.title}</a>
+							<a className="transition-colors no-underline visited:text-gray-500" href={section.route}>{section.title}</a>
 						</p>
 					))
 				}
