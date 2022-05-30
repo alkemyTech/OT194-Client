@@ -7,8 +7,12 @@ export const CustomInput = ({
 	value,
 	placeholder,
 	handleInputChange,
+<<<<<<< HEAD
 	errors,
 	onBlur
+=======
+	errors
+>>>>>>> 5cfcf5591ca5b2448b2d1dbd94433ac836b4ee72
 }) => {
 	return (
 		<div data-testid="test-id-form-group-container">
@@ -19,7 +23,10 @@ export const CustomInput = ({
 				onChange={handleInputChange}
 				name={name}
 				value={value}
+<<<<<<< HEAD
 				onBlur={onBlur}
+=======
+>>>>>>> 5cfcf5591ca5b2448b2d1dbd94433ac836b4ee72
 				data-testid="test-id-form-control"
 			/>
 			{errors && (

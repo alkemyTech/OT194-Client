@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
+import { useBeforeunload } from 'react-beforeunload';
+import { useSelector } from 'react-redux';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Dashboard } from './pages/Dashboard';
@@ -9,6 +11,14 @@ import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
 
 function App () {
+	const { remember } = useSelector((state) => state.auth);
+
+	useBeforeunload(() => {
+		if (remember) return;
+
+		localStorage.removeItem('user');
+	});
+
 	return (
 		<Router>
 			<div>
