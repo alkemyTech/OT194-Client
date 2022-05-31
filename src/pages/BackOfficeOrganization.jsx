@@ -5,6 +5,7 @@ import { Formik, Field, Form } from 'formik';
 
 export const BackOfficeOrganization = () => {
 	const [image, setImage] = useState(undefined);
+	const [imgError, setImgError] = useState(false);
 
 	const required = 'Este campo es requerido';
 	const nameLength = 'El nombre debe tener 3 caracteres como minimo';
@@ -19,6 +20,8 @@ export const BackOfficeOrganization = () => {
 	};
 
 	const handleSubmit = (values) => {
+		setImgError(false);
+
 		// Enviar solo el nombre
 		if (!image) {
 			return console.log(values);
@@ -28,6 +31,7 @@ export const BackOfficeOrganization = () => {
 		if (image && image.size < 50936250 && supportedFormats.includes(image.type)) {
 			console.log(JSON.stringify(values), image);
 		} else {
+			setImgError(true);
 			console.log('No soportado');
 		}
 	};
@@ -63,7 +67,7 @@ export const BackOfficeOrganization = () => {
 								onChange={(e) => setImage(e.target.files[0])}
 								placeholder='Logo'
 							/>
-							{errors.logo ? <div className="text-redOng my-1">{errors.logo}</div> : null}
+							{imgError ? <div className="text-redOng my-1">Archivo no soportado</div> : null}
 							<button disabled={isSubmitting} className="form-login-button mt-5 p-3 bg-redOng text-white" type="submit">Guardar</button>
 						</Form>
 					)}
