@@ -7,8 +7,7 @@ export const CustomInput = ({
 	value,
 	placeholder,
 	handleInputChange,
-	errors,
-	onBlur
+	errors
 }) => {
 	return (
 		<div data-testid="test-id-form-group-container">
@@ -19,7 +18,6 @@ export const CustomInput = ({
 				onChange={handleInputChange}
 				name={name}
 				value={value}
-				onBlur={onBlur}
 				data-testid="test-id-form-control"
 			/>
 			{errors && (

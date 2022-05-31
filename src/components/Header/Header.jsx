@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-// import { Link } from 'react-router';
-
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 
@@ -8,7 +7,7 @@ import { GrClose } from 'react-icons/gr';
 import {
 	ButtonsContainer,
 	HeaderContainer,
-	Link,
+	MyLink,
 	Logo,
 	MenuHambIcon,
 	MenuItem,
@@ -20,36 +19,43 @@ import {
 
 export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
-	const mockedLinks = [
-		'Inicio',
-		'Nosotros',
-		'Novedades',
-		'Testimonios',
-		'Contacto',
-		'Contribuye'
-	];
-
+	const path = useLocation();
+	const [active, setActive] = useState('');
 	const handleMenu = () => {
-		console.log('ckic');
 		setMenuOpen(!menuOpen);
 	};
-
-	// TODO: Links=> object Array
-	// const navLinks = [
-	// 	{
-	// 		text: 'About',
-	// 		route: '/about',
-	// 	},
-	// 	{
-	// 		text: 'Contact',
-	// 		route: '/contact',
-	// 	},
-	// 	,
-	// 	{
-	// 		text: 'More Info',
-	// 		route: '/info',
-	// 	},
-	// ];
+	const navLinks = [
+		{
+			text: 'Inicio',
+			route: '/'
+		},
+		{
+			text: 'Nosotros',
+			route: '/staff'
+		},
+		{
+			text: 'Novedades',
+			route: '/news'
+		},
+		{
+			text: 'Testimonios',
+			route: '/reviews'
+		},
+		{
+			text: 'Contacto',
+			route: ''
+		},
+		{
+			text: 'Contribuye',
+			route: '/donate'
+		}
+	];
+	useEffect(() => {
+		setActive(`${path.pathname}`);
+	}, [path]);
+	const scrollBottom = () => {
+		window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+	};
 	return (
 		<HeaderContainer>
 			<Logo
@@ -57,23 +63,23 @@ export const Header = () => {
 			/>
 
 			<MenuList>
-				{mockedLinks.map((link) => (
-					<MenuItem key={link}>
-						<Link href='https://www.google.com'>{link}</Link>
+				{navLinks.map((link, i) => (
+					<MenuItem key={i} active={link.route === active ? 'true' : ''}>
+						{link.text === 'Contacto'
+							? (
+								<MyLink to={`${path.pathname}`} onClick={scrollBottom}>{link.text}</MyLink>
+							)
+							: (<MyLink to={link.route} >
+								{link.text}
+							</MyLink>)}
+
 					</MenuItem>
 				))}
 				<ButtonsContainer>
-					<MyButton red={false}>Log in</MyButton>
-					<MyButton red>Registrate</MyButton>
+					<MyLink to='/login'><MyButton red={false}>Log in</MyButton></MyLink>
+					<MyLink to='/register'><MyButton red>Registrate</MyButton></MyLink>
 				</ButtonsContainer>
-				{/* TODO: LINKS FROM REACT ROUTER */}
-				{/* {navLinks.map((link,i) => (
-					<MenuItem key={i}>
-                         <Link to={link.route}>
-                        	 {link.text}
-                         </Link>
-                    </MenuItem>
-				))} */}
+
 			</MenuList>
 			<MenuHambIcon>
 				{menuOpen
@@ -87,15 +93,22 @@ export const Header = () => {
 			{menuOpen && (
 				<MenuMobile>
 					<MenuMobileList>
-						{mockedLinks.map((link) => (
-							<MenuItem key={link}>
-								<Link href='https://www.google.com'>{link}</Link>
+						{navLinks.map((link, i) => (
+							<MenuItem key={i} active={link.route === path ? 'true' : ''}>
+								{link.text === 'Contacto'
+									? (
+										<MyLink to={`${path.pathname}`} onClick={scrollBottom()}>{link.text}</MyLink>
+									)
+									: (<MyLink to={link.route} >
+										{link.text}
+									</MyLink>)}
+
 							</MenuItem>
 						))}
 					</MenuMobileList>
 					<ButtonsContainer>
-						<MyButton red={false}>Log in</MyButton>
-						<MyButton red>Registrate</MyButton>
+						<MyLink to='/login'><MyButton red={false}>Log in</MyButton></MyLink>
+						<MyLink to='/register'><MyButton red>Registrate</MyButton></MyLink>
 					</ButtonsContainer>
 				</MenuMobile>
 			)}

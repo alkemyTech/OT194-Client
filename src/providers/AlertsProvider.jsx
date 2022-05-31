@@ -2,8 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { hideAlert, showAlert } from '../actions/alertsActions';
+import PropTypes from 'prop-types';
 
-function AlertsProvider (props: { children: React.ReactNode }) {
+function AlertsProvider (props) {
 	const dispatch = useDispatch();
 	const alert = useSelector(store => store.alerts);
 
@@ -31,5 +32,9 @@ function AlertsProvider (props: { children: React.ReactNode }) {
 		</>
 	);
 }
+
+AlertsProvider.propTypes = {
+	children: PropTypes.element
+};
 
 export default AlertsProvider;

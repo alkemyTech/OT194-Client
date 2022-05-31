@@ -7,7 +7,10 @@ export const RegisterForm = ({
 	values,
 	errors,
 	handleChange,
+<<<<<<< HEAD
 	handleBlur,
+=======
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
 	handleSubmit,
 	isSubmitting
 }) => (
@@ -19,9 +22,14 @@ export const RegisterForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="text"
+<<<<<<< HEAD
 			placeholder="First Name"
 			name="firstName"
 			onBlur={handleBlur}
+=======
+			placeholder="Nombre"
+			name="firstName"
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
 			value={values.firstName}
 			errors={errors.firstName}
 			isRequired={true}
@@ -29,9 +37,14 @@ export const RegisterForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="text"
+<<<<<<< HEAD
 			placeholder="Last Name"
 			name="lastName"
 			onBlur={handleBlur}
+=======
+			placeholder="Apellido"
+			name="lastName"
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
 			value={values.lastName}
 			errors={errors.lastName}
 			isRequired={true}
@@ -41,7 +54,10 @@ export const RegisterForm = ({
 			type="text"
 			placeholder="E-mail"
 			name="email"
+<<<<<<< HEAD
 			onBlur={handleBlur}
+=======
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
 			value={values.email}
 			errors={errors.email}
 			isRequired={true}
@@ -49,13 +65,30 @@ export const RegisterForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="password"
+<<<<<<< HEAD
 			placeholder="Password"
 			name="password"
 			onBlur={handleBlur}
+=======
+			placeholder="Contraseña"
+			name="password"
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
 			value={values.password}
 			errors={errors.password}
 			isRequired={true}
 		/>
+<<<<<<< HEAD
+=======
+		<CustomInput
+			handleInputChange={handleChange}
+			type="password"
+			placeholder="Confirmar constraseña"
+			name="password2"
+			value={values.password2}
+			errors={errors.password2}
+			isRequired={true}
+		/>
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
 		<div className="rounded w-full border-transparent py-3 px-2 m-2">
 			<button
 				type="submit"
