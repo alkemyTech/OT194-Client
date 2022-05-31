@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// HEADER fix=> from Styled components to TAILWIND
+
 export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 
@@ -9,7 +11,6 @@ export const Header = () => {
 		setMenuOpen(!menuOpen);
 	};
 
-	// TODO: Links=> object Array
 	const navLinks = [
 		{
 			text: 'Inicio',
