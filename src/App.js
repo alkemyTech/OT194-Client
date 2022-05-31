@@ -7,6 +7,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
+import { BackOfficeOrganization } from './pages/BackOfficeOrganization';
 
 function App () {
 	return (
@@ -16,6 +17,7 @@ function App () {
 				<Routes>
 					<Route path='/' element={<Dashboard />} />
 					<Route path='/login' element={<Login />} />
+					<Route path='/backoffice/edit-organization' element={<BackOfficeOrganization />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/news' element={<h1>Página de prueba news</h1>} />
 					<Route path='/not-found' element={<NotFound />} />
