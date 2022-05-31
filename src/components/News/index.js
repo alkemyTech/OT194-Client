@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useFetch } from '../../hooks/useFetch';
 
 export const News = () => {
-	const news = [{ id: '123', name: 'Novedad', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }, { id: '124', name: 'Novedad2', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }, { id: '125', name: 'Novedad3', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }];
+	const news = useFetch('/news', 'get', {});
+	// const news = [{ id: '123', name: 'Novedad', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }, { id: '124', name: 'Novedad2', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }, { id: '125', name: 'Novedad3', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }];
 
 	const Card = ({ data }) => (
 		<div className="w-max shadow-lg flex bg-blueOng rounded-3xl mx-5">
