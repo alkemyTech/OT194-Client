@@ -7,6 +7,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
+import { UserProfile } from './pages/UserProfile';
 
 function App () {
 	return (
@@ -19,6 +20,7 @@ function App () {
 					<Route path='/register' element={<Register />} />
 					<Route path='/news' element={<h1>Página de prueba news</h1>} />
 					<Route path='/not-found' element={<NotFound />} />
+					<Route path='/profile' element={<UserProfile />} />
 					<Route path='*' element={<Navigate to='/not-found' />} />
 				</Routes>
 				<Footer />
