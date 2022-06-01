@@ -1,77 +1,111 @@
-import React from "react";
-import { Form } from "formik";
-import { CustomInput } from "../../CustomInput";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Form } from 'formik';
+import { CustomInput } from '../../CustomInput';
+import PropTypes from 'prop-types';
 
 export const RegisterForm = ({
-  values,
-  errors,
-  handleChange,
-  handleBlur,
-  handleSubmit,
-  isSubmitting,
+	values,
+	errors,
+	handleChange,
+<<<<<<< HEAD
+	handleBlur,
+=======
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
+	handleSubmit,
+	isSubmitting
 }) => (
-  <Form
-    onSubmit={handleSubmit}
-    data-testid="test-id-formik-container"
-    className="w-full max-w-lg"
-  >
-    <CustomInput
-      handleInputChange={handleChange}
-      type="text"
-      placeholder="First Name"
-      name="firstName"
-      onBlur={handleBlur}
-      value={values.firstName}
-      errors={errors.firstName}
-      isRequired={true}
-    />
-    <CustomInput
-      handleInputChange={handleChange}
-      type="text"
-      placeholder="Last Name"
-      name="lastName"
-      onBlur={handleBlur}
-      value={values.lastName}
-      errors={errors.lastName}
-      isRequired={true}
-    />
-    <CustomInput
-      handleInputChange={handleChange}
-      type="text"
-      placeholder="E-mail"
-      name="email"
-      onBlur={handleBlur}
-      value={values.email}
-      errors={errors.email}
-      isRequired={true}
-    />
-    <CustomInput
-      handleInputChange={handleChange}
-      type="password"
-      placeholder="Password"
-      name="password"
-      onBlur={handleBlur}
-      value={values.password}
-      errors={errors.password}
-      isRequired={true}
-    />
-    <div className="rounded w-full border-transparent py-3 px-2 m-2">
-      <button
-        type="submit"
-        className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
-        disable={isSubmitting}
-      >
+	<Form
+		onSubmit={handleSubmit}
+		data-testid="test-id-formik-container"
+		className="w-full max-w-lg"
+	>
+		<CustomInput
+			handleInputChange={handleChange}
+			type="text"
+<<<<<<< HEAD
+			placeholder="First Name"
+			name="firstName"
+			onBlur={handleBlur}
+=======
+			placeholder="Nombre"
+			name="firstName"
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
+			value={values.firstName}
+			errors={errors.firstName}
+			isRequired={true}
+		/>
+		<CustomInput
+			handleInputChange={handleChange}
+			type="text"
+<<<<<<< HEAD
+			placeholder="Last Name"
+			name="lastName"
+			onBlur={handleBlur}
+=======
+			placeholder="Apellido"
+			name="lastName"
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
+			value={values.lastName}
+			errors={errors.lastName}
+			isRequired={true}
+		/>
+		<CustomInput
+			handleInputChange={handleChange}
+			type="text"
+			placeholder="E-mail"
+			name="email"
+<<<<<<< HEAD
+			onBlur={handleBlur}
+=======
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
+			value={values.email}
+			errors={errors.email}
+			isRequired={true}
+		/>
+		<CustomInput
+			handleInputChange={handleChange}
+			type="password"
+<<<<<<< HEAD
+			placeholder="Password"
+			name="password"
+			onBlur={handleBlur}
+=======
+			placeholder="Contraseña"
+			name="password"
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
+			value={values.password}
+			errors={errors.password}
+			isRequired={true}
+		/>
+<<<<<<< HEAD
+=======
+		<CustomInput
+			handleInputChange={handleChange}
+			type="password"
+			placeholder="Confirmar constraseña"
+			name="password2"
+			value={values.password2}
+			errors={errors.password2}
+			isRequired={true}
+		/>
+>>>>>>> 28abe73d46c5e7eee76b06566a9a12e8b90e825f
+		<div className="rounded w-full border-transparent py-3 px-2 m-2">
+			<button
+				type="submit"
+				className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
+				disable={isSubmitting}
+			>
         Register
-      </button>
-    </div>
-  </Form>
+			</button>
+		</div>
+	</Form>
 );
 
 RegisterForm.propTypes = {
-  values: PropTypes.object,
-  errors: PropTypes.object,
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  handleBlur: PropTypes.func,
+	values: PropTypes.object,
+	errors: PropTypes.object,
+	handleChange: PropTypes.func,
+	handleSubmit: PropTypes.func,
+	handleBlur: PropTypes.func,
+	isSubmitting: PropTypes.bool
 };

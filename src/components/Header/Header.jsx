@@ -7,10 +7,8 @@ export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	const handleMenu = () => {
-		console.log('ckic');
 		setMenuOpen(!menuOpen);
 	};
-
 	const navLinks = [
 		{
 			text: 'Inicio',
