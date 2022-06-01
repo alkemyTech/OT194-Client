@@ -1,9 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RegisterFormik } from '../components/Register/index';
+import Spinner from '../components/Spinner';
 
 function Register () {
+	const { isLoading } = useSelector((state) => state.auth);
+
 	return (
 		<>
-			<h1>Página de Registro</h1>
+			{isLoading && <Spinner />}
+			<RegisterFormik />
 		</>
 	);
 }

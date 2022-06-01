@@ -5,7 +5,8 @@ module.exports = {
 	},
 	extends: [
 		'plugin:react/recommended',
-		'standard'
+		'standard',
+		'plugin:jest/recommended'
 	],
 	parserOptions: {
 		ecmaFeatures: {
@@ -16,7 +17,8 @@ module.exports = {
 	},
 	plugins: [
 		'react',
-		'better-styled-components'
+		'better-styled-components',
+		'jest'
 	],
 	rules: {
 		semi: [2, 'always'],
