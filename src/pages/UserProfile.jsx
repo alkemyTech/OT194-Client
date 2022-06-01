@@ -17,20 +17,20 @@ function UserProfile () {
 
 	return (
 		<>
-			<div className="flex flex-col items-center mt-6 m-8">
-				<h1 className="text-center">Hola User</h1>
+			<div className="flex flex-col items-center mt-6 m-8 shadow-lg">
+				<h1 className="text-center form-title">Hola User</h1>
 				<img className="w-48 rounded-lg" src="./images/user.png" alt=""/>
 				<div className="text-left">
-					<h2 className="text-center">Información de Usuario</h2>
+					<h3 className="text-center form-title">Información de Usuario</h3>
 					{!editing && (
 						<div className="flex flex-col m-4">
-							<strong>Nombre</strong>
-							<p>{ formValues.name }</p>
-							<strong>Apellido</strong>
-							<p>{ formValues.lastname }</p>
-							<strong>Email</strong>
-							<p>{ formValues.email }</p>
-							<h4 className="text-center">Acciones</h4>
+							<strong className="form-title text-slate-500">Nombre</strong>
+							<strong className="form-title ml-6">{ formValues.name }</strong>
+							<strong className="form-title text-slate-500">Apellido</strong>
+							<strong className="form-title ml-6">{ formValues.lastname }</strong>
+							<strong className="form-title text-slate-500">Email</strong>
+							<strong className="form-title ml-6">{ formValues.email }</strong>
+							<h4 className="text-center form-title">Acciones</h4>
 							<button
 								className="bg-blue-500 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-4"
 								onClick={() => setEditing(true)}
