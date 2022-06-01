@@ -5,6 +5,7 @@ import {
 	faChevronLeft
 } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CarouselImg = styled.img`
   height: 246px;
@@ -92,5 +93,9 @@ function Slider (props) {
 		</>
 	);
 }
+
+Slider.propTypes = {
+	arr: PropTypes.array
+};
 
 export default Slider;
