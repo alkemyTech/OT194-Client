@@ -1,26 +1,74 @@
 import React from 'react';
+import { Formik, Field, Form } from 'formik';
 
 function UserProfile () {
+	const [editing, setEditing] = React.useState(false);
+	const [formValues, setFormValues] = React.useState({
+		email: 'prueba@gmail.com',
+		name: 'Pepito',
+		lastname: 'Perez'
+	});
+
+	console.log('formValues', formValues);
+
+	const submit = (values) => {
+		setEditing(false);
+	};
+
 	return (
 		<>
 			<div className="flex flex-col items-center mt-6 m-8">
 				<h1 className="text-center">Hola User</h1>
 				<img className="w-48 rounded-lg" src="./images/user.png" alt=""/>
-				<div className="text-center">
-					<h2>Información de Usuario</h2>
-					<span className="mr-4">Nombre</span>
-					<input type="text" name="Nombre" value="Nombre de usuario" className= "outline-0 outline-width: 0px" /><br/>
-					<div className="m-4">
-						<span className="mr-2">Apellido</span>
-						<input type="text" /><br/>
-					</div>
-					<div className="m-4">
-						<span className="mr-2">Email</span>
-						<input type="email"/><br/>
-					</div>
-					<span className="mr-2">Acciones</span>
-					<button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mr-4">Editar</button>
-					<button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">Eliminar cuenta</button>
+				<div className="text-left">
+					<h2 className="text-center">Información de Usuario</h2>
+					{!editing && (
+						<div className="flex flex-col m-4">
+							<strong>Nombre</strong>
+							<p>{ formValues.name }</p>
+							<strong>Apellido</strong>
+							<p>{ formValues.lastname }</p>
+							<strong>Email</strong>
+							<p>{ formValues.email }</p>
+							<h4 className="text-center">Acciones</h4>
+							<button
+								className="bg-blue-500 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-4"
+								onClick={() => setEditing(true)}
+							>
+								Editar
+							</button>
+							<button className="bg-red-500 text-white font-bold py-2 px-4 border border-red-700 rounded">Eliminar cuenta</button>
+						</div>
+					)}
+					{editing && (
+						<Formik
+							initialValues={{ name: '', lastname: '', email: '' }}
+							onSubmit={submit}
+						>
+							<Form className="flex h-full flex-col rounded-lg m-2 space-y-4">
+								<Field className="form-login p-3"
+									name="name"
+									placeholder="Nombre"
+									value={formValues.name}
+									onChange={(event) => setFormValues({ ...formValues, name: event.target.value })}
+								/>
+								<Field className="form-login p-3"
+									name="lastname"
+									placeholder="Apellido"
+									value={formValues.lastname}
+									onChange={(event) => setFormValues({ ...formValues, lastname: event.target.value })}
+								/>
+								<Field className="form-login p-3"
+									type="email"
+									name="email"
+									placeholder="Email"
+									value={formValues.email}
+									onChange={(event) => setFormValues({ ...formValues, email: event.target.value })}
+								/>
+								<button className="bg-blue-500 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-4" type="submit">Guardar</button>
+							</Form>
+						</Formik>
+					)}
 				</div>
 			</div>
 		</>
