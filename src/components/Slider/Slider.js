@@ -6,6 +6,7 @@ import {
 	faChevronLeft
 } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CarouselImg = styled.img`
   height: 246px;
@@ -33,32 +34,33 @@ const CarouselDivTxt = styled.div`
 `;
 
 function Slider (props) {
+	const { arr } = props;
 	const [selectedIndex, setSelectedIndex] = useState(0);
-	const [selectedImage, setSelectedImage] = useState(props.arr[0].imageUrl);
-	const [selectedText, setSelectedText] = useState(props.arr[0].text);
-	const [selectedCampo, setSelectedCampo] = useState(props.arr[0].campo);
+	const [selectedImage, setSelectedImage] = useState(arr[0].imageUrl);
+	const [selectedText, setSelectedText] = useState(arr[0].text);
+	const [selectedCampo, setSelectedCampo] = useState(arr[0].campo);
 	const [loaded, setLoaded] = useState(false);
 
 	const prev = () => {
 		setLoaded(false);
 		setTimeout(() => {
 			const prevIndex =
-        selectedIndex > 0 ? selectedIndex - 1 : props.arr.length - 1;
+        selectedIndex > 0 ? selectedIndex - 1 : arr.length - 1;
 			setSelectedIndex(prevIndex);
-			setSelectedImage(props.arr[prevIndex].imageUrl);
-			setSelectedText(props.arr[prevIndex].text);
-			setSelectedCampo(props.arr[prevIndex].campo);
+			setSelectedImage(arr[prevIndex].imageUrl);
+			setSelectedText(arr[prevIndex].text);
+			setSelectedCampo(arr[prevIndex].campo);
 		}, 700);
 	};
 	const next = () => {
 		setLoaded(false);
 		setTimeout(() => {
 			const nextIndex =
-        selectedIndex < props.arr.length - 1 ? selectedIndex + 1 : 0;
+        selectedIndex < arr.length - 1 ? selectedIndex + 1 : 0;
 			setSelectedIndex(nextIndex);
-			setSelectedImage(props.arr[nextIndex].imageUrl);
-			setSelectedText(props.arr[nextIndex].text);
-			setSelectedCampo(props.arr[nextIndex].campo);
+			setSelectedImage(arr[nextIndex].imageUrl);
+			setSelectedText(arr[nextIndex].text);
+			setSelectedCampo(arr[nextIndex].campo);
 		}, 700);
 	};
 	return (
@@ -93,5 +95,13 @@ function Slider (props) {
 		</>
 	);
 }
+
+Slider.propTypes = {
+	arr: PropTypes.array,
+	'arr[].imageUrl': PropTypes.string,
+	'arr[].text': PropTypes.string,
+	'arr[].campo': PropTypes.string,
+	'arr[].length': PropTypes.number
+};
 
 export default Slider;
