@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
+import { axiosInstance } from '../../helper/axiosInstance';
 
 const initialState = {
 	user: null,
@@ -26,6 +27,32 @@ export const login = createAsyncThunk('auth/login',
 	async (user, thunkAPI) => {
 		try {
 			return await authService.login(user);
+		} catch (error) {
+			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+			return thunkAPI.rejectWithValue(message);
+		};
+	}
+);
+
+// Get user
+export const getUserData = createAsyncThunk('user/getData',
+	async (thunkAPI) => {
+		try {
+			const { id } = thunkAPI.getState(state => state.auth.user);
+			return axiosInstance(`/user/${id}`, {}, 'GET');
+		} catch (error) {
+			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+			return thunkAPI.rejectWithValue(message);
+		};
+	}
+);
+
+// Edit User
+export const editUserData = createAsyncThunk('user/editData',
+	async (user, thunkAPI) => {
+		try {
+			const { id } = thunkAPI.getState(state => state.auth.user);
+			return axiosInstance(`/user/${id}`, user, 'POST');
 		} catch (error) {
 			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
 			return thunkAPI.rejectWithValue(message);
