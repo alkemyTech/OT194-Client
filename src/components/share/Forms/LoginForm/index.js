@@ -27,19 +27,29 @@ export const LoginForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="password"
-			placeholder="Password"
+			placeholder="Contraseña"
 			name="password"
 			value={values.password}
 			errors={errors.password}
 			isRequired={true}
 		/>
+		<input
+			onChange={handleChange}
+			type="checkbox"
+			name="rememberMe"
+			id="rememberMe"
+			defaultChecked={values.rememberMe}
+		/>
+		<label htmlFor="rememberMe">
+      Recordarme
+		</label>
 		<div className="rounded w-full border-transparent py-3 px-2 m-2">
 			<button
 				type="submit"
 				className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
 				disable={isSubmitting}
 			>
-        Login
+        Ingresar
 			</button>
 		</div>
 	</Form>
