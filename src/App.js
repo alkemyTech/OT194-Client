@@ -9,6 +9,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
+import { NewsDetail } from './pages/NewsDetail';
 import { UserProfile } from './pages/UserProfile';
 
 function App () {
@@ -28,6 +29,7 @@ function App () {
 					<Route path='/' element={<Dashboard />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
+					<Route path='/news/:id' element={<NewsDetail />} />
 					<Route path='/news' element={<h1>Página de prueba news</h1>} />
 					<Route path='/not-found' element={<NotFound />} />
 					<Route path='/profile' element={<UserProfile />} />
