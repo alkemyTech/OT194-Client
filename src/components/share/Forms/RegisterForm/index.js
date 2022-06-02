@@ -7,7 +7,6 @@ export const RegisterForm = ({
 	values,
 	errors,
 	handleChange,
-	handleBlur,
 	handleSubmit,
 	isSubmitting
 }) => (
@@ -19,9 +18,8 @@ export const RegisterForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="text"
-			placeholder="First Name"
+			placeholder="Nombre"
 			name="firstName"
-			onBlur={handleBlur}
 			value={values.firstName}
 			errors={errors.firstName}
 			isRequired={true}
@@ -29,9 +27,8 @@ export const RegisterForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="text"
-			placeholder="Last Name"
+			placeholder="Apellido"
 			name="lastName"
-			onBlur={handleBlur}
 			value={values.lastName}
 			errors={errors.lastName}
 			isRequired={true}
@@ -41,7 +38,6 @@ export const RegisterForm = ({
 			type="text"
 			placeholder="E-mail"
 			name="email"
-			onBlur={handleBlur}
 			value={values.email}
 			errors={errors.email}
 			isRequired={true}
@@ -49,11 +45,19 @@ export const RegisterForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="password"
-			placeholder="Password"
+			placeholder="Contraseña"
 			name="password"
-			onBlur={handleBlur}
 			value={values.password}
 			errors={errors.password}
+			isRequired={true}
+		/>
+		<CustomInput
+			handleInputChange={handleChange}
+			type="password"
+			placeholder="Confirmar constraseña"
+			name="password2"
+			value={values.password2}
+			errors={errors.password2}
 			isRequired={true}
 		/>
 		<div className="rounded w-full border-transparent py-3 px-2 m-2">
@@ -62,7 +66,7 @@ export const RegisterForm = ({
 				className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
 				disable={isSubmitting}
 			>
-        Register
+        Registrarse
 			</button>
 		</div>
 	</Form>

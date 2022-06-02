@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { login, resetAuthReq } from '../../features/auth/authSlice';
+import { login, resetAuthReq, setRemember } from '../../features/auth/authSlice';
 import { showAlert } from '../../actions/alertsActions';
 import { Formik } from 'formik';
 import { LoginForm } from '../share/Forms/LoginForm';
@@ -9,10 +9,9 @@ import { loginFormSchema } from '../share/Forms/LoginForm/schemaLoginForm';
 
 export const LoginFormik = () => {
 	const startValues = {
-		firstName: '',
-		lastName: '',
 		email: '',
-		password: ''
+		password: '',
+		rememberMe: false
 	};
 	const { user, isError, isSuccess, message } = useSelector(
 		(state) => state.auth
@@ -39,6 +38,7 @@ export const LoginFormik = () => {
 				validationSchema={loginFormSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					dispatch(login(values));
+					if (values.rememberMe) dispatch(setRemember());
 					setSubmitting(false);
 				}}
 				component={LoginForm}
