@@ -30,3 +30,11 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
+.menuTop{
+    top: 96px;
+    height: calc(100vh - 96px);
+}
+
+.textEditor{
+	height: 600px;
+}

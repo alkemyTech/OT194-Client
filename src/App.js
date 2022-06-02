@@ -7,6 +7,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
+import { ActivitiesForm } from './components/share/Forms/ActivitiesForm';
 
 function App () {
 	return (
@@ -17,7 +18,7 @@ function App () {
 					<Route path='/' element={<Dashboard />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
-					<Route path='/news' element={<h1>Página de prueba news</h1>} />
+					<Route path='/news' element={<ActivitiesForm />} />
 					<Route path='/not-found' element={<NotFound />} />
 					<Route path='*' element={<Navigate to='/not-found' />} />
 				</Routes>
