@@ -3,10 +3,11 @@ import { Form } from 'formik';
 import { CustomInput } from '../../CustomInput';
 import PropTypes from 'prop-types';
 
-export const RegisterForm = ({
+export const EditUserForm = ({
 	values,
 	errors,
 	handleChange,
+	handleBlur,
 	handleSubmit,
 	isSubmitting
 }) => (
@@ -18,8 +19,9 @@ export const RegisterForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="text"
-			placeholder="Nombre"
+			placeholder="First Name"
 			name="firstName"
+			onBlur={handleBlur}
 			value={values.firstName}
 			errors={errors.firstName}
 			isRequired={true}
@@ -27,52 +29,36 @@ export const RegisterForm = ({
 		<CustomInput
 			handleInputChange={handleChange}
 			type="text"
-			placeholder="Apellido"
+			placeholder="Last Name"
 			name="lastName"
+			onBlur={handleBlur}
 			value={values.lastName}
 			errors={errors.lastName}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="text"
-			placeholder="E-mail"
-			name="email"
-			value={values.email}
-			errors={errors.email}
-			isRequired={true}
-		/>
-		<CustomInput
-			handleInputChange={handleChange}
-			type="password"
-			placeholder="Contraseña"
-			name="password"
-			value={values.password}
-			errors={errors.password}
-			isRequired={true}
-		/>
-		<CustomInput
-			handleInputChange={handleChange}
-			type="password"
-			placeholder="Confirmar constraseña"
-			name="password2"
-			value={values.password2}
-			errors={errors.password2}
+			type="number"
+			placeholder="Role Id"
+			name="roleId"
+			onBlur={handleBlur}
+			value={values.roleId}
+			errors={errors.roleId}
 			isRequired={true}
 		/>
 		<div className="rounded w-full border-transparent py-3 px-2 m-2">
 			<button
 				type="submit"
 				className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
-				disable={isSubmitting}
+				disabled={isSubmitting}
 			>
-        Registrarse
+        Edit
 			</button>
 		</div>
 	</Form>
 );
 
-RegisterForm.propTypes = {
+EditUserForm.propTypes = {
 	values: PropTypes.object,
 	errors: PropTypes.object,
 	handleChange: PropTypes.func,

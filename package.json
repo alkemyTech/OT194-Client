@@ -4,6 +4,8 @@
   "proxy": "http://localhost:8080/api/v1",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^34.1.0",
+    "@ckeditor/ckeditor5-react": "^5.0.2",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
@@ -15,6 +17,7 @@
     "formik": "^2.2.9",
     "prop-types": "^15.8.1",
     "react": "^16.13.1",
+    "react-beforeunload": "^2.5.3",
     "react-dom": "^16.13.1",
     "react-icons": "^4.3.1",
     "react-redux": "^7.1.3",

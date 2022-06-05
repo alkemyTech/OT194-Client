@@ -1,17 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import activityService from './activityService';
+import activityService from './activitiesService';
 
 const initialState = {
 	activities: [],
-	activity: {
-		id: '',
-		name: '',
-		content: '',
-	},
+	activity: {},
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
-	message: '',
+	message: ''
 };
 
 // POST ACTIVITY
@@ -55,7 +51,7 @@ export const activitiesSlice = createSlice({
 	initialState,
 	reducers: {
 		resetActivities: () => initialState,
-		resetActivitiesReq: (state) => {},
+		resetActivitiesReq: (state) => {}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -75,14 +71,40 @@ export const activitiesSlice = createSlice({
 				state.message = '';
 				state.activities = [...state.activities, action.payload];
 			})
-
+			// Create failed
 			.addCase(createActivity.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = false;
 				state.isError = true;
 				state.message = action.payload;
+			})
+
+			.addCase(updateActivity.pending, (state, action) => {
+				state.isLoading = true;
+				state.isSuccess = false;
+				state.isError = false;
+				state.message = '';
+			})
+			.addCase(updateActivity.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.isError = false;
+				state.message = '';
+
+				state.activities = state.activities.map((activity) => {
+					if (activity.id === action.payload.id) {
+						return action.payload;
+					}
+					return activity;
+				});
+			})
+			.addCase(updateActivity.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = false;
+				state.isError = true;
+				state.message = action.payload;
 			});
-	},
+	}
 });
 
 export const { resetAactivities, resetActivitiesReq } = activitiesSlice.actions;
