@@ -78,5 +78,5 @@ export const NewsList = () => {
 Button.propTypes = {
 	cb: PropTypes.func,
 	text: PropTypes.string,
-	className: PropTypes.string,
+	className: PropTypes.string
 };
