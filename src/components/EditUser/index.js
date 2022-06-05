@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { register, resetAuthReq } from '../../features/auth/authSlice';
+import { resetAuthReq, getUserData, editUserData } from '../../features/auth/authSlice';
 import { showAlert } from '../../actions/alertsActions';
 import { Formik } from 'formik';
-import { RegisterForm } from '../share/Forms/RegisterForm';
-import { registerFormSchema } from '../share/Forms/RegisterForm/schemaRegisterForm';
+import { EditUserForm } from '../share/Forms/EditUserForm';
+import { editUserFormSchema } from '../share/Forms/EditUserForm/schemaEditUserForm';
 
-export const RegisterFormik = () => {
-	const startValues = {
+export const EditUserFormik = () => {
+	const [startValues, setStartValues] = useState({
 		firstName: '',
 		lastName: '',
-		email: '',
-		password: '',
-		password2: ''
-	};
+		roleId: ''
+	});
+
 	const { user, isError, isSuccess, message } = useSelector(
 		(state) => state.auth
 	);
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -31,18 +31,23 @@ export const RegisterFormik = () => {
 		dispatch(resetAuthReq());
 	}, [user, isError, isSuccess, message, navigate, dispatch]);
 
+	useEffect(() => {
+		const data = dispatch(getUserData());
+		setStartValues(data);
+	}, [user]);
+
 	return (
 		<>
 			<Formik
-				data-testid="test-id-formik"
+				data-testid="login-test-id-formik"
 				enableReinitialize
 				initialValues={startValues}
-				validationSchema={registerFormSchema}
+				validationSchema={editUserFormSchema}
 				onSubmit={(values, { setSubmitting }) => {
-					dispatch(register(values));
+					dispatch(editUserData(values));
 					setSubmitting(false);
 				}}
-				component={RegisterForm}
+				component={EditUserForm}
 				validateOnChange={false}
 				validateOnBlur={false}
 			/>
