@@ -12,61 +12,61 @@ export const RegisterForm = ({
 }) => (
 	<Form
 		onSubmit={handleSubmit}
-		data-testid="test-id-formik-container"
-		className="w-full max-w-lg"
+		data-testid='test-id-formik-container'
+		className='w-full max-w-lg'
 	>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="text"
-			placeholder="Nombre"
-			name="firstName"
+			type='text'
+			placeholder='Nombre'
+			name='firstName'
 			value={values.firstName}
 			errors={errors.firstName}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="text"
-			placeholder="Apellido"
-			name="lastName"
+			type='text'
+			placeholder='Apellido'
+			name='lastName'
 			value={values.lastName}
 			errors={errors.lastName}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="text"
-			placeholder="E-mail"
-			name="email"
+			type='text'
+			placeholder='E-mail'
+			name='email'
 			value={values.email}
 			errors={errors.email}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="password"
-			placeholder="Contraseña"
-			name="password"
+			type='password'
+			placeholder='Contraseña'
+			name='password'
 			value={values.password}
 			errors={errors.password}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="password"
-			placeholder="Confirmar constraseña"
-			name="password2"
+			type='password'
+			placeholder='Confirmar constraseña'
+			name='password2'
 			value={values.password2}
 			errors={errors.password2}
 			isRequired={true}
 		/>
-		<div className="rounded w-full border-transparent py-3 px-2 m-2">
+		<div className='rounded w-full border-transparent py-3 px-2 m-2'>
 			<button
-				type="submit"
-				className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
+				type='submit'
+				className='shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2'
 				disable={isSubmitting}
 			>
-        Registrarse
+				Registrarse
 			</button>
 		</div>
 	</Form>
