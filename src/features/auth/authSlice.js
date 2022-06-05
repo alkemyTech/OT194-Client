@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
-// import { axiosInstance } from '../../helper/axiosInstance';
+import { axiosInstance } from '../../helper/axiosInstance';
 
 // Get state from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
@@ -51,8 +51,8 @@ export const getUserData = createAsyncThunk(
 	'user/getData',
 	async (thunkAPI) => {
 		try {
-			// const { id } = thunkAPI.getState((state) => state.auth.user);
-			// return axiosInstance(`/user/${id}`, {}, 'GET');
+			const { id } = thunkAPI.getState((state) => state.auth.user);
+			return axiosInstance(`/user/${id}`, {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -70,8 +70,8 @@ export const editUserData = createAsyncThunk(
 	'user/editData',
 	async (user, thunkAPI) => {
 		try {
-			// const { id } = thunkAPI.getState((state) => state.auth.user);
-			// return axiosInstance(`/user/${id}`, user, 'POST');
+			const { id } = thunkAPI.getState((state) => state.auth.user);
+			return axiosInstance(`/user/${id}`, user, 'POST');
 		} catch (error) {
 			const message =
 				(error.response &&

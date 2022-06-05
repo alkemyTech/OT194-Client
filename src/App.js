@@ -17,7 +17,7 @@ import { NotFound } from './pages/NotFound';
 import { BackOfficeOrganization } from './pages/BackOfficeOrganization';
 import { NewsDetail } from './pages/NewsDetail';
 import { UserProfile } from './pages/UserProfile';
-import { ActivitiesForm } from './components/share/Forms/ActivitiesForm';
+import { News } from './components/News';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -41,7 +41,7 @@ function App () {
 					/>
 					<Route path='/register' element={<Register />} />
 					<Route path='/news/:id' element={<NewsDetail />} />
-					<Route path='/news' element={<ActivitiesForm />} />
+					<Route path='/news' element={<News/>} />
 					<Route path='/not-found' element={<NotFound />} />
 					<Route path='/profile' element={<UserProfile />} />
 					<Route path='*' element={<Navigate to='/not-found' />} />
