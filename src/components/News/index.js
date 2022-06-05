@@ -28,7 +28,7 @@ Ver Novedad
 	);
 	return (
 		<div className="p-4">
-			<h1 className="flex justify-start font-bold p-4">Ultimas Novedades</h1>
+			<h1 className="flex justify-start font-bold p-4">Últimas novedades</h1>
 			<div className="grid grid-cols-4 gap-4">
 				{news.map(data => (
 					<Card key={data.id} data={data} />
