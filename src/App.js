@@ -40,6 +40,10 @@ function App () {
 						element={<BackOfficeOrganization />}
 					/>
 					<Route path='/register' element={<Register />} />
+					<Route path='/nosotros' element={<h1>NOSOTROS</h1>} />
+					<Route path='/testimonials' element={<h1>TESTIMONIOS</h1>} />
+					<Route path='/contacto' element={<h1>CONTACTO</h1>} />
+					<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
 					<Route path='/news/:id' element={<NewsDetail />} />
 					<Route path='/news' element={<News/>} />
 					<Route path='/not-found' element={<NotFound />} />

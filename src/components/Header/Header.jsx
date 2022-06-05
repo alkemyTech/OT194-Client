@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // HEADER fix=> from Styled components to TAILWIND
 
 export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
+	const navigate = useNavigate();
 
 	const handleMenu = () => {
 		setMenuOpen(!menuOpen);
@@ -20,11 +21,11 @@ export const Header = () => {
 		},
 		{
 			text: 'Novedades',
-			route: '/novedades'
+			route: '/news'
 		},
 		{
 			text: 'Testimonios',
-			route: '/testimonios'
+			route: '/testimonials'
 		},
 		{
 			text: 'Contacto',
@@ -37,7 +38,7 @@ export const Header = () => {
 	];
 	return (<nav className="h-24 relative flex items-center justify-between flex-wrap bg-white px-6 py-0">
 		<div className="flex items-center flex-shrink-0 text-white mr-6">
-			<img className="mx-auto w-24 h-24" src='/logo-fundacion.png'/>
+			<img className="cursor-pointer mx-auto w-24 h-24" src='/logo-fundacion.png' onClick={() => navigate('/')}/>
 		</div>
 		<div className="block lg:hidden">
 			<button onClick={handleMenu} className="flex bg-white cursor-pointer items-center px-3 py-2 border-0 rounded text-teal-200 hover:text-white">
@@ -53,15 +54,15 @@ export const Header = () => {
 					<ul className='list-none my-5 text-center p-0'>
 						{
 							navLinks.map((link, i) => (
-								<li key={i} className='my-10 text-lg first:font-bold '>
+								<li key={i} className='my-10 text-lg first:font-extrabold '>
 									<Link className='text-black hover:text-redOng no-underline' to={`${link.route}`}>{link.text}</Link>
 								</li>))
 						}
 					</ul>
 				</div>
 				<div className='text-center p-0'>
-					<button className='mx-2 bg-white border-1 border focus:outline-4 cursor-pointer hover:opacity-50 focus:ring focus:black rounded-full border-0 py-3 px-6'>Login</button>
-					<button className='mx-2 text-white bg-redOng cursor-pointer hover:opacity-50 focus:ring rounded-full border-0 py-3 px-6'>Registrate</button>
+					<button className='mx-2 bg-white border-1 border focus:outline-4 cursor-pointer hover:opacity-50 focus:ring focus:black rounded-full border-0 py-3 px-6' onClick={() => navigate('/login')}>Login</button>
+					<button className='mx-2 text-white bg-redOng cursor-pointer hover:opacity-50 focus:ring rounded-full border-0 py-3 px-6' onClick={() => navigate('/register')}>Registrate</button>
 				</div>
 			</div>
 		}
@@ -77,8 +78,8 @@ export const Header = () => {
 				</ul>
 			</div>
 			<div className='text-center p-0'>
-				<button className='mx-2 bg-white border-1 border focus:outline-4 focus:ring focus:black rounded-full border-0 py-3 px-6 cursor-pointer hover:opacity-50'>Login</button>
-				<button className='mx-2 text-white bg-redOng hover:bg-redOng focus:ring rounded-full border-0 py-3 px-6 cursor-pointer hover:opacity-50'>Registrate</button>
+				<button className='mx-2 bg-white border-1 border focus:outline-4 focus:ring focus:black rounded-full border-0 py-3 px-6 cursor-pointer hover:opacity-50' onClick={() => navigate('/login')}>Login</button>
+				<button className='mx-2 text-white bg-redOng hover:bg-redOng focus:ring rounded-full border-0 py-3 px-6 cursor-pointer hover:opacity-50' onClick={() => navigate('/register')}>Registrate</button>
 			</div>
 		</div>
 	</nav>);
