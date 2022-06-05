@@ -7,7 +7,7 @@ export const useFetch = (url, method, body = null) => {
 	const [state, setState] = useState({
 		response: null,
 		error: null,
-		loading: true
+		loading: true,
 	});
 
 	useEffect(() => {
@@ -21,21 +21,21 @@ export const useFetch = (url, method, body = null) => {
 				url,
 				{
 					headers: {
-						authorization: `Bearer ${token}`
-					}
+						authorization: `Bearer ${token}`,
+					},
 				},
 				body
 			);
 			setState({
 				loading: false,
 				error: null,
-				response: data
+				response: data,
 			});
 		} catch (error) {
 			setState({
 				loading: false,
 				error: error.message,
-				response: null
+				response: null,
 			});
 		}
 	};
