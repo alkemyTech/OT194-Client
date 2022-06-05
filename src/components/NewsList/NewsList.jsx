@@ -5,13 +5,14 @@ import { useFetch } from '../../hooks/useFetch';
 const Button = ({ cb, text, className }) => {
 	return (
 		<button className={className} onClick={cb}>
+			{' '}
 			{text}
 		</button>
 	);
 };
 
 export const NewsList = () => {
-	const data = useFetch('/news', 'get', {});
+	const news = useFetch('/news', 'get', {});
 
 	const handleNewsUpdate = (id) => {
 		console.log('Update id: ', id);
@@ -45,13 +46,13 @@ export const NewsList = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{data.map((item, i) => (
+					{news.map((item, i) => (
 						<tr key={i}>
 							<td className='border px-8 py-4 text-sm'>{item.name}</td>
 							<td className='border px-8 py-4 text-sm'>
 								<img className='rounded-full h-12 w-12' src={item.image} />
 							</td>
-							<td className='border px-8 py-4 text-sm'>{item.cratedAt}</td>
+							<td className='border px-8 py-4 text-sm'>{item.createdAt}</td>
 							<td className='text-center'>
 								<Button
 									className='border-0 px-6 py-2 rounded bg-blueOng text-white cursor-pointer text-sm'
@@ -77,5 +78,5 @@ export const NewsList = () => {
 Button.propTypes = {
 	cb: PropTypes.func,
 	text: PropTypes.string,
-	className: PropTypes.string,
+	className: PropTypes.string
 };
