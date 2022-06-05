@@ -1,14 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { LoginFormik } from '../components/Login';
 import Spinner from '../components/Spinner';
 
 export const Login = () => {
 	const { isLoading } = useSelector((state) => state.auth);
-	const navigate = useNavigate();
-
-	const handleGoToRegister = () => navigate('/register');
 
 	return (
 		<div className="h-full">
@@ -20,9 +17,9 @@ export const Login = () => {
 					<LoginFormik />
 					<p className="form-footer mt-17">
             No tienes cuenta?{' '}
-						<a className="text-redPure no-underline cursor-pointer" onClick={handleGoToRegister}>
+						<Link className="text-redPure no-underline cursor-pointer" to='/register' >
               Registrate
-						</a>
+						</Link>
 					</p>
 				</div>
 
