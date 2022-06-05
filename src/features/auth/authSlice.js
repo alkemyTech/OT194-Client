@@ -1,8 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
+import { axiosInstance } from '../../helper/axiosInstance';
+
+// Get state from localStorage
+const user = JSON.parse(localStorage.getItem('user'));
+const remember = JSON.parse(localStorage.getItem('remember'));
 
 const initialState = {
-	user: null,
+	user: user || null,
+	remember: remember || null,
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
@@ -33,6 +39,32 @@ export const login = createAsyncThunk('auth/login',
 	}
 );
 
+// Get user
+export const getUserData = createAsyncThunk('user/getData',
+	async (thunkAPI) => {
+		try {
+			const { id } = thunkAPI.getState(state => state.auth.user);
+			return axiosInstance(`/user/${id}`, {}, 'GET');
+		} catch (error) {
+			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+			return thunkAPI.rejectWithValue(message);
+		};
+	}
+);
+
+// Edit User
+export const editUserData = createAsyncThunk('user/editData',
+	async (user, thunkAPI) => {
+		try {
+			const { id } = thunkAPI.getState(state => state.auth.user);
+			return axiosInstance(`/user/${id}`, user, 'POST');
+		} catch (error) {
+			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+			return thunkAPI.rejectWithValue(message);
+		};
+	}
+);
+
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
@@ -43,6 +75,10 @@ export const authSlice = createSlice({
 			state.isError = false;
 			state.isSuccess = false;
 			state.message = '';
+		},
+		setRemember: (state) => {
+			state.remember = true;
+			localStorage.setItem('remember', true);
 		}
 	},
 	extraReducers: (builder) => {
@@ -54,6 +90,8 @@ export const authSlice = createSlice({
 			.addCase(register.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
+				state.user = action.payload;
+				localStorage.setItem('user', JSON.stringify(action.payload));
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
@@ -67,6 +105,8 @@ export const authSlice = createSlice({
 			.addCase(login.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
+				state.user = action.payload;
+				localStorage.setItem('user', JSON.stringify(action.payload));
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
@@ -78,6 +118,7 @@ export const authSlice = createSlice({
 
 export const {
 	resetAuth,
-	resetAuthReq
+	resetAuthReq,
+	setRemember
 } = authSlice.actions;
 export default authSlice.reducer;

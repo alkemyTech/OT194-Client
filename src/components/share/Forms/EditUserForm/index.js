@@ -3,59 +3,62 @@ import { Form } from 'formik';
 import { CustomInput } from '../../CustomInput';
 import PropTypes from 'prop-types';
 
-export const LoginForm = ({
+export const EditUserForm = ({
 	values,
 	errors,
 	handleChange,
+	handleBlur,
 	handleSubmit,
 	isSubmitting
 }) => (
 	<Form
 		onSubmit={handleSubmit}
-		data-testid="login-test-id-formik-container"
+		data-testid="test-id-formik-container"
 		className="w-full max-w-lg"
 	>
 		<CustomInput
 			handleInputChange={handleChange}
 			type="text"
-			placeholder="E-mail"
-			name="email"
-			value={values.email}
-			errors={errors.email}
+			placeholder="First Name"
+			name="firstName"
+			onBlur={handleBlur}
+			value={values.firstName}
+			errors={errors.firstName}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="password"
-			placeholder="Contraseña"
-			name="password"
-			value={values.password}
-			errors={errors.password}
+			type="text"
+			placeholder="Last Name"
+			name="lastName"
+			onBlur={handleBlur}
+			value={values.lastName}
+			errors={errors.lastName}
 			isRequired={true}
 		/>
-		<input
-			onChange={handleChange}
-			type="checkbox"
-			name="rememberMe"
-			id="rememberMe"
-			defaultChecked={values.rememberMe}
+		<CustomInput
+			handleInputChange={handleChange}
+			type="number"
+			placeholder="Role Id"
+			name="roleId"
+			onBlur={handleBlur}
+			value={values.roleId}
+			errors={errors.roleId}
+			isRequired={true}
 		/>
-		<label htmlFor="rememberMe">
-      Recordarme
-		</label>
 		<div className="rounded w-full border-transparent py-3 px-2 m-2">
 			<button
 				type="submit"
 				className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
-				disable={isSubmitting}
+				disabled={isSubmitting}
 			>
-        Ingresar
+        Edit
 			</button>
 		</div>
 	</Form>
 );
 
-LoginForm.propTypes = {
+EditUserForm.propTypes = {
 	values: PropTypes.object,
 	errors: PropTypes.object,
 	handleChange: PropTypes.func,

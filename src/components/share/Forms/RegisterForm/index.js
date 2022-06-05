@@ -7,62 +7,66 @@ export const RegisterForm = ({
 	values,
 	errors,
 	handleChange,
-	handleBlur,
 	handleSubmit,
 	isSubmitting
 }) => (
 	<Form
 		onSubmit={handleSubmit}
-		data-testid="test-id-formik-container"
-		className="w-full max-w-lg"
+		data-testid='test-id-formik-container'
+		className='w-full max-w-lg'
 	>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="text"
-			placeholder="First Name"
-			name="firstName"
-			onBlur={handleBlur}
+			type='text'
+			placeholder='Nombre'
+			name='firstName'
 			value={values.firstName}
 			errors={errors.firstName}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="text"
-			placeholder="Last Name"
-			name="lastName"
-			onBlur={handleBlur}
+			type='text'
+			placeholder='Apellido'
+			name='lastName'
 			value={values.lastName}
 			errors={errors.lastName}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="text"
-			placeholder="E-mail"
-			name="email"
-			onBlur={handleBlur}
+			type='text'
+			placeholder='E-mail'
+			name='email'
 			value={values.email}
 			errors={errors.email}
 			isRequired={true}
 		/>
 		<CustomInput
 			handleInputChange={handleChange}
-			type="password"
-			placeholder="Password"
-			name="password"
-			onBlur={handleBlur}
+			type='password'
+			placeholder='Contraseña'
+			name='password'
 			value={values.password}
 			errors={errors.password}
 			isRequired={true}
 		/>
-		<div className="rounded w-full border-transparent py-3 px-2 m-2">
+		<CustomInput
+			handleInputChange={handleChange}
+			type='password'
+			placeholder='Confirmar constraseña'
+			name='password2'
+			value={values.password2}
+			errors={errors.password2}
+			isRequired={true}
+		/>
+		<div className='rounded w-full border-transparent py-3 px-2 m-2'>
 			<button
-				type="submit"
-				className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
+				type='submit'
+				className='shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2'
 				disable={isSubmitting}
 			>
-        Register
+				Registrarse
 			</button>
 		</div>
 	</Form>
