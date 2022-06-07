@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetAuthReq, getUserData, editUserData } from '../../features/auth/authSlice';
-import { showAlert } from '../../actions/alertsActions';
 import { Formik } from 'formik';
 import { EditUserForm } from '../share/Forms/EditUserForm';
 import { editUserFormSchema } from '../share/Forms/EditUserForm/schemaEditUserForm';
+import { showAlert } from '../../features/alert/alertSlice';
 
 export const EditUserFormik = () => {
 	const [startValues, setStartValues] = useState({
@@ -22,7 +22,7 @@ export const EditUserFormik = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (isError) dispatch(showAlert(true, 'Error', message));
+		if (isError) dispatch(showAlert({ show: true, title: 'Error', text: message }));
 
 		if (isSuccess || user) {
 			navigate('/');

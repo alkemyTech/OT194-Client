@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, resetAuthReq, setRemember } from '../../features/auth/authSlice';
-import { showAlert } from '../../actions/alertsActions';
 import { Formik } from 'formik';
 import { LoginForm } from '../share/Forms/LoginForm';
 import { loginFormSchema } from '../share/Forms/LoginForm/schemaLoginForm';
+import { showAlert } from '../../features/alert/alertSlice';
 
 export const LoginFormik = () => {
 	const startValues = {
@@ -20,7 +20,7 @@ export const LoginFormik = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (isError) dispatch(showAlert(true, 'Error', message));
+		if (isError) dispatch(showAlert({ show: true, title: 'Error', text: message }));
 
 		if (isSuccess || user) {
 			navigate('/');
