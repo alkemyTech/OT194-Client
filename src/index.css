@@ -25,6 +25,51 @@ body {
 	font-family: 'Roboto',sans-serif;
 
 }
+.font-roboto{
+	font-family: 'Roboto',sans-serif;
+
+}
+.font-poppins{
+	font-family: 'Poppins',sans-serif;
+
+}
+.font-mulish{
+	font-family: 'Mulish',sans-serif;
+}
+
+.staff-card{
+	height: 234px;
+	width: 210px;
+	border-radius: 1rem;
+	background-repeat: no-repeat;
+	background-size: cover;
+  background-position: center;
+	object-fit: contain;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	color:white;
+
+
+}
+
+
+.testimony-card{
+	height: 234px;
+	width: 210px;
+	border-radius: 1rem;
+	text-align:justify;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 16px;
+	gap:6px;
+	align-items: left;
+	color:black;
+
+}
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
