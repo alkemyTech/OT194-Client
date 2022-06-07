@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { register, resetAuthReq } from '../../features/auth/authSlice';
-import { showAlert } from '../../actions/alertsActions';
 import { Formik } from 'formik';
 import { RegisterForm } from '../share/Forms/RegisterForm';
 import { registerFormSchema } from '../share/Forms/RegisterForm/schemaRegisterForm';
+import { showAlert } from '../../features/alert/alertSlice';
 
 export const RegisterFormik = () => {
 	const startValues = {
@@ -22,7 +22,7 @@ export const RegisterFormik = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (isError) dispatch(showAlert(true, 'Error', message));
+		if (isError) dispatch(showAlert({ show: true, title: 'Error', text: message }));
 
 		if (isSuccess || user) {
 			navigate('/');

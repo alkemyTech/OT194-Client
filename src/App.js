@@ -18,6 +18,7 @@ import { BackOfficeOrganization } from './pages/BackOfficeOrganization';
 import { NewsDetail } from './pages/NewsDetail';
 import { UserProfile } from './pages/UserProfile';
 import { News } from './components/News';
+import { ContactsList } from './components/ContactsList/ContactsList';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -50,6 +51,7 @@ function App () {
 					<Route path='/profile' element={<UserProfile />} />
 					<Route path='*' element={<Navigate to='/not-found' />} />
 				</Routes>
+				<ContactsList />
 				<Footer />
 			</div>
 		</Router>
