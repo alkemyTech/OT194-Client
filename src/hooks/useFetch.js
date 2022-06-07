@@ -1,5 +1,5 @@
-import api from '../axios';
 import { useEffect, useState } from 'react';
+import { axiosInstance } from '../helper/axiosInstance';
 
 // baseURL = http://localhost:8080/api/v1
 
@@ -17,7 +17,7 @@ export const useFetch = (url, method, body = null) => {
 	const fetchData = async () => {
 		const token = localStorage.getItem('token');
 		try {
-			const { data } = await api[method](
+			const { data } = await axiosInstance[method](
 				url,
 				{
 					headers: {

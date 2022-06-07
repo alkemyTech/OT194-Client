@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import alertsReducer from '../reducers/alertsReducer';
 import authSlice from '../features/auth/authSlice';
 import activitiesSlice from '../features/activities/activitiesSlice';
+import alertSlice from '../features/alert/alertSlice';
 import newsSlice from '../features/news/newsSlice';
 
 export default configureStore({
 	reducer: {
-		alerts: alertsReducer,
+		alerts: alertSlice,
 		news: newsSlice,
 		auth: authSlice,
 		activities: activitiesSlice
