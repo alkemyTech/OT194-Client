@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RegisterFormik } from '../components/Register/index';
 import Spinner from '../components/Spinner';
 
@@ -10,6 +11,12 @@ function Register () {
 		<>
 			{isLoading && <Spinner />}
 			<RegisterFormik />
+			<p className="form-footer mt-17">
+            Ya estas registrado?
+				<Link className="text-redPure no-underline cursor-pointer" to='/login' >
+              Iniciar Sesion
+				</Link>
+			</p>
 		</>
 	);
 }

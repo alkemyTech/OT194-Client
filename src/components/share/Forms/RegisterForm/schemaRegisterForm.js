@@ -11,8 +11,7 @@ export const registerFormSchema = Yup.object().shape({
 	lastName: Yup.string().required('Por favor ingrese su apellido'),
 	email: Yup.string().email(invalidEmail).required(emailRequired),
 	password: Yup.string().min(6, passwordLength).required(passwordRequired),
-	password2: Yup
-		.string()
+	password2: Yup.string()
 		.min(6, passwordLength)
 		.required(password2Required)
 		.oneOf([Yup.ref('password'), null], passwordsMustMatch)

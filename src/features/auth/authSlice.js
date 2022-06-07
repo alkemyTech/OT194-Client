@@ -16,52 +16,71 @@ const initialState = {
 };
 
 // Register user
-export const register = createAsyncThunk('auth/register',
+export const register = createAsyncThunk(
+	'auth/register',
 	async (user, thunkAPI) => {
 		try {
 			return await authService.register(user);
 		} catch (error) {
-			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
 			return thunkAPI.rejectWithValue(message);
-		};
+		}
 	}
 );
 
 // Login user
-export const login = createAsyncThunk('auth/login',
-	async (user, thunkAPI) => {
-		try {
-			return await authService.login(user);
-		} catch (error) {
-			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-			return thunkAPI.rejectWithValue(message);
-		};
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+	try {
+		return await authService.login(user);
+	} catch (error) {
+		const message =
+			(error.response && error.response.data && error.response.data.message) ||
+			error.message ||
+			error.toString();
+		return thunkAPI.rejectWithValue(message);
 	}
-);
+});
 
 // Get user
-export const getUserData = createAsyncThunk('user/getData',
+export const getUserData = createAsyncThunk(
+	'user/getData',
 	async (thunkAPI) => {
 		try {
-			const { id } = thunkAPI.getState(state => state.auth.user);
+			const { id } = thunkAPI.getState((state) => state.auth.user);
 			return axiosInstance(`/user/${id}`, {}, 'GET');
 		} catch (error) {
-			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
 			return thunkAPI.rejectWithValue(message);
-		};
+		}
 	}
 );
 
 // Edit User
-export const editUserData = createAsyncThunk('user/editData',
+export const editUserData = createAsyncThunk(
+	'user/editData',
 	async (user, thunkAPI) => {
 		try {
-			const { id } = thunkAPI.getState(state => state.auth.user);
+			const { id } = thunkAPI.getState((state) => state.auth.user);
 			return axiosInstance(`/user/${id}`, user, 'POST');
 		} catch (error) {
-			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
 			return thunkAPI.rejectWithValue(message);
-		};
+		}
 	}
 );
 
@@ -83,7 +102,7 @@ export const authSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-		// Register
+			// Register
 			.addCase(register.pending, (state) => {
 				state.isLoading = true;
 			})
@@ -98,7 +117,7 @@ export const authSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 			})
-		// Login
+			// Login
 			.addCase(login.pending, (state) => {
 				state.isLoading = true;
 			})
@@ -116,9 +135,5 @@ export const authSlice = createSlice({
 	}
 });
 
-export const {
-	resetAuth,
-	resetAuthReq,
-	setRemember
-} = authSlice.actions;
+export const { resetAuth, resetAuthReq, setRemember } = authSlice.actions;
 export default authSlice.reducer;
