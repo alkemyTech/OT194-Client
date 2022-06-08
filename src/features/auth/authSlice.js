@@ -23,9 +23,7 @@ export const register = createAsyncThunk(
 			return await authService.register(user);
 		} catch (error) {
 			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
+				(error.response && error.response.data && error.response.data.message) ||
 				error.message ||
 				error.toString();
 			return thunkAPI.rejectWithValue(message);
@@ -34,30 +32,30 @@ export const register = createAsyncThunk(
 );
 
 // Login user
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
-	try {
-		return await authService.login(user);
-	} catch (error) {
-		const message =
+export const login = createAsyncThunk(
+	'auth/login',
+	async (user, thunkAPI) => {
+		try {
+			return await authService.login(user);
+		} catch (error) {
+			const message =
 			(error.response && error.response.data && error.response.data.message) ||
 			error.message ||
 			error.toString();
-		return thunkAPI.rejectWithValue(message);
-	}
-});
+			return thunkAPI.rejectWithValue(message);
+		}
+	});
 
 // Get user
 export const getUserData = createAsyncThunk(
-	'user/getData',
+	'auth/getUserData',
 	async (thunkAPI) => {
 		try {
 			const { id } = thunkAPI.getState((state) => state.auth.user);
 			return axiosInstance(`/user/${id}`, {}, 'GET');
 		} catch (error) {
 			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
+				(error.response && error.response.data && error.response.data.message) ||
 				error.message ||
 				error.toString();
 			return thunkAPI.rejectWithValue(message);
@@ -67,16 +65,14 @@ export const getUserData = createAsyncThunk(
 
 // Edit User
 export const editUserData = createAsyncThunk(
-	'user/editData',
+	'auth/editUserData',
 	async (user, thunkAPI) => {
 		try {
 			const { id } = thunkAPI.getState((state) => state.auth.user);
 			return axiosInstance(`/user/${id}`, user, 'POST');
 		} catch (error) {
 			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
+				(error.response && error.response.data && error.response.data.message) ||
 				error.message ||
 				error.toString();
 			return thunkAPI.rejectWithValue(message);
@@ -98,6 +94,12 @@ export const authSlice = createSlice({
 		setRemember: (state) => {
 			state.remember = true;
 			localStorage.setItem('remember', true);
+		},
+		logout: (state) => {
+			state.remember = null;
+			localStorage.removeItem('user');
+			state.user = null;
+			localStorage.removeItem('remember');
 		}
 	},
 	extraReducers: (builder) => {
@@ -135,5 +137,5 @@ export const authSlice = createSlice({
 	}
 });
 
-export const { resetAuth, resetAuthReq, setRemember } = authSlice.actions;
+export const { resetAuth, resetAuthReq, setRemember, logout } = authSlice.actions;
 export default authSlice.reducer;

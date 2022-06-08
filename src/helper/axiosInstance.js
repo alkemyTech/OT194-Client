@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const axiosInstance = (endpoint, data, method = 'GET') => {
+export const axiosInstance = (endpoint, data = {}, method = 'GET') => {
 	const baseUrl = process.env.API_URL;
 	const token = localStorage.getItem('token') || '';
 	return axios({
