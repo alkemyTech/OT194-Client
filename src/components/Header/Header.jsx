@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Dropdown } from 'flowbite-react';
 
 // HEADER fix=> from Styled components to TAILWIND
 const navLinks = [
@@ -41,13 +42,25 @@ const navBackofficeAdminLinks = [
 	{
 		text: 'BackOffice Testimonios',
 		route: '/'
+	},
+	{
+		text: 'BackOffice Actividades',
+		route: '/'
+	},
+	{
+		text: 'BackOffice Organización',
+		route: '/'
+	},
+	{
+		text: 'Editar Perfil',
+		route: '/backoffice/edit-organization'
 	}
 ];
 
 const navLinkUser = [
 	{
 		text: 'Editar Perfil',
-		route: '/'
+		route: '/backoffice/edit-organization'
 	}
 ];
 
@@ -101,12 +114,21 @@ export const Header = () => {
 					</div>
 					{!user && (
 						<div className='text-center p-0'>
-							<button className='mx-2 bg-white border-1 border focus:outline-4 cursor-pointer hover:opacity-50 focus:ring focus:black rounded-full border-0 py-3 px-6' onClick={() => navigate('/login')}>Login</button>
-							<button className='mx-2 text-white bg-redOng cursor-pointer hover:opacity-50 focus:ring rounded-full border-0 py-3 px-6' onClick={() => navigate('/register')}>Registrate</button>
+							<button className='mx-2 bg-white border-1 border focus:outline-4 focus:ring focus:black rounded-full border-0 py-3 px-6 cursor-pointer hover:opacity-50' onClick={() => navigate('/login')}>Login</button>
+							<button className='mx-2 text-white bg-redOng hover:bg-redOng focus:ring rounded-full border-0 py-3 px-6 cursor-pointer hover:opacity-50' onClick={() => navigate('/register')}>Registrate</button>
 						</div>
 					)}
 					{user && (
-						<div className='text-center p-0'>{user.firstName}</div>
+						<Dropdown className='text-center p-0 cursor-pointer' label={user.firstName}>
+							<Dropdown.Item>
+								{
+									menuBackOffice.map((link, i) => (
+										<li className="list-none" key={i}>
+											<Link className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white no-underline" to={`${link.route}`}>{link.text}</Link>
+										</li>))
+								}
+							</Dropdown.Item>
+						</Dropdown>
 					)}
 				</div>
 			}
@@ -128,21 +150,18 @@ export const Header = () => {
 					</div>
 				)}
 				{user && (
-					<button className='text-center p-0'>{user.firstName}</button>
+					<Dropdown label={user.firstName}>
+						<Dropdown.Item>
+							{
+								menuBackOffice.map((link, i) => (
+									<li className="list-none" key={i}>
+										<Link className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white no-underline" to={`${link.route}`}>{link.text}</Link>
+									</li>))
+							}
+						</Dropdown.Item>
+					</Dropdown>
 				)}
 			</div>
-			{menuBackOffice &&
-				<div className="flex flex-col items-center justify-center text-sm lg:flex-grow opacity-100 lg:opacity-100 ">
-					<ul className='list-none my-5 text-center p-0'>
-						{
-							menuBackOffice.map((link, i) => (
-								<li key={i} className='my-10 text-lg first:font-extrabold '>
-									<Link className='text-black hover:text-redOng no-underline' to={`${link.route}`}>{link.text}</Link>
-								</li>))
-						}
-					</ul>
-				</div>
-			}
 		</nav>
 	);
 };
