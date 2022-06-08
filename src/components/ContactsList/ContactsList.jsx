@@ -1,8 +1,12 @@
 import React from 'react';
-import { useFetch } from '../../hooks/useFetch';
+// import { useFetch } from '../../hooks/useFetch';
 
 export const ContactsList = () => {
-	const contacts = useFetch('/backoffice/contacts');
+	// const contacts = useFetch('/backoffice/contacts');
+	const contacts = [];
+
+	if (contacts.length === 0) return <></>;
+
 	return (
 		<div
 			className="container w-full mx-auto my-5"

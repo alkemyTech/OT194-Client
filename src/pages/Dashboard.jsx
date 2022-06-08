@@ -52,7 +52,7 @@ function Dashboard () {
 				<div className='inline-flex flex-row items-end font-poppins content-center justify-between px-20 py-1'>
 					<span className='text-2xl font-black '>Nuestro Staff</span>
 					<div className='flex items-center'>
-						<Link to={'staff'} className='flex items-center no-underline' > Ver todos
+						<Link to={'nosotros'} className='flex items-center no-underline' > Ver todos
 							<img src="images/vector.png" alt="go to" className='ml-2' />
 						</Link>
 					</div>
@@ -77,7 +77,7 @@ function Dashboard () {
 				<div className='inline-flex flex-row items-end font-poppins content-center justify-between px-20 py-1'>
 					<span className='text-2xl font-black '>Testimonios</span>
 					<div className='flex items-center'>
-						<Link to={'testimonies'} className='flex items-center no-underline' > Ver todos
+						<Link to={'testimonios'} className='flex items-center no-underline' > Ver todos
 							<img src="images/vector.png" alt="go to" className='ml-2' />
 						</Link>
 					</div>

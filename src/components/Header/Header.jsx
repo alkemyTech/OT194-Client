@@ -25,7 +25,7 @@ export const Header = () => {
 		},
 		{
 			text: 'Testimonios',
-			route: '/testimonials'
+			route: '/testimonios'
 		},
 		{
 			text: 'Contacto',
