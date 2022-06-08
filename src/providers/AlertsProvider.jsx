@@ -21,7 +21,7 @@ const AlertsProvider = (props) => {
 			/>
 		</>
 	);
-}
+};
 
 AlertsProvider.propTypes = {
 	children: PropTypes.element
