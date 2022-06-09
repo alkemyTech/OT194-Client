@@ -19,6 +19,7 @@ import { NewsDetail } from './pages/NewsDetail';
 import { UserProfile } from './pages/UserProfile';
 import { News } from './components/News';
 import { ContactsList } from './components/ContactsList/ContactsList';
+import { BackOfficeTestimonials } from './pages/BackOfficeTestimonials';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -39,6 +40,10 @@ function App () {
 					<Route
 						path='/backoffice/edit-organization'
 						element={<BackOfficeOrganization />}
+					/>
+					<Route
+						path='/backoffice/testimonials'
+						element={<BackOfficeTestimonials />}
 					/>
 					<Route path='/register' element={<Register />} />
 					<Route path='/nosotros' element={<h1>NOSOTROS</h1>} />
