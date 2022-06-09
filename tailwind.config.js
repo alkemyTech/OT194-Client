@@ -2,7 +2,7 @@ module.exports = {
 	corePlugins: {
 		preflight: false
 	},
-	content: ['./src/**/*.{html,js,jsx}', 'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'],
+	content: ['./src/**/*.{html,js,jsx}'],
 	theme: {
 		extend: {
 			colors: {
@@ -14,7 +14,5 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [
-		require('flowbite/plugin')
-	]
+	plugins: []
 };
