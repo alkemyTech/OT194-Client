@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import { useBeforeunload } from 'react-beforeunload';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getOrganizationData, resetOrganizationReq } from './features/organization/organizationSlice';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Dashboard } from './pages/Dashboard';
@@ -19,10 +20,21 @@ import { NewsDetail } from './pages/NewsDetail';
 import { UserProfile } from './pages/UserProfile';
 import { News } from './components/News';
 import { ContactsList } from './components/ContactsList/ContactsList';
+import Spinner from './components/Spinner';
 import { BackOfficeTestimonials } from './pages/BackOfficeTestimonials';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
+	const { isError, isSuccess, isLoading } = useSelector((state) => state.organization);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getOrganizationData());
+	}, []);
+
+	useEffect(() => {
+		dispatch(resetOrganizationReq());
+	}, [isError, isSuccess, dispatch]);
 
 	useBeforeunload(() => {
 		if (remember) return;
@@ -32,7 +44,8 @@ function App () {
 
 	return (
 		<Router>
-			<div>
+			<div className='App'>
+				{isLoading && <Spinner />}
 				<Header />
 				<Routes>
 					<Route path='/' element={<Dashboard />} />

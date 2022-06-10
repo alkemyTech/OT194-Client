@@ -4,6 +4,7 @@ import activitiesSlice from '../features/activities/activitiesSlice';
 import alertSlice from '../features/alert/alertSlice';
 import newsSlice from '../features/news/newsSlice';
 import componentsSlice from '../features/components/componentsSlice';
+import organizationSlice from '../features/organization/organizationSlice';
 
 export default configureStore({
 	reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
 		news: newsSlice,
 		auth: authSlice,
 		activities: activitiesSlice,
-		components: componentsSlice
+		components: componentsSlice,
+		organization: organizationSlice
 	}
 });
