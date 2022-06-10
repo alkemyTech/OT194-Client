@@ -22,6 +22,7 @@ import { News } from './components/News';
 import { ContactsList } from './components/ContactsList/ContactsList';
 import Spinner from './components/Spinner';
 import { BackOfficeTestimonials } from './pages/BackOfficeTestimonials';
+import { ActivityDetail } from './pages/ActivityDetail';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -63,6 +64,7 @@ function App () {
 					<Route path='/testimonios' element={<h1>TESTIMONIOS</h1>} />
 					<Route path='/contacto' element={<h1>CONTACTO</h1>} />
 					<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
+					<Route path='/actividades/:id' element={<ActivityDetail />} />
 					<Route path='/news/:id' element={<NewsDetail />} />
 					<Route path='/news' element={<News/>} />
 					<Route path='/not-found' element={<NotFound />} />
