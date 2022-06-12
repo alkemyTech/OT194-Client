@@ -1,15 +1,17 @@
 import React from 'react';
 import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
 import { contactFormSchema } from '../share/Forms/ContactForm/schemaContactForm';
 import { ContactForm } from '../share/Forms/ContactForm';
+import { createContact } from '../../features/contacts/contactsSlice';
 
 export const Contact = () => {
 	const startValues = {
-		fullName: '',
+		name: '',
 		email: '',
 		message: ''
 	};
-
+	const dispatch = useDispatch();
 	return (
 		<div className="flex mb-4">
 			<div className="w-1/2 ">
@@ -27,8 +29,8 @@ export const Contact = () => {
 				initialValues={startValues}
 				validationSchema={contactFormSchema}
 				onSubmit={(values, { setSubmitting }) => {
+					dispatch(createContact(values));
 					setSubmitting(false);
-					alert(JSON.stringify(values, null, 2));
 				}}
 				component={ContactForm}
 			/>
