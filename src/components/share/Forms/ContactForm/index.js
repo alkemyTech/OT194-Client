@@ -21,10 +21,10 @@ export const ContactForm = ({
 			handleInputChange={handleChange}
 			type="text"
 			placeholder="Nombre y Apellido"
-			name="fullName"
+			name="name"
 			onBlur={handleBlur}
-			value={values.fullName}
-			errors={errors.fullName}
+			value={values.name}
+			errors={errors.name}
 			isRequired={true}
 		/>
 		<CustomInput

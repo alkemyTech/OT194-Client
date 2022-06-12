@@ -5,6 +5,7 @@ import alertSlice from '../features/alert/alertSlice';
 import newsSlice from '../features/news/newsSlice';
 import componentsSlice from '../features/components/componentsSlice';
 import organizationSlice from '../features/organization/organizationSlice';
+import contactsSlice from '../features/contacts/contactsSlice';
 
 export default configureStore({
 	reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
 		auth: authSlice,
 		activities: activitiesSlice,
 		components: componentsSlice,
-		organization: organizationSlice
+		organization: organizationSlice,
+		contacts: contactsSlice
 	}
 });
