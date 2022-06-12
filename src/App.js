@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Navigate
-} from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useTransition, animated } from 'react-spring';
 import './App.css';
 import { useBeforeunload } from 'react-beforeunload';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,6 +24,14 @@ function App () {
 	const { remember } = useSelector((state) => state.auth);
 	const { isError, isSuccess, isLoading } = useSelector((state) => state.organization);
 	const dispatch = useDispatch();
+	const location = useLocation();
+
+	const transitions = useTransition(location, {
+		from: { opacity: 0, duration: 300 },
+		enter: { opacity: 1, duration: 500 },
+		leave: { opacity: 0 },
+		exitBeforeEnter: true
+	});
 
 	useEffect(() => {
 		dispatch(getOrganizationData());
@@ -44,37 +48,39 @@ function App () {
 	});
 
 	return (
-		<Router>
-			<div className='App'>
-				{isLoading && <Spinner />}
-				<Header />
-				<Routes>
-					<Route path='/' element={<Dashboard />} />
-					<Route path='/login' element={<Login />} />
-					<Route
-						path='/backoffice/edit-organization'
-						element={<BackOfficeOrganization />}
-					/>
-					<Route
-						path='/backoffice/testimonials'
-						element={<BackOfficeTestimonials />}
-					/>
-					<Route path='/register' element={<Register />} />
-					<Route path='/nosotros' element={<h1>NOSOTROS</h1>} />
-					<Route path='/testimonios' element={<h1>TESTIMONIOS</h1>} />
-					<Route path='/contacto' element={<h1>CONTACTO</h1>} />
-					<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
-					<Route path='/actividades/:id' element={<ActivityDetail />} />
-					<Route path='/news/:id' element={<NewsDetail />} />
-					<Route path='/news' element={<News/>} />
-					<Route path='/not-found' element={<NotFound />} />
-					<Route path='/profile' element={<UserProfile />} />
-					<Route path='*' element={<Navigate to='/not-found' />} />
-				</Routes>
-				<ContactsList />
-				<Footer />
-			</div>
-		</Router>
+		<div className='App'>
+			{isLoading && <Spinner />}
+			<Header />
+			{transitions((props, item) => {
+				return <animated.div style={props}>
+					<Routes location={item}>
+						<Route path='/' element={<Dashboard />} />
+						<Route path='/login' element={<Login />} />
+						<Route
+							path='/backoffice/edit-organization'
+							element={<BackOfficeOrganization />}
+						/>
+						<Route
+							path='/backoffice/testimonials'
+							element={<BackOfficeTestimonials />}
+						/>
+						<Route path='/register' element={<Register />} />
+						<Route path='/nosotros' element={<h1>NOSOTROS</h1>} />
+						<Route path='/testimonios' element={<h1>TESTIMONIOS</h1>} />
+						<Route path='/contacto' element={<h1>CONTACTO</h1>} />
+						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
+						<Route path='/actividades/:id' element={<ActivityDetail />} />
+						<Route path='/news/:id' element={<NewsDetail />} />
+						<Route path='/news' element={<News/>} />
+						<Route path='/not-found' element={<NotFound />} />
+						<Route path='/profile' element={<UserProfile />} />
+						<Route path='*' element={<Navigate to='/not-found' />} />
+					</Routes>
+				</animated.div>;
+			})}
+			<ContactsList />
+			<Footer />
+		</div>
 	);
 }
 
