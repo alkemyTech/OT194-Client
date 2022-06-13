@@ -22,7 +22,7 @@ function BurguerMenu () {
 						<div className='flex justify-center mb-4'>
 							<div className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full no-underline'>
 								<Link
-									className='text-white hover:text-redOng no-underline'
+									className='text-white no-underline'
 									to="/backoffice"
 								>
 									{user.firstName}
