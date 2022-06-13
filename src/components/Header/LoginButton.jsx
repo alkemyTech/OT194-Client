@@ -14,7 +14,7 @@ function LoginButton () {
 
 	return (
 		<button
-			className='mx-2 bg-white border-1 border focus:outline-4 focus:ring focus:black rounded-full focus:border-0 py-3 px-6 cursor-pointer hover:opacity-50'
+			className='mx-2 bg-white border-solid border-1 border focus:outline-4 focus:ring focus:black rounded-full focus:border-0 py-3 px-6 cursor-pointer hover:opacity-50'
 			onClick={handleLogin}
 		>Login</button>
 	);

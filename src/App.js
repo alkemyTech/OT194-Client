@@ -23,6 +23,7 @@ import { ContactsList } from './components/ContactsList/ContactsList';
 import Spinner from './components/Spinner';
 import { BackOfficeTestimonials } from './pages/BackOfficeTestimonials';
 import { ActivityDetail } from './pages/ActivityDetail';
+import { BackOfficeScreen } from './pages/BackOfficeScreen';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -51,6 +52,7 @@ function App () {
 				<Routes>
 					<Route path='/' element={<Dashboard />} />
 					<Route path='/login' element={<Login />} />
+					<Route path='/backoffice' element={<BackOfficeScreen/>} />
 					<Route
 						path='/backoffice/edit-organization'
 						element={<BackOfficeOrganization />}

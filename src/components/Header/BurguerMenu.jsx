@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { NavRoutes } from './NavRoutes';
 import LogoutButton from './LogoutButton';
@@ -17,7 +18,19 @@ function BurguerMenu () {
 			</div>
 			<div className='text-center p-0'>
 				{user
-					? <LogoutButton />
+					? <>
+						<div className='flex justify-center mb-4'>
+							<div className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full no-underline'>
+								<Link
+									className='text-white hover:text-redOng no-underline'
+									to="/backoffice"
+								>
+									{user.firstName}
+								</Link>
+							</div>
+						</div>
+						<LogoutButton />
+					</>
 					: <>
 						<LoginButton />
 						<RegisterButton />
