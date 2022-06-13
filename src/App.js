@@ -10,6 +10,7 @@ import { Footer } from './components/Footer/Footer';
 import { Dashboard } from './pages/Dashboard';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
+import { Testimonios } from './pages/Testimonios';
 import { NotFound } from './pages/NotFound';
 import { BackOfficeOrganization } from './pages/BackOfficeOrganization';
 import { NewsDetail } from './pages/NewsDetail';
@@ -66,7 +67,7 @@ function App () {
 						/>
 						<Route path='/register' element={<Register />} />
 						<Route path='/nosotros' element={<h1>NOSOTROS</h1>} />
-						<Route path='/testimonios' element={<h1>TESTIMONIOS</h1>} />
+						<Route path='/testimonios' element={<Testimonios />} />
 						<Route path='/contacto' element={<h1>CONTACTO</h1>} />
 						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
 						<Route path='/actividades/:id' element={<ActivityDetail />} />
