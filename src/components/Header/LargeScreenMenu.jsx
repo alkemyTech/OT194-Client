@@ -10,8 +10,8 @@ function LargeScreenMenu () {
 
 	return (
 		<div className="hidden flex-grow lg:flex lg:items-center ">
-			<div className="flex items-center justify-end lg:flex-grow opacity-100 lg:opacity-100 ">
-				<ul className='flex list-none text-center p-0'>
+			<div className="flex items-center justify-end lg:flex-grow">
+				<ul className='flex list-none text-center p-0 m-0'>
 					<NavRoutes />
 				</ul>
 			</div>
@@ -19,8 +19,8 @@ function LargeScreenMenu () {
 				{user
 					? <LogoutButton />
 					: <>
-						<RegisterButton />
 						<LoginButton />
+						<RegisterButton />
 					</>
 				}
 			</div>

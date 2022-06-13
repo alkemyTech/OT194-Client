@@ -18,7 +18,7 @@ export const News = () => {
 				<div>
 					<h3 className="font-medium p-2">{data.name}</h3>
 					<Link to={`news/${data.id}`}>
-						<button className="w-32 m-2 bg-bluePure hover:bg-blueOng text-white font-bold py-2 px-4 border border-bluePure rounded">
+						<button className="w-32 m-2 font-englebert bg-bluePure hover:bg-blueOng text-white font-bold py-2 px-4 border border-bluePure rounded">
 Ver Novedad
 						</button>
 					</Link>

@@ -3,41 +3,27 @@
 @tailwind utilities;
 body {
 	margin: 0;
-	font-family: 'Poppins',sans-serif;
+	font-family: 'Englebert','Poppins',sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-.form-title{
-	font-family: 'Poppins',sans-serif;
-}
-.form-login{
-	font-family: 'Poppins',sans-serif;
+
+.form-login {
 	font-size:small;
 }
-.form-login-button{
-	font-family: 'Poppins',sans-serif;
+
+.form-login-button {
 	font-size:larger;
 	font-weight: 900;
 }
-.form-footer{
-	font-family: 'Roboto',sans-serif;
 
-}
-.font-roboto{
-	font-family: 'Roboto',sans-serif;
-
-}
-.font-poppins{
-	font-family: 'Poppins',sans-serif;
-
-}
-.font-mulish{
-	font-family: 'Mulish',sans-serif;
+.font-englebert {
+	font-family: 'Englebert','Poppins',sans-serif;
 }
 
-.staff-card{
-	height: 234px;
-	width: 210px;
+.staff-card {
+	height: 200px;
+	width: 200px;
 	border-radius: 1rem;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -49,14 +35,11 @@ body {
 	justify-content: flex-end;
 	align-items: center;
 	color:white;
-
-
 }
 
-
-.testimony-card{
+.testimony-card {
 	height: 234px;
-	width: 210px;
+	width: 180px;
 	border-radius: 1rem;
 	text-align:justify;
 	display: flex;
@@ -66,18 +49,17 @@ body {
 	gap:6px;
 	align-items: left;
 	color:black;
-
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
-}
-.menuTop{
-    top: 96px;
-    height: calc(100vh - 96px);
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.textEditor{
+.menuTop {
+  top: 96px;
+  height: calc(100vh - 96px);
+}
+
+.textEditor {
 	height: 600px;
 }
