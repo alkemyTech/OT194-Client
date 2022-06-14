@@ -1,36 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { getAllNews } from '../../features/news/newsSlice';
+
+const Card = ({ data }) => (
+	<div className="w-5/6 mb-3 shadow-lg rounded-3xl border-solid border border-blue-700" style={{ backgroundColor: '#7E9AFD' }}>
+		<div className="">
+			<img
+				alt={data.name}
+				className="block mx-auto rounded-3xl p-2 h-44 w-fit"
+				src={data.image}
+			/>
+		</div>
+		<div className="flex flex-col justify-between">
+			<p className="font-medium px-1">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae augue augue.  varius laoreet nibh.
+			</p>
+			<Link to={`/news/${data.id}`} >
+				<button className=' mb-2 w-11/12 font-mulish  appearance-none border rounded-xl border-transparent text-white p-2 py-2.5 text-center no-underline bg-blue-700 ease-in-out duration-200  hover:bg-white hover:border-blue-700 hover:text-black ' style={{ boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)' }}>
+						Ver Novedad
+				</button>
+			</Link>
+		</div>
+	</div>
+);
 
 export const News = () => {
-	const news = [{ id: '123', name: 'Novedad', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }, { id: '124', name: 'Novedad2', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }, { id: '125', name: 'Novedad3', image: 'https://source.unsplash.com/WLUHO9A_xik/1600x900' }];
+	const dispatch = useDispatch();
+	const allNews = useSelector(state => state.news.allNews);
+	useEffect(() => {
+		dispatch(getAllNews());
+	}, []);
 
-	const Card = ({ data }) => (
-		<div className="w-max shadow-lg flex bg-blueOng rounded-3xl mx-5">
-			<div className="flex-no-shrink w-1/2">
-				<img
-					alt={data.name}
-					className="block mx-auto rounded-3xl p-2 h-32 w-32"
-					src={data.image}
-				/>
-			</div>
-			<div className="max-w-lg">
-				<div>
-					<h3 className="font-medium p-2">{data.name}</h3>
-					<Link to={`news/${data.id}`}>
-						<button className="w-32 m-2 bg-bluePure hover:bg-blueOng text-white font-bold py-2 px-4 border border-bluePure rounded">
-Ver Novedad
-						</button>
-					</Link>
-				</div>
-			</div>
-		</div>
-	);
 	return (
 		<div className="p-4">
-			<h1 className="flex justify-start font-bold p-4">Últimas novedades</h1>
-			<div className="grid grid-cols-4 gap-4">
-				{news.map(data => (
+			<h1 className="flex justify-start font-bold ">Últimas novedades</h1>
+			<div className="flex flex-wrap ">
+				{allNews.map(data => (
 					<Card key={data.id} data={data} />
 				))}
 			</div>
@@ -38,9 +45,6 @@ Ver Novedad
 	);
 };
 
-News.propTypes = {
-	data: PropTypes.object,
-	name: PropTypes.string,
-	image: PropTypes.string,
-	id: PropTypes.string
+Card.propTypes = {
+	data: PropTypes.object
 };
