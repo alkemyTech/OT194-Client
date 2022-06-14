@@ -20,7 +20,7 @@ export function Header () {
 		<nav className="h-16 w-full fixed box-border shadow-md flex items-center justify-between bg-white pl-6 pr-6 py-0 select-none">
 			<div className="flex items-center flex-shrink-0 text-white mr-6">
 				<img
-					className="cursor-pointer mx-auto my-0 w-24 h-14 object-cover"
+					className="cursor-pointer mx-auto my-0 w-24 h-14"
 					src='/logo-fundacion.png'
 					onClick={handleLogo}
 				/>

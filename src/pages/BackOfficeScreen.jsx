@@ -6,7 +6,7 @@ import { FaNewspaper, FaList, FaTable, FaComments, FaSitemap, FaSlideshare, FaUs
 export const BackOfficeScreen = () => {
 	const { user } = useSelector((state) => state.auth);
 
-	if (user.roleId !== 2) {
+	if (user && user.roleId !== 2) {
 		return (
 			<div className='flex justify-center items-center'>
 				<div className='flex gap-14 flex-wrap justify-center items-center my-14' style={ { width: '80%', height: '80%' } }>
