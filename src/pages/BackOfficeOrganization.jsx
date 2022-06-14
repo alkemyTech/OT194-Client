@@ -39,7 +39,7 @@ export const BackOfficeOrganization = () => {
 	return (
 		<div className="w-full flex">
 			<div className="lg:w-96 mx-auto my-5">
-				<h2 className="form-title">Información de la organización</h2>
+				<h2>Información de la organización</h2>
 				<Formik
 					validationSchema={formSchema}
 					initialValues={startValues}
@@ -52,14 +52,14 @@ export const BackOfficeOrganization = () => {
 				>
 					{({ errors, isSubmitting }) => (
 						<Form className="flex flex-col">
-							<h3 className="form-title">Nombre</h3>
+							<h3>Nombre</h3>
 							<Field className="form-login p-3"
 								type="text"
 								name="name"
 								placeholder="Nombre de organizacion"
 							/>
 							{errors.name ? <div className="text-redOng my-1">{errors.name}</div> : null}
-							<h3 className="form-title">Logo</h3>
+							<h3>Logo</h3>
 							<input
 								className="form-login p-3"
 								type="file"

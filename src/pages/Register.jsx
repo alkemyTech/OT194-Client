@@ -11,7 +11,7 @@ function Register () {
 		<>
 			{isLoading && <Spinner />}
 			<RegisterFormik />
-			<p className="form-footer mt-17">
+			<p className="mt-17">
             Ya estas registrado?
 				<Link className="text-redPure no-underline cursor-pointer" to='/login' >
               Iniciar Sesion

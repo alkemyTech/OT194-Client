@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { closeNav } from '../../features/components/componentsSlice';
 
@@ -17,12 +17,18 @@ export function NavRoutes () {
 	return (
 		<>
 			{navLinks.map((link, i) => (
-				<li key={i} className='m-2 text-lg first:font-extrabold'>
-					<Link
-						className='text-black hover:text-redOng no-underline'
+				<li key={i} className='m-2 text-lg'>
+					<NavLink
+						exact
+						style={{ textUnderlineOffset: '2px' }}
+						className={({ isActive }) => {
+							return isActive
+								? 'text-blueOng cursor-default pointer-events-none font-extrabold'
+								: 'text-black hover:text-redOng no-underline';
+						}}
 						onClick={() => dispatch(closeNav())}
 						to={`${link.route}`}
-					>{link.text}</Link>
+					>{link.text}</NavLink>
 				</li>))
 			}
 		</>
