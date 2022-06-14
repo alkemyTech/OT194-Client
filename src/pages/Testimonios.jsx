@@ -27,14 +27,14 @@ function Testimonios () {
 						<div key={testimony.name} className='bg-yellowOng flex flex-col text-black w-48 h-60 p-2 m-2 rounded-lg border-solid border border-orange-200 mb-4 text-justify'>
 							<img className='object-cover w-16 h-16 rounded-full ' src={testimony.imageUrl} alt="Person" />
 							<span className='text-l font-mulish pb-2 font-bold mt-4'> {testimony.name}</span>
-							<span className='h-full  font-semibold text-sm break-all'>{testimony.testimony}</span>
+							<span className='h-full text-sm break-all'>{testimony.testimony}</span>
 						</div>
 					);
 				})
 				}
 			</div>
 			<button className='bg-redOng text-white border-none text-sm py-2 px-4 rounded-full w-64 mb-6 cursor-pointer'>¡Agregar mi Testimonio!</button>
-			<Link to={'/'} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-40 no-underline">Ir al Inicio</Link>
+			<Link to={'/'} className="bg-blue-500 hover:bg-blue-700 text-white p-2 pt rounded-full w-40 no-underline">Ir al Inicio</Link>
 		</section>
 	);
 }
