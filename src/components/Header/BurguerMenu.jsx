@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { NavRoutes } from './NavRoutes';
 import LogoutButton from './LogoutButton';
 import LoginButton from './LoginButton';
 import RegisterButton from './RegisterButton';
+import UserButton from './UserButton';
 
 function BurguerMenu () {
 	const { user } = useSelector((state) => state.auth);
@@ -19,17 +19,8 @@ function BurguerMenu () {
 			<div className='text-center p-0'>
 				{user
 					? <>
-						<div className='flex justify-center mb-4'>
-							<div className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full no-underline'>
-								<Link
-									className='text-white no-underline'
-									to="/backoffice"
-								>
-									{user.firstName}
-								</Link>
-							</div>
-						</div>
 						<LogoutButton />
+						<UserButton />
 					</>
 					: <>
 						<LoginButton />
@@ -42,6 +33,3 @@ function BurguerMenu () {
 }
 
 export default BurguerMenu;
-
-// <div className="hidden flex-grow lg:flex lg:items-center">
-// <div className="flex items-center justify-end text-sm lg:flex-grow opacity-100 lg:opacity-100 ">

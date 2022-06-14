@@ -52,6 +52,7 @@ function App () {
 		<div className='App'>
 			{isLoading && <Spinner />}
 			<Header />
+			<div className='h-16' />
 			{transitions((props, item) => {
 				return <animated.div style={props}>
 					<Routes location={item}>
