@@ -14,9 +14,9 @@ function RegisterButton () {
 
 	return (
 		<button
-			className='mx-2 text-white bg-redOng hover:bg-redOng focus:ring rounded-full border-0 py-3 px-6 cursor-pointer hover:opacity-50'
+			className='mx-2 font-englebert text-base w-30 bg-redOng hover:bg-white focus:bg-white text-white hover:text-redOng focus:text-blueOng rounded-full border-2 border-transparent hover:border-redOng focus:border-blueOng py-1 px-4 cursor-pointer'
 			onClick={handleRegister}
-		>Registrate</button>
+		>Registrarse</button>
 	);
 }
 

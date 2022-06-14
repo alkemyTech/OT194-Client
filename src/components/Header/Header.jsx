@@ -17,10 +17,10 @@ export function Header () {
 	};
 
 	return (
-		<nav className="h-24 relative flex items-center justify-between flex-wrap bg-white px-6 py-0">
+		<nav className="h-16 w-full z-50 fixed box-border shadow-md flex items-center justify-between bg-white pl-6 pr-6 py-0 select-none">
 			<div className="flex items-center flex-shrink-0 text-white mr-6">
 				<img
-					className="cursor-pointer mx-auto w-24 h-24"
+					className="cursor-pointer mx-auto my-0 w-24 h-14 object-cover"
 					src='/logo-fundacion.png'
 					onClick={handleLogo}
 				/>

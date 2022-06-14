@@ -13,9 +13,9 @@ export const Login = () => {
 			<div className="flex justify-center items-center md:grid md:grid-cols-2">
 				<div className="m-auto ">
 					<p className="form-login">Bienvenido</p>
-					<h2 className="form-title">Inicia sesón en tu cuenta!</h2>
+					<h2>Inicia sesón en tu cuenta!</h2>
 					<LoginFormik />
-					<p className="form-footer mt-17">
+					<p className="mt-17">
             No tienes cuenta?{' '}
 						<Link className="text-redPure no-underline cursor-pointer" to='/register' >
               Registrate

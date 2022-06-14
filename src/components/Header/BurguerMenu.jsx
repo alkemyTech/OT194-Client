@@ -4,6 +4,7 @@ import { NavRoutes } from './NavRoutes';
 import LogoutButton from './LogoutButton';
 import LoginButton from './LoginButton';
 import RegisterButton from './RegisterButton';
+import UserButton from './UserButton';
 
 function BurguerMenu () {
 	const { user } = useSelector((state) => state.auth);
@@ -17,7 +18,10 @@ function BurguerMenu () {
 			</div>
 			<div className='text-center p-0'>
 				{user
-					? <LogoutButton />
+					? <>
+						<LogoutButton />
+						<UserButton />
+					</>
 					: <>
 						<LoginButton />
 						<RegisterButton />
@@ -29,6 +33,3 @@ function BurguerMenu () {
 }
 
 export default BurguerMenu;
-
-// <div className="hidden flex-grow lg:flex lg:items-center">
-// <div className="flex items-center justify-end text-sm lg:flex-grow opacity-100 lg:opacity-100 ">
