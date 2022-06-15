@@ -20,6 +20,8 @@ import Spinner from './components/Spinner';
 import { BackOfficeTestimonials } from './pages/BackOfficeTestimonials';
 import { ActivityDetail } from './pages/ActivityDetail';
 import { BackOfficeScreen } from './pages/BackOfficeScreen';
+import { Staff } from './pages/Staff';
+import { ContactUs } from './pages/ContactUs';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -68,9 +70,9 @@ function App () {
 							element={<BackOfficeTestimonials />}
 						/>
 						<Route path='/register' element={<Register />} />
-						<Route path='/nosotros' element={<h1>NOSOTROS</h1>} />
+						<Route path='/nosotros' element={<Staff />} />
 						<Route path='/testimonios' element={<h1>TESTIMONIOS</h1>} />
-						<Route path='/contacto' element={<h1>CONTACTO</h1>} />
+						<Route path='/contacto' element={<ContactUs />} />
 						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
 						<Route path='/actividades/:id' element={<ActivityDetail />} />
 						<Route path='/news/:id' element={<NewsDetail />} />
