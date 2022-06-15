@@ -1,22 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllNews, deleteNews } from '../../features/news/newsSlice';
-import { Link } from 'react-router-dom';
+import { deleteNews, getAllNews } from '../../features/news/newsSlice';
+import { Link, useNavigate } from 'react-router-dom';
 import {
 	faPenToSquare,
 	faSquareMinus
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { showAlert } from '../../features/alert/alertSlice';
 
 export const NewsList = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const news = useSelector(state => state.news.allNews);
 	useEffect(() => {
 		dispatch(getAllNews());
 	}, []);
 
 	const handleNewsDelete = (id) => {
-		dispatch(deleteNews(id));
+		const alert = {
+			show: true,
+			text: `¿Esta seguro que desa eliminar la novedad ${id}?`,
+			title: `Eliminar la novedad ${id}`,
+			showCancelButton: true
+		};
+		dispatch(showAlert(alert, dispatch(deleteNews(id))));
+		navigate('/backoffice/news');
 	};
 	return (
 		<div className='mb-10'>
@@ -57,9 +66,9 @@ export const NewsList = () => {
 										<Link to={`/backoffice/news/${item.id}`}>
 											<FontAwesomeIcon className='mx-2 text-lg text-blue-600' icon={faPenToSquare} />
 										</Link>
-										<Link onClick={() => handleNewsDelete(item.id)} to={'#'}>
+										<span onClick={() => handleNewsDelete(item.id)} className='p-0.5'>
 											<FontAwesomeIcon className='text-lg text-red-600' icon={faSquareMinus} />
-										</Link>
+										</span>
 									</span>
 								</td>
 								<td className='text-center hidden sm:table-cell'>
@@ -69,11 +78,10 @@ export const NewsList = () => {
 									>Editar</Link>
 								</td>
 								<td className='text-center hidden sm:table-cell'>
-									<Link
-										className='border-0 px-6 py-2 rounded bg-redOng text-white cursor-pointer text-md no-underline'
+									<button
+										className='border-0 px-6 py-2.5 rounded bg-redOng text-white cursor-pointer text-md no-underline'
 										onClick={() => handleNewsDelete(item.id)}
-										to={'#'}
-									>Eliminar</Link>
+									>Eliminar</button>
 								</td>
 							</tr>
 						))}
