@@ -21,6 +21,8 @@ import Spinner from './components/Spinner';
 import { BackOfficeTestimonials } from './pages/BackOfficeTestimonials';
 import { ActivityDetail } from './pages/ActivityDetail';
 import { BackOfficeScreen } from './pages/BackOfficeScreen';
+import ProtectRoute from './pages/routesProtection/ProtectRoute';
+import AdminCheck from './pages/routesProtection/AdminCheck';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -29,8 +31,8 @@ function App () {
 	const location = useLocation();
 
 	const transitions = useTransition(location, {
-		from: { opacity: 0, duration: 300 },
-		enter: { opacity: 1, duration: 500 },
+		from: { opacity: 0, duration: 100 },
+		enter: { opacity: 1, duration: 200 },
 		leave: { opacity: 0 },
 		exitBeforeEnter: true
 	});
@@ -58,27 +60,31 @@ function App () {
 				return <animated.div style={props}>
 					<Routes location={item}>
 						<Route path='/' element={<Dashboard />} />
-						<Route path='/login' element={<Login />} />
-						<Route path='/backoffice' element={<BackOfficeScreen/>} />
-						<Route
-							path='/backoffice/edit-organization'
-							element={<BackOfficeOrganization />}
-						/>
-						<Route
-							path='/backoffice/testimonials'
-							element={<BackOfficeTestimonials />}
-						/>
-						<Route path='/register' element={<Register />} />
+						<Route path='/not-found' element={<NotFound />} />
+						<Route path='*' element={<Navigate to='/not-found' />} />
 						<Route path='/nosotros' element={<h1>NOSOTROS</h1>} />
+						<Route path='/news' element={<News/>} />
+						<Route path='/news/:id' element={<NewsDetail />} />
+						<Route path='/actividades/:id' element={<ActivityDetail />} />
 						<Route path='/testimonios' element={<Testimonios />} />
 						<Route path='/contacto' element={<h1>CONTACTO</h1>} />
 						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
-						<Route path='/actividades/:id' element={<ActivityDetail />} />
-						<Route path='/news/:id' element={<NewsDetail />} />
-						<Route path='/news' element={<News/>} />
-						<Route path='/not-found' element={<NotFound />} />
-						<Route path='/profile' element={<UserProfile />} />
-						<Route path='*' element={<Navigate to='/not-found' />} />
+						<Route path='/login' element={<Login />} />
+						<Route path='/register' element={<Register />} />
+						<Route element={<ProtectRoute />} >
+							<Route path='/backoffice' element={<BackOfficeScreen/>} />
+							<Route path='/profile' element={<UserProfile />} />
+							<Route element={<AdminCheck />} >
+								<Route
+									path='/backoffice/edit-organization'
+									element={<BackOfficeOrganization />}
+								/>
+								<Route
+									path='/backoffice/testimonials'
+									element={<BackOfficeTestimonials />}
+								/>
+							</Route>
+						</Route>
 					</Routes>
 				</animated.div>;
 			})}
