@@ -3,17 +3,17 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PropTypes } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { newsFormSchema } from '../../Forms/NewsForm/schemaNewsForm';
+import { newsFormSchema } from './schemaNewsForm';
 import '../../../../custom.css';
-
 import {
+	getNews,
 	modifyNews,
 	createNews,
 	newsActions
-	// getNews
 } from '../../../../features/news/newsSlice';
-import { useParams } from 'react-router-dom';
-import { Field, Form, Formik } from 'formik';
+
+import { useNavigate, useParams } from 'react-router-dom';
+import { Form, Formik } from 'formik';
 
 const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 
@@ -27,27 +27,53 @@ export const NewsForm = () => {
 
 	const news = useSelector(state => state.news.openedNews);
 
+	const [imagePreview, setimagePreview] = useState({ preview: '', raw: '' });
 	const [image, setImage] = useState(undefined);
 	const [imgError, setImgError] = useState(false);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const { id: newsId } = useParams();
 
 	useEffect(() => {
-	// 	dispatch(getNews(newsId));
+		newsId === undefined ||	dispatch(getNews(newsId));
+	}, [newsId]);
+
+	useEffect(() => {
+		return () => {
+			dispatch(newsActions.resetOpenedNews());
+		};
 	}, []);
+
+	useEffect(() => {
+		setImage(news.image);
+	}, [news]);
+
+	const handleImageChange = (e) => {
+		setimagePreview({
+			preview: URL.createObjectURL(e.target.files[0]),
+			raw: e.target.files[0]
+		});
+		setImage(e.target.files[0]);
+	};
 
 	const handleSubmit = (data) => {
 		setImgError(false);
 
-		if (image && (image.size > 50936250 || !supportedMimeTypes.includes(image.type))) {
+		if (typeof (image) === 'object' && (image.size > 50936250 || !supportedMimeTypes.includes(image.type))) {
 			return setImgError(true);
 		}
 
-		if (newsId >= 0 && news.title.length > 0) {
-			dispatch(modifyNews(newsId, data, image));
+		if (!image) {
+			return setImgError(true);
+		}
+
+		if (newsId >= 0 && news.name.length > 0) {
+			dispatch(modifyNews(data));
+			navigate('/backoffice/news');
 		} else {
-			dispatch(createNews(data, image));
+			dispatch(createNews(data));
+			navigate('/backoffice/news');
 		}
 
 		dispatch(newsActions.resetOpenedNews());
@@ -67,42 +93,66 @@ export const NewsForm = () => {
 				initialValues={news}
 				onSubmit={handleSubmit}
 			>
-				{({ errors, setFieldValue, values }) => (
-					<Form className="flex flex-col">
+				{({ errors, setFieldValue, values, handleBlur, handleChange }) => (
+					<Form className="flex flex-col  md:m-5">
 						<div className="flex flex-col gap-1 mb-3">
 							<label>Imagen</label>
+
+							{imagePreview.preview
+								? (
+									<img
+										src={imagePreview.preview}
+										alt="UserImg"
+										className=' w-5/6 h-full self-center'
+									/>
+								)
+								: (image
+									? (
+										<><img
+											src={news.image}
+											alt="UserImg"
+											className=' w-5/6 h-full self-center'
+										/>
+										</>
+									)
+									: (
+										<div></div>
+									)) }
 							<input
+								accept="image/*"
+								id="upload-button"
 								type="file"
-								name='logo'
-								onChange={(e) => setImage(e.target.files[0])}
+								name='image'
+								onChange={e => { handleChange(e); handleImageChange(e); }}
 								placeholder='Logo'
+								className='hidden'
 							/>
-							{imgError ? <div className="text-red-800 font-bold my-1">Archivo no soportado</div> : null}
+							<label htmlFor='upload-button'>
+								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Upload your photo</h3>
+							</label>
+							{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}
 						</div>
 						<div className="flex flex-col gap-1 mb-3">
-							<label>Titulo</label>
-							<Field
-								className="form-login p-3"
-								type="text"
-								name="title"
+							<label className='text-left'>Titulo</label>
+							<input
+								className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								placeholder='Titulo'
+								name='name'
+								type='text'
+								value={values.name}
+								data-testid="test-id-form-control"
 							/>
-							{errors.title ? <div className="text-red-800 font-bold my-1">{errors.title}</div> : null}
+							{errors.name && (
+								<h5 className="text-redOng m-0 ml-1 text-left" data-testid="test-id-error-text">
+									{errors.name}
+								</h5>
+							)}
+
 						</div>
 						<div className="flex flex-col gap-1 mb-3">
-							<label>Categoria</label>
-							<Field
-								className="form-login p-3"
-								as="select"
-								name='category'
-							>
-								<option value=""></option>
-								<option value="Comunidad">Comunidad</option>
-								<option value="Merenderos">Merenderos</option>
-							</Field>
-							{errors.category ? <div className="text-red-800 font-bold my-1">{errors.category}</div> : null}
-						</div>
-						<div className="flex flex-col gap-1 mb-3">
-							<label>Contenido</label>
+							<label className='text-left'>Contenido</label>
 							<CKEditor
 								editor={ClassicEditor}
 								config={{
@@ -138,13 +188,13 @@ export const NewsForm = () => {
 									setFieldValue('content', data);
 								}}
 							/>
-							{errors.content ? <div className="text-red-800 font-bold my-1">{errors.content}</div> : null}
+							{errors.content ? <div className="text-red-800 font-bold my-1 text-left">{errors.content}</div> : null}
 						</div>
 						<button
 							type='submit'
 							className='mt-3 text-white bg-redOng hover:bg-redOng focus:ring rounded border-0 py-3 px-6 cursor-pointer hover:opacity-50'
 						>
-							{(newsId > 0 && news.title.length > 0) ? 'Modificar' : 'Crear'}
+							{(newsId > 0) ? 'Modificar' : 'Crear'}
 						</button>
 					</Form>
 				)}
@@ -156,7 +206,7 @@ export const NewsForm = () => {
 NewsForm.propTypes = {
 	news: PropTypes.shape({
 		id: PropTypes.string,
-		title: PropTypes.string,
+		name: PropTypes.string,
 		image: PropTypes.string,
 		content: PropTypes.string,
 		category: PropTypes.string
