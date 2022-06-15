@@ -6,14 +6,34 @@ const initialState = {
 		image: '',
 		title: '',
 		category: '',
-		content: ''
+		content: '',
+		slide: ''
 	},
+	allNews: [],
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
 	message: ''
 };
 
+// Obtener todas las novedades
+export const getAllNews = createAsyncThunk(
+	'news/getAllData',
+	async (thunkAPI) => {
+		try {
+			const res = await axiosInstance('/news', {}, 'GET');
+			return res.data;
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
 // Obtener una novedad en especifico
 export const getNews = createAsyncThunk(
 	'news/getData',
@@ -91,6 +111,20 @@ export const newsSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
+			// GetAll
+			.addCase(getAllNews.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getAllNews.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.allNews = action.payload;
+			})
+			.addCase(getAllNews.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
 			// Get
 			.addCase(getNews.pending, (state) => {
 				state.isLoading = true;
