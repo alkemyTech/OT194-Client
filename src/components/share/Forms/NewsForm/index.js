@@ -97,27 +97,16 @@ export const NewsForm = () => {
 					<Form className="flex flex-col  md:m-5">
 						<div className="flex flex-col gap-1 mb-3">
 							<label>Imagen</label>
-
 							{imagePreview.preview
 								? (
-									<img
-										src={imagePreview.preview}
-										alt="UserImg"
-										className=' w-5/6 h-full self-center'
-									/>
+									<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '400px' }}>
+										<img src={imagePreview.preview} alt={'Imagen cargada'} height={'100%'} />
+									</div>
 								)
-								: (image
-									? (
-										<><img
-											src={news.image}
-											alt="UserImg"
-											className=' w-5/6 h-full self-center'
-										/>
-										</>
-									)
-									: (
-										<div></div>
-									)) }
+								: image && (<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '90vw', maxHeight: '400px' }}>
+									<img src={news.image} alt={`Imagen de la noticia ${news.name}`} height={'100%'} />
+								</div>)
+							}
 							<input
 								accept="image/*"
 								id="upload-button"
