@@ -32,7 +32,9 @@ function Testimonios () {
 				}
 			</div>
 			<div className="flex flex-col items-center gap-3">
-				<button className='bg-redOng font-medium text-lg text-white border-none py-2 cursor-pointer rounded-lg px-10'>¡Agregar mi Testimonio!</button>
+				<Link to={'/testimonios/add'}>
+					<button className='bg-redOng font-medium text-lg text-white border-none py-2 cursor-pointer rounded-lg px-10'>¡Agregar mi Testimonio!</button>
+				</Link>
 				<Link to={'/'}>
 					<button className='text-black font-medium bg-white border border-solid border-black text-sm py-2 cursor-pointer rounded-lg px-10 hover:bg-neutral-700 hover:border-white hover:text-white transition-colors'>Ir al inicio</button>
 				</Link>
