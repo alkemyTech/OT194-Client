@@ -55,12 +55,12 @@ export const NewsList = () => {
 					<tbody>
 						{news.length && news.map((item, i) => (
 							<tr key={i}>
-								<td className='border px-8 py-4 text-sm'>{item.name}</td>
-								<td className='border px-8 py-4 text-sm'>
+								<td className='border px-4 py-4 text-sm'>{item.name}</td>
+								<td className='border py-4 text-sm'>
 									<img className='rounded-full h-12 w-12' src={item.image} />
 								</td>
-								<td className='border px-8 py-4 text-sm relative'>
-									{item.createdAt}
+								<td className='border px-4 py-4 text-sm relative'>
+									{item.createdAt.slice(0, 10)}
 									<span className=' absolute top-0 right-1 sm:hidden'>
 										<Link to={`/backoffice/news/${item.id}`}>
 											<FontAwesomeIcon className='mx-2 text-lg text-blue-600' icon={faPenToSquare} />
