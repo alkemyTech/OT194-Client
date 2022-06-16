@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 export const axiosInstance = (endpoint, data = {}, method = 'GET') => {
-	const token = localStorage.getItem('token') || '';
+	const token = localStorage.getItem('token');
 	return axios({
 		method,
 		url: `${endpoint}`,
 		data,
 		headers: {
-			'x-token': token
+			authorization: `Bearer ${token}`
 		}
 	})
 		.then((response) =>

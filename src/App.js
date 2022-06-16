@@ -25,6 +25,8 @@ import ProtectRoute from './pages/routesProtection/ProtectRoute';
 import AdminCheck from './pages/routesProtection/AdminCheck';
 import { Staff } from './pages/Staff';
 import { ContactUs } from './pages/ContactUs';
+import { NewsList } from './components/NewsList/NewsList';
+import { NewsForm } from './components/share/Forms/NewsForm';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -84,6 +86,18 @@ function App () {
 								<Route
 									path='/backoffice/testimonials'
 									element={<BackOfficeTestimonials />}
+								/>
+								<Route
+									path='/backoffice/news'
+									element={<NewsList />}
+								/>
+								<Route
+									path='/backoffice/news/create'
+									element={<NewsForm />}
+								/>
+								<Route
+									path='/backoffice/news/:id'
+									element={<NewsForm />}
 								/>
 							</Route>
 						</Route>

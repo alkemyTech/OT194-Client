@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	show: false,
 	title: null,
-	text: null
+	text: null,
+	showCancelButton: true
 };
 
 export const alertSlice = createSlice({
@@ -15,6 +16,7 @@ export const alertSlice = createSlice({
 			state.show = action.payload.show;
 			state.title = action.payload.title;
 			state.text = action.payload.text;
+			state.showCancelButton = action.payload.showCancelButton;
 		}
 	}
 });
