@@ -1,10 +1,11 @@
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../helper/axiosInstance';
 
 const initialState = {
 	openedNews: {
 		image: '',
-		title: '',
+		name: '',
 		category: '',
 		content: '',
 		slide: ''
@@ -55,9 +56,9 @@ export const getNews = createAsyncThunk(
 // Crear una novedad
 export const createNews = createAsyncThunk(
 	'news/createData',
-	async (data, image, thunkAPI) => {
+	async (data, thunkAPI) => {
 		try {
-			if (image) {
+			if (data.image) {
 				// logica para subir imagen
 			}
 			return axiosInstance('/news', data, 'POST');
@@ -76,12 +77,30 @@ export const createNews = createAsyncThunk(
 // Editar una novedad
 export const modifyNews = createAsyncThunk(
 	'news/modifyData',
-	async (id, data, image, thunkAPI) => {
+	async (data, thunkAPI) => {
 		try {
-			if (image) {
+			if (data.image) {
 				// logica para subir imagen
 			}
-			return axiosInstance(`/news/${id}`, data, 'PATCH');
+			return axiosInstance(`/news/${data.id}`, data, 'PUT');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// Eliminar una novedad
+export const deleteNews = createAsyncThunk(
+	'news/deleteData',
+	async (id, thunkAPI) => {
+		try {
+			return axiosInstance(`/news/${id}`, {}, 'DELETE');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -132,7 +151,7 @@ export const newsSlice = createSlice({
 			.addCase(getNews.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.openedNews = action.payload;
+				state.openedNews = action.payload.data;
 			})
 			.addCase(getNews.rejected, (state, action) => {
 				state.isLoading = false;
