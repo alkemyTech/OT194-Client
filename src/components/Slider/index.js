@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const CarouselImg = styled.img`
-	height: 246px;
 	opacity: 0;
 	transition: 1s;
 	width: 100%;
@@ -58,14 +57,14 @@ function Slider (props) {
 	return (
 		<>
 
-			<div className=' bg-neutral-300 relative my-5 w-full items-center justify-center'>
+			<div className=' bg-neutral-100 relative my-5 w-full items-center justify-center flex' style={{ height: '500px' }}>
 				{arr.length === 0
 					? (<div className="flex  font-sans text-black w-full items-center justify-center" style={{ height: '500px' }}>
 						<p>Imagen no encontrada</p>
 					</div>)
 					: (<CarouselImg
 						src={selectedImage}
-						className={loaded ? 'loaded' : ''}
+						className={` h-max ${loaded ? 'loaded' : ''}`}
 						alt={selectedText}
 					/>)}
 
@@ -77,14 +76,14 @@ function Slider (props) {
 						<button
 							type='button'
 							onClick={prev}
-							className='flex items-center p-2 border-0 text-base rounded-full text-gray-600 bg-white hover:bg-gray-100 absolute left-5 top-1/2'
+							className='flex items-center p-2 border-0 text-base rounded-full text-gray-600 bg-white hover:bg-gray-100 cursor-pointer absolute left-5 top-1/2'
 						>
 							<FontAwesomeIcon icon={faChevronLeft} className=' h-3.5 w-3.5' />
 						</button>
 						<button
 							type='button'
 							onClick={next}
-							className='flex items-center p-2 border-0 text-base rounded-full text-gray-600 bg-white hover:bg-gray-100 absolute right-5  top-1/2'
+							className='flex items-center p-2 border-0 text-base rounded-full text-gray-600 bg-white hover:bg-gray-100  cursor-pointer absolute right-5  top-1/2'
 						>
 							<FontAwesomeIcon icon={faChevronRight} className=' h-3.5 w-3.5' />
 						</button></>)}

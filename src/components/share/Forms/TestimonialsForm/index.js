@@ -12,10 +12,10 @@ import {
 	testimonialsActions
 	// getTestimony
 } from '../../../../features/testimonials/testimonialsSlice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 
-const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
 
 export const TestimonialsForm = () => {
 	/* TODO:
@@ -29,6 +29,7 @@ export const TestimonialsForm = () => {
 	const [image, setImage] = useState(undefined);
 	const [imgError, setImgError] = useState(false);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const { id: testimonyId } = useParams();
 
@@ -47,8 +48,10 @@ export const TestimonialsForm = () => {
 
 		if (testimonyId >= 0 && testimony.name.length > 0) {
 			dispatch(modifyTestimony(testimonyId, data, image));
+			navigate('/testimonios');
 		} else {
 			dispatch(createTestimony(data, image));
+			navigate('/testimonios');
 		}
 
 		dispatch(testimonialsActions.resetOpenedNews());
@@ -56,7 +59,7 @@ export const TestimonialsForm = () => {
 
 	return (
 		<div
-			className='mx-auto'
+			className='mx-auto my-5'
 			style={{
 				maxWidth: '1000px',
 				width: '80%'

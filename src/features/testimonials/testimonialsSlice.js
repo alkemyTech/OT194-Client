@@ -7,11 +7,31 @@ const initialState = {
 		image: '',
 		content: ''
 	},
+	allTestimonials: [],
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
 	message: ''
 };
+
+// Obtener todos los testimonios
+export const getAllTestimonials = createAsyncThunk(
+	'testimonials/getAllData',
+	async (thunkAPI) => {
+		try {
+			const res = await axiosInstance('/testimonials/', {}, 'GET');
+			return res.data;
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
 
 // Obtener un testimonio en especifico
 export const getTestimony = createAsyncThunk(
@@ -83,6 +103,20 @@ export const testimonialsSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
+			// GetAll
+			.addCase(getAllTestimonials.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getAllTestimonials.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.allTestimonials = action.payload;
+			})
+			.addCase(getAllTestimonials.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
 			// Get
 			.addCase(getTestimony.pending, (state) => {
 				state.isLoading = true;

@@ -27,6 +27,7 @@ import { Staff } from './pages/Staff';
 import { ContactUs } from './pages/ContactUs';
 import { NewsList } from './components/NewsList/NewsList';
 import { NewsForm } from './components/share/Forms/NewsForm';
+import { TestimonialsForm } from './components/share/Forms/TestimonialsForm';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -71,6 +72,7 @@ function App () {
 						<Route path='/news/:id' element={<NewsDetail />} />
 						<Route path='/actividades/:id' element={<ActivityDetail />} />
 						<Route path='/testimonios' element={<Testimonios />} />
+						<Route path='/testimonios/add' element={<TestimonialsForm />} />
 						<Route path='/contacto' element={<ContactUs />} />
 						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
 						<Route path='/login' element={<Login />} />
@@ -80,7 +82,7 @@ function App () {
 							<Route path='/profile' element={<UserProfile />} />
 							<Route element={<AdminCheck />} >
 								<Route
-									path='/backoffice/edit-organization'
+									path='/backoffice/organization'
 									element={<BackOfficeOrganization />}
 								/>
 								<Route

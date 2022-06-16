@@ -23,8 +23,8 @@ export const BackOfficeScreen = () => {
 				<Link to ={'/backoffice/news'}> <OptionCard title={'Novedades'} icon={<FaNewspaper size={70} />} /> </Link>
 				<OptionCard title={'Actividades'} icon={<FaList size={70} />} />
 				<OptionCard title={'Categorias'} icon={<FaTable size={70} />} />
-				<OptionCard title={'Testimonios'} icon={<FaComments size={70} />} />
-				<OptionCard title={'Organizacion'} icon={<FaSitemap size={70} />} />
+				<Link to={'/backoffice/testimonials'}><OptionCard title={'Testimonios'} icon={<FaComments size={70} />} /></Link>
+				<Link to={'/backoffice/organization'}><OptionCard title={'Organizacion'} icon={<FaSitemap size={70} />} /></Link>
 				<OptionCard title={'Slides'} icon={<FaSlideshare size={70} />} />
 				<OptionCard title={'Usuarios'} icon={<FaUsers size={70} />} />
 				<OptionCard title={'Miembros'} icon={<FaUserFriends size={70} />} />

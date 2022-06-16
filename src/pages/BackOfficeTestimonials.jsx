@@ -1,29 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
-
+import { getAllTestimonials } from '../features/testimonials/testimonialsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 export const BackOfficeTestimonials = () => {
-	const mockTestimonials = [
-		{
-			id: '1',
-			name: 'Francisco Del Fresno'
-		},
-		{
-			id: '2',
-			name: 'Alan Trias'
-		},
-		{
-			id: '3',
-			name: 'Mateo Sequeira'
-		},
-		{
-			id: '4',
-			name: 'Lucas Gomez'
-		},
-		{
-			id: '5',
-			name: 'Lina Fierro de la Rua Hernandez Rojas'
-		}
-	];
+	const dispatch = useDispatch();
+	const testimonials = useSelector(state => state.testimonials.allTestimonials);
+
+	useEffect(() => {
+		dispatch(getAllTestimonials());
+	}, []);
 
 	const handleDeleteTestimony = (id) => {
 		// Logica para eliminar (No existe endpoint)
@@ -46,7 +31,7 @@ export const BackOfficeTestimonials = () => {
 					</thead>
 					<tbody>
 						{
-							mockTestimonials.map((m, i) => (
+							testimonials.map((m, i) => (
 								<tr className="bg-neutral-100" key={m.id}>
 									<td style={{ width: '60vw', maxWidth: '500px' }} className="px-3 py-2 font-medium">{m.name}</td>
 									<td className="">
