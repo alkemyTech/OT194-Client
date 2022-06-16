@@ -11,6 +11,9 @@ module.exports = {
 				yellowOng: '#FAFA88',
 				blueOng: '#9AC9FB',
 				bluePure: '#0038FF'
+			},
+			screens: {
+				xs: '375px'
 			}
 		}
 	},

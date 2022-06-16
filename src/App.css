@@ -32,6 +32,10 @@
   color: rgb(112, 76, 182);
 }
 
+.max-height-screen {
+	max-height: calc(100vh - 64px);
+}
+
 @keyframes App-logo-float {
   0% {
     transform: translateY(0);

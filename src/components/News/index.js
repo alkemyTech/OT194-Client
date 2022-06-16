@@ -37,7 +37,7 @@ export const News = () => {
 		<div className="p-4 justify-center">
 			<h1 className="flex justify-center font-bold ">Últimas novedades</h1>
 			<div className="grid grid-cols-1 gap-4 justify-items-center sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-				{allNews.map(data => (
+				{allNews.length && allNews.map(data => (
 					<Card key={data.id} data={data} />
 				))}
 			</div>
