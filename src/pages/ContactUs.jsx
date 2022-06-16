@@ -14,7 +14,7 @@ export const ContactUs = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<div className="flex flex-col mx-auto overflow-hidden gap-8" style={{ width: '85vw', maxWidth: '600px' }}>
+		<div className="flex flex-col mx-auto my-14 overflow-hidden gap-8" style={{ width: '85vw', maxWidth: '600px' }}>
 			<div className="flex flex-col">
 				<h1 className="m-0">Nuestra mision</h1>
 				<p className="m-0">
