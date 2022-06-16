@@ -19,12 +19,16 @@ function Testimonios () {
 		{ imageUrl: 'https://s3-alpha-sig.figma.com/img/8c43/d067/5ea7411286a8533ecdb0db6e36f9bbdb?Expires=1655078400&Signature=R7Izm1nOoOkYZ-qr1t-LWN7Im8ksVv-0hkqhrpJ-Y21M0DNOSptIBINnxH0ipMRs9CTfyD75Qp~N9nsL4Nv5piwz6jcQSlv~PXlkai1SVaJ8DOeSN3hH5LYGjA~vAGm~Ir3jHzElDpzSPWS6BuAtd5unkgU593o7f2ogOLlin91YmdIIz3r6enrOAc9GMDnWu-eeQ7yukbUh8N7Zs1Xsy0f85Sezx-VEFPnBS8hXzFN4oBhvjDD1~nJU2uU-0j4~6C6qBoibw6OTlSTLXa6Wv6LLzKtL5hP1jUaRXUrWYJcpBeVyKnSfP7MMd~LekbYBuWKC9Xltsg-gE-laIJflzQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA', name: 'Nombre y Apellido', testimony: 'testimoniotestimoniotestimoniotestimoniotestimoniotestimoniotestimoniotestimoniotestimoniotestimoni' }
 	];
 	return (
-		<section className='m-8 flex flex-col'>
+		<section className='m-8 flex flex-col px-5 mx-auto'
+			style={{
+				maxWidth: '1200px'
+			}}
+		>
 			<h1 className="text-3xl">Testimonios</h1>
-			<div className='flex flex-wrap justify-center w-full mx-18 mb-10'>
+			<div className='flex flex-wrap justify-center gap-3 mb-10'>
 				{	testimonies.map((testimony) => {
 					return (
-						<div key={testimony.name} className='bg-yellowOng flex flex-col text-black w-48 h-60 p-2 m-2 rounded-lg border-solid border border-orange-200 mb-4 text-justify'>
+						<div key={testimony.name} className='bg-yellow-100 flex flex-col text-black w-48 h-60 p-3 box-border rounded-2xl border-solid border-2 border-yellow-200 text-justify'>
 							<img className='object-cover w-16 h-16 rounded-full ' src={testimony.imageUrl} alt="Person" />
 							<span className='text-l font-mulish pb-2 font-bold mt-4'> {testimony.name}</span>
 							<span className='h-full text-sm break-all'>{testimony.testimony}</span>
@@ -33,8 +37,12 @@ function Testimonios () {
 				})
 				}
 			</div>
-			<button className='bg-redOng text-white border-none text-sm py-2 px-4 rounded-full w-64 mb-6 cursor-pointer'>¡Agregar mi Testimonio!</button>
-			<Link to={'/'} className="bg-blue-500 hover:bg-blue-700 text-white p-2 pt rounded-full w-40 no-underline">Ir al Inicio</Link>
+			<div className="flex flex-col items-center gap-3">
+				<button className='bg-redOng font-medium text-lg text-white border-none py-2 cursor-pointer rounded-lg px-10'>¡Agregar mi Testimonio!</button>
+				<Link to={'/'}>
+					<button className='text-black font-medium bg-white border border-solid border-black text-sm py-2 cursor-pointer rounded-lg px-10 hover:bg-neutral-700 hover:border-white hover:text-white transition-colors'>Ir al inicio</button>
+				</Link>
+			</div>
 		</section>
 	);
 }
