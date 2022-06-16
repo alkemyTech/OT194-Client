@@ -80,7 +80,7 @@ function App () {
 							<Route path='/profile' element={<UserProfile />} />
 							<Route element={<AdminCheck />} >
 								<Route
-									path='/backoffice/edit-organization'
+									path='/backoffice/organization'
 									element={<BackOfficeOrganization />}
 								/>
 								<Route

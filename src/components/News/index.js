@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getAllNews } from '../../features/news/newsSlice';
 
@@ -35,18 +35,32 @@ export const News = () => {
 	useEffect(() => {
 		dispatch(getAllNews());
 	}, []);
-
+	const location = useLocation();
+	const { pathname } = location;
 	return (
+		<>{pathname === '/'
+
+			? (<div className='flex flex-col w-screen min-h-1/5 '>
+				<div className='inline-flex flex-row items-end content-center justify-between px-20 py-1'>
+					<span className='text-2xl font-black '>Novedades</span>
+					<div className='flex items-center'>
+						<Link to={'/news'} className='flex items-center no-underline' > Ver todos
+							<img src="images/vector.png" alt="go to" className='ml-2' />
+						</Link>
+					</div>
+				</div>
+			</div>)
+			: (<h1 className="flex justify-center font-bold ">Últimas novedades</h1>)
+		}
 		<div className="p-4 mx-auto"
-			style={{ maxWidth: '1500px' }}
-		>
-			<h1>Últimas novedades</h1>
+			style={{ maxWidth: '1500px' }}>
 			<div className="flex flex-wrap gap-4 justify-center">
-				{allNews.length && allNews.map(data => (
+				{allNews.length && allNews.slice(0, (pathname === '/' ? 2 : allNews.length - 1)).map(data => (
 					<Card key={data.id} data={data} />
 				))}
 			</div>
 		</div>
+		</>
 	);
 };
 
