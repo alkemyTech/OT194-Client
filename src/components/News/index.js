@@ -16,9 +16,9 @@ const Card = ({ data }) => (
 				src={data.image}
 			/>
 		</div>
-		<div className="flex flex-col justify-between">
+		<div className="flex flex-col justify-between p-2.5">
 			<p className="m-0 font-medium text-base text-left" >
-				{data.content.slice(0, 150)}
+				{data.content.slice(0, 135)}...
 			</p>
 			<Link to={`/news/${data.id}`}>
 				<button className="cursor-pointer drop-shadow-md w-full bg-blue-700 text-white appearance-none py-2.5 border rounded-lg border-transparent ease-in-out duration-200 hover:bg-white hover:border-blue-700 hover:text-black">
