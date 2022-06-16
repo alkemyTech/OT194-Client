@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteNews, getAllNews } from '../../features/news/newsSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
 	faPenToSquare,
 	faSquareMinus
@@ -11,7 +11,6 @@ import { showAlert } from '../../features/alert/alertSlice';
 
 export const NewsList = () => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const news = useSelector(state => state.news.allNews);
 	useEffect(() => {
 		dispatch(getAllNews());
@@ -25,8 +24,8 @@ export const NewsList = () => {
 			showCancelButton: true
 		};
 		dispatch(showAlert(alert, dispatch(deleteNews(id))));
-		navigate('/backoffice/news');
 	};
+	console.log(news);
 	return (
 		<div className='mb-10'>
 			<div
@@ -54,7 +53,7 @@ export const NewsList = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{news.map((item, i) => (
+						{news.length && news.map((item, i) => (
 							<tr key={i}>
 								<td className='border px-8 py-4 text-sm'>{item.name}</td>
 								<td className='border px-8 py-4 text-sm'>
