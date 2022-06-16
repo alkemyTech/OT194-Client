@@ -17,6 +17,7 @@ const AlertsProvider = (props) => {
 				show = {alert.show}
 				text = {alert.text}
 				title = {alert.title}
+				showCancelButton = {alert.showCancelButton}
 				onConfirm= {confirm}
 			/>
 		</>
