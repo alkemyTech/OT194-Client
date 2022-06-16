@@ -54,7 +54,7 @@ export const NewsList = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{news.length > 0 || news.map((item, i) => (
+						{news !== undefined || news.map((item, i) => (
 							<tr key={i}>
 								<td className='border px-8 py-4 text-sm'>{item.name}</td>
 								<td className='border px-8 py-4 text-sm'>
