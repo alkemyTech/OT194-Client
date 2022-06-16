@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form } from 'formik';
-import { CustomInput } from '../../CustomInput';
 import PropTypes from 'prop-types';
 
 export const ContactForm = ({
@@ -14,56 +13,76 @@ export const ContactForm = ({
 	<Form
 		onSubmit={handleSubmit}
 		data-testid="test-id-formik-container"
-		className="w-full max-w-lg"
+		className="flex flex-col gap-2"
 	>
-		<h2 className="flex justify-center">¡Contactate con nosotros!</h2>
-		<CustomInput
-			handleInputChange={handleChange}
-			type="text"
-			placeholder="Nombre y Apellido"
-			name="name"
+		<input
+			className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
+			onChange={handleChange}
 			onBlur={handleBlur}
+			placeholder='Nombre y Apellido'
+			name='name'
+			type='text'
 			value={values.name}
-			errors={errors.name}
-			isRequired={true}
+			data-testid="test-id-form-control"
 		/>
-		<CustomInput
-			handleInputChange={handleChange}
-			type="text"
-			placeholder="E-mail"
-			name="email"
+		{errors.name && (
+			<h5 className="text-redOng m-0 ml-1 text-left" data-testid="test-id-error-text">
+				{errors.name}
+			</h5>
+		)}
+		<input
+			className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
+			onChange={handleChange}
 			onBlur={handleBlur}
+			placeholder='E-mail'
+			name='email'
+			type='text'
 			value={values.email}
-			errors={errors.email}
-			isRequired={true}
+			data-testid="test-id-form-control"
 		/>
-		<CustomInput
-			handleInputChange={handleChange}
-			type="textarea"
-			placeholder="Escribe tu consulta"
-			name="message"
+		{errors.email && (
+			<h5 className="text-redOng m-0 ml-1 text-left" data-testid="test-id-error-text">
+				{errors.email}
+			</h5>
+		)}
+		<textarea
+			onChange={handleChange}
 			onBlur={handleBlur}
+			placeholder='Escribe tu consulta'
+			name='message'
+			type='text'
 			value={values.message}
-			errors={errors.message}
-			isRequired={true}
+			className="
+        w-full
+        m-0
+			  p-3
+        box-border
+			  resize-y
+			  form-control
+			  bg-white bg-clip-padding
+			  block
+			  text-base
+			  font-normal
+			  text-gray-700
+			  border border-solid border-gray-300
+			  rounded
+			  transition
+			  ease-in-out
+			"
+			rows="3"
 		/>
-		<div className="rounded w-full border-transparent py-3 px-2 m-2">
-			<button
-				type="submit"
-				className="shadow border rounded w-full border-transparent bg-blueOng text-white py-3 px-2 m-2"
-				disable={isSubmitting}
-			>
-        Enviar Consulta
-			</button>
-		</div>
-		<div className="flex justify-center">
-			<button
-				type="submit"
-				className="shadow border rounded w-50 border-black bg-white text-black py-3 px-2 m-2"
-			>
-        Ir al inicio
-			</button>
-		</div>
+		{errors.message && (
+			<h5 className="text-redOng m-0 ml-1 text-left" data-testid="test-id-error-text">
+				{errors.message}
+			</h5>
+		)}
+		<button
+			type='submit'
+			className='mt-3 text-white bg-blueOng hover:bg-blueOng focus:ring rounded border-0 py-3 px-6 cursor-pointer hover:opacity-80'
+			disabled={isSubmitting}
+		>
+			Enviar Consulta
+		</button>
 	</Form>
 );
 

@@ -23,6 +23,8 @@ import { ActivityDetail } from './pages/ActivityDetail';
 import { BackOfficeScreen } from './pages/BackOfficeScreen';
 import ProtectRoute from './pages/routesProtection/ProtectRoute';
 import AdminCheck from './pages/routesProtection/AdminCheck';
+import { Staff } from './pages/Staff';
+import { ContactUs } from './pages/ContactUs';
 import { NewsList } from './components/NewsList/NewsList';
 import { NewsForm } from './components/share/Forms/NewsForm';
 
@@ -64,12 +66,12 @@ function App () {
 						<Route path='/' element={<Dashboard />} />
 						<Route path='/not-found' element={<NotFound />} />
 						<Route path='*' element={<Navigate to='/not-found' />} />
-						<Route path='/nosotros' element={<h1>NOSOTROS</h1>} />
+						<Route path='/nosotros' element={<Staff />} />
 						<Route path='/news' element={<News/>} />
 						<Route path='/news/:id' element={<NewsDetail />} />
 						<Route path='/actividades/:id' element={<ActivityDetail />} />
 						<Route path='/testimonios' element={<Testimonios />} />
-						<Route path='/contacto' element={<h1>CONTACTO</h1>} />
+						<Route path='/contacto' element={<ContactUs />} />
 						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/register' element={<Register />} />
