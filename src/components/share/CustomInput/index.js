@@ -10,9 +10,14 @@ export const CustomInput = ({
 	errors
 }) => {
 	return (
-		<div data-testid="test-id-form-group-container">
+		<div data-testid="test-id-form-group-container" className='w-full flex flex-col items-start justify-center'>
+			{errors && (
+				<h4 className="text-redOng my-0" data-testid="test-id-error-text">
+					{errors}
+				</h4>
+			)}
 			<input
-				className="shadow appearance-none border rounded w-full py-3 px-4 m-2 text-gray-700 leading-tight"
+				className="shadow appearance-none border box-border text-base rounded-lg w-full h-12 py-3 px-4 my-2 text-gray-700"
 				type={type}
 				placeholder={placeholder}
 				onChange={handleInputChange}
@@ -20,11 +25,6 @@ export const CustomInput = ({
 				value={value}
 				data-testid="test-id-form-control"
 			/>
-			{errors && (
-				<h5 className="text-redOng" data-testid="test-id-error-text">
-					{errors}
-				</h5>
-			)}
 		</div>
 	);
 };

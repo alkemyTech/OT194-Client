@@ -13,7 +13,7 @@ export const LoginForm = ({
 	<Form
 		onSubmit={handleSubmit}
 		data-testid="login-test-id-formik-container"
-		className="w-full max-w-lg"
+		className="w-full flex flex-col gap-3 items-start"
 	>
 		<CustomInput
 			handleInputChange={handleChange}
@@ -33,25 +33,25 @@ export const LoginForm = ({
 			errors={errors.password}
 			isRequired={true}
 		/>
-		<input
-			onChange={handleChange}
-			type="checkbox"
-			name="rememberMe"
-			id="rememberMe"
-			defaultChecked={values.rememberMe}
-		/>
-		<label htmlFor="rememberMe">
+		<div className='flex'>
+			<input
+				className='h-5'
+				onChange={handleChange}
+				type="checkbox"
+				name="rememberMe"
+				id="rememberMe"
+				defaultChecked={values.rememberMe}
+			/>
+			<label htmlFor="rememberMe" className='text-lg'>
       Recordarme
-		</label>
-		<div className="rounded w-full border-transparent py-3 px-2 m-2">
-			<button
-				type="submit"
-				className="shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2"
-				disable={isSubmitting}
-			>
-        Ingresar
-			</button>
+			</label>
 		</div>
+		<button
+			type="submit"
+			className="shadow-md border border-box rounded-lg text-base h-12 w-full border-transparent bg-redOng text-white py-3 px-2 my-2"
+			disable={isSubmitting}
+		>Iniciar sesión
+		</button>
 	</Form>
 );
 

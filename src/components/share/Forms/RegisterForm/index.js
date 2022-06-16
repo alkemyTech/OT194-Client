@@ -13,7 +13,7 @@ export const RegisterForm = ({
 	<Form
 		onSubmit={handleSubmit}
 		data-testid='test-id-formik-container'
-		className='w-full max-w-lg'
+		className='w-full flex flex-col gap-3 items-start'
 	>
 		<CustomInput
 			handleInputChange={handleChange}
@@ -60,15 +60,12 @@ export const RegisterForm = ({
 			errors={errors.password2}
 			isRequired={true}
 		/>
-		<div className='rounded w-full border-transparent py-3 px-2 m-2'>
-			<button
-				type='submit'
-				className='shadow appearance-none border rounded w-full border-transparent bg-redOng text-white py-3 px-2 m-2'
-				disable={isSubmitting}
-			>
-				Registrarse
-			</button>
-		</div>
+		<button
+			type='submit'
+			className='shadow-md border-box border h-12 rounded-lg w-full border-transparent bg-redOng text-base text-white py-3 px-2 my-2'
+			disable={isSubmitting}
+		>Registrarse
+		</button>
 	</Form>
 );
 

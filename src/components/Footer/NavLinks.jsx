@@ -12,14 +12,14 @@ function NavLinks () {
 	];
 
 	return (
-		<div className="flex flex-col sm:flex-row mx-auto mb-6 sm:gap-5">
+		<div className="flex flex-col sm:flex-row mx-auto mb-6 gap-5">
 			{navLinks.map((section, i) => (
 				<NavLink
 					style={{ textUnderlineOffset: '2px' }}
 					className={({ isActive }) => {
 						return isActive
-							? 'text-blueOng cursor-default pointer-events-none font-extrabold'
-							: 'text-black hover:text-redOng no-underline';
+							? 'text-blueOng text-lg cursor-default pointer-events-none font-extrabold'
+							: 'text-black text-lg hover:text-redOng no-underline';
 					}}
 					key={`${i}${section.title}`}
 					to={section.route}
