@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteNews, getAllNews } from '../../features/news/newsSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
 	faPenToSquare,
 	faSquareMinus
@@ -11,6 +11,7 @@ import { showAlert } from '../../features/alert/alertSlice';
 
 export const NewsList = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const news = useSelector(state => state.news.allNews);
 	useEffect(() => {
 		dispatch(getAllNews());
@@ -21,11 +22,14 @@ export const NewsList = () => {
 			show: true,
 			text: `¿Esta seguro que desa eliminar la novedad ${id}?`,
 			title: `Eliminar la novedad ${id}`,
-			showCancelButton: true
+			showCancelButton: true,
+			action: () => {
+				dispatch(deleteNews(id));
+				navigate('/backoffice/news');
+			}
 		};
-		dispatch(showAlert(alert, dispatch(deleteNews(id))));
+		dispatch(showAlert(alert));
 	};
-	console.log(news);
 	return (
 		<div className='mb-10'>
 			<div

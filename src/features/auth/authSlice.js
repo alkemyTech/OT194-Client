@@ -63,13 +63,12 @@ export const getUserData = createAsyncThunk(
 	}
 );
 
-// Edit User
-export const editUserData = createAsyncThunk(
-	'auth/editUserData',
-	async (user, thunkAPI) => {
+// DELETE User
+export const deleteUserData = createAsyncThunk(
+	'auth/deleteUserData',
+	async (thunkAPI) => {
 		try {
-			const { id } = thunkAPI.getState((state) => state.auth.user);
-			return axiosInstance(`/user/${id}`, user, 'POST');
+			return axiosInstance('/users', {}, 'PATCH');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||
@@ -130,6 +129,23 @@ export const authSlice = createSlice({
 				localStorage.setItem('user', JSON.stringify(action.payload));
 			})
 			.addCase(login.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			// DELETE
+			.addCase(deleteUserData.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(deleteUserData.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.remember = null;
+				localStorage.removeItem('user');
+				state.user = null;
+				localStorage.removeItem('remember');
+			})
+			.addCase(deleteUserData.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
