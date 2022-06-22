@@ -3,8 +3,18 @@ import authService from './authService';
 import { axiosInstance } from '../../helper/axiosInstance';
 
 // Get state from localStorage
-const user = JSON.parse(localStorage.getItem('user'));
-const remember = JSON.parse(localStorage.getItem('remember'));
+const user = JSON.parse(localStorage.getItem('user')) ||
+	JSON.parse(sessionStorage.getItem('user'));
+const remember = JSON.parse(localStorage.getItem('remember')) ||
+	JSON.parse(sessionStorage.getItem('remember'));
+if (user) {
+	localStorage.setItem('user', JSON.stringify(user));
+	sessionStorage.setItem('user', JSON.stringify(user));
+};
+if (remember) {
+	localStorage.setItem('remember', true);
+	sessionStorage.setItem('remember', true);
+};
 
 const initialState = {
 	user: user || null,
@@ -63,13 +73,12 @@ export const getUserData = createAsyncThunk(
 	}
 );
 
-// Edit User
-export const editUserData = createAsyncThunk(
-	'auth/editUserData',
-	async (user, thunkAPI) => {
+// DELETE User
+export const deleteUserData = createAsyncThunk(
+	'auth/deleteUserData',
+	async (thunkAPI) => {
 		try {
-			const { id } = thunkAPI.getState((state) => state.auth.user);
-			return axiosInstance(`/user/${id}`, user, 'POST');
+			return axiosInstance('/users', {}, 'PATCH');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||
@@ -94,12 +103,15 @@ export const authSlice = createSlice({
 		setRemember: (state) => {
 			state.remember = true;
 			localStorage.setItem('remember', true);
+			sessionStorage.setItem('remember', true);
 		},
 		logout: (state) => {
 			state.remember = null;
 			localStorage.removeItem('user');
+			sessionStorage.removeItem('user');
 			state.user = null;
 			localStorage.removeItem('remember');
+			sessionStorage.removeItem('remember');
 		}
 	},
 	extraReducers: (builder) => {
@@ -113,6 +125,7 @@ export const authSlice = createSlice({
 				state.isSuccess = true;
 				state.user = action.payload;
 				localStorage.setItem('user', JSON.stringify(action.payload));
+				sessionStorage.setItem('user', JSON.stringify(action.payload));
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
@@ -128,8 +141,26 @@ export const authSlice = createSlice({
 				state.isSuccess = true;
 				state.user = action.payload;
 				localStorage.setItem('user', JSON.stringify(action.payload));
+				sessionStorage.setItem('user', JSON.stringify(action.payload));
 			})
 			.addCase(login.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			// DELETE
+			.addCase(deleteUserData.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(deleteUserData.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.remember = null;
+				localStorage.removeItem('user');
+				state.user = null;
+				localStorage.removeItem('remember');
+			})
+			.addCase(deleteUserData.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

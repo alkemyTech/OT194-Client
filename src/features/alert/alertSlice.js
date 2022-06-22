@@ -4,7 +4,8 @@ const initialState = {
 	show: false,
 	title: null,
 	text: null,
-	showCancelButton: true
+	showCancelButton: true,
+	action: null
 };
 
 export const alertSlice = createSlice({
@@ -17,6 +18,7 @@ export const alertSlice = createSlice({
 			state.title = action.payload.title;
 			state.text = action.payload.text;
 			state.showCancelButton = action.payload.showCancelButton;
+			state.action = action.payload.action;
 		}
 	}
 });

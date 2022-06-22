@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { OptionCard } from '../components/Backoffice/OptionCard';
-import { FaNewspaper, FaList, FaTable, FaComments, FaSitemap, FaSlideshare, FaUsers, FaUserFriends } from 'react-icons/fa';
+import { FaNewspaper, FaList, FaTable, FaComments, FaSitemap, FaSlideshare, FaUsers, FaUserFriends, FaUsersSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { CardDeleteUser } from '../components/Backoffice/CardDeleteUser';
 
 export const BackOfficeScreen = () => {
 	const { user } = useSelector((state) => state.auth);
@@ -12,6 +13,7 @@ export const BackOfficeScreen = () => {
 			<div className='flex justify-center items-center'>
 				<div className='flex gap-14 flex-wrap justify-center items-center my-14' style={ { width: '80%', height: '80%' } }>
 					<OptionCard title={'Usuario'} icon={<FaUsers size={70} />} />
+					<CardDeleteUser title={'Delete Account'} icon={<FaUsersSlash size={70} />} />
 				</div>
 			</div>
 		);
