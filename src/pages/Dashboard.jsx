@@ -36,9 +36,9 @@ function Dashboard () {
 	}];
 
 	return (
-		<div className='flex flex-col flex-wrap p-2'>
+		<div className='contenedorMayor flex flex-col flex-wrap p-2'>
 
-			<section className='flex flex-row w-screen min-h-2/5 justify-center items-center m-3'>
+			<section className='welcome-img flex flex-row w-screen min-h-2/5 justify-center items-center m-3'>
 				<div className='flex flex-col w-2/5 h-96 p-5 justify-center items-start'>
 					<h1 className='text-5xl font-black'>Hola!  Bienvenidx</h1>
 					<p className='text-xl'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing dignissim ac et eleifend lacus, rhoncus, dignissim sagittis. Tellus ac a, elementum ut. Tellus a morbi tincidunt ultricies malesuada eget turpis. Lacus enim non enim, velit hac turpis interdum arcu. Suspendisse at vel ultrices amet orci enim lectus porttitor ut.</p>
@@ -49,7 +49,7 @@ function Dashboard () {
 				</div>
 			</section>
 
-			<section className='flex flex-col w-screen space-evenly min-h-1/5 m-3'>
+			<section className='staff flex flex-col w-screen space-evenly min-h-1/5 m-3'>
 
 				<div className='inline-flex flex-row content-center justify-between px-20 py-1'>
 					<span className='text-2xl font-black '>Nuestro Staff</span>
@@ -59,10 +59,10 @@ function Dashboard () {
 						</Link>
 					</div>
 				</div>
-				<div className='flex flex-row space-evenly'>
+				<div className='flex flex-wrap flex-shrink-1 flex-row space-evenly'>
 					{ staff.map((person, i) => {
 						return (
-							<div key={`${person.name}${i}`} className='staff-card' style={{ backgroundImage: `url(${person.imageUrl})` }}>
+							<div key={`${person.name}${i}`} className='m-4 staff-card' style={{ backgroundImage: `url(${person.imageUrl})` }}>
 								<span className='text-xl font-bold'> {person.name}</span>
 								<span className='pb-2'> {person.position}</span>
 							</div>
@@ -73,7 +73,7 @@ function Dashboard () {
 
 			</section>
 
-			<section className='flex flex-col w-screen min-h-1/5 pt-10 m-3'>
+			<section className='testimonies flex flex-col w-screen min-h-1/5 pt-10 m-3'>
 
 				<div className='inline-flex flex-row items-end content-center justify-between px-20 py-1'>
 					<span className='text-2xl font-black '>Testimonios</span>
