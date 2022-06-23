@@ -36,10 +36,10 @@ function Dashboard () {
 	}];
 
 	return (
-		<div className='contenedorMayor flex flex-col flex-wrap p-2'>
+		<div className='contenedorMayor flex flex-col overflow-hidden p-2'>
 
-			<section className='welcome-img flex flex-row w-screen min-h-2/5 justify-center items-center m-3'>
-				<div className='flex flex-col w-2/5 h-96 p-5 justify-center items-start'>
+			<section className='welcome-img flex-grow flex flex-row w-full min-h-2/5 justify-center items-center'>
+				<div className='flex flex-col w-full md:w-2/5  p-5 justify-center items-start'>
 					<h1 className='text-5xl font-black'>Hola!  Bienvenidx</h1>
 					<p className='text-xl'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing dignissim ac et eleifend lacus, rhoncus, dignissim sagittis. Tellus ac a, elementum ut. Tellus a morbi tincidunt ultricies malesuada eget turpis. Lacus enim non enim, velit hac turpis interdum arcu. Suspendisse at vel ultrices amet orci enim lectus porttitor ut.</p>
 					<Link to={'contact'} className='shadow appearance-none border rounded border-transparent bg-redOng text-white py-3 px-2 m-2 text-center no-underline w-3/12'>Contactanos</Link>
@@ -49,17 +49,17 @@ function Dashboard () {
 				</div>
 			</section>
 
-			<section className='staff flex flex-col w-screen space-evenly min-h-1/5 m-3'>
+			<section className='mt-16 staff justify-center flex flex-col w-full space-evenly min-h-1/5 '>
 
 				<div className='inline-flex flex-row content-center justify-between px-20 py-1'>
 					<span className='text-2xl font-black '>Nuestro Staff</span>
-					<div className='flex items-center'>
+					<div className='flex justify-around items-center'>
 						<Link to={'nosotros'} className='flex items-center no-underline' > Ver todos
 							<img src="images/vector.png" alt="go to" className='ml-2' />
 						</Link>
 					</div>
 				</div>
-				<div className='flex flex-wrap flex-shrink-1 flex-row space-evenly'>
+				<div className='flex content-center justify-center  flex-wrap flex-col sm:content-center sm:flex-row md:flex-shrink-1 md:space-evenly'>
 					{ staff.map((person, i) => {
 						return (
 							<div key={`${person.name}${i}`} className='m-4 staff-card' style={{ backgroundImage: `url(${person.imageUrl})` }}>
@@ -73,21 +73,21 @@ function Dashboard () {
 
 			</section>
 
-			<section className='testimonies flex flex-col w-screen min-h-1/5 pt-10 m-3'>
+			<section className='testimonies flex flex-col w-full min-h-1/5 pt-10'>
 
-				<div className='inline-flex flex-row items-end content-center justify-between px-20 py-1'>
+				<div className='inline-flex flex-row  items-center  justify-between px-16 py-1'>
 					<span className='text-2xl font-black '>Testimonios</span>
-					<div className='flex items-center'>
+					<div className='flex items-center '>
 						<Link to={'testimonios'} className='flex items-center no-underline' > Ver todos
 							<img src="images/vector.png" alt="go to" className='ml-2' />
 						</Link>
 					</div>
 				</div>
 
-				<div className='flex flex-row  justify-around'>
+				<div className='flex  flex-row justify-center flex-wrap space-evenly'>
 					{	testimonials.slice(0, 5).map((testimony) => {
 						return (
-							<div key={testimony.name} className=' bg-yellowOng flex flex-col text-black testimony-card'>
+							<div key={testimony.name} className=' m-4 bg-yellowOng flex flex-col text-black testimony-card'>
 								<img className='w-16 h-16 rounded-full ' src={testimony.image} alt="Person" />
 								<span className='text-l pb-2 font-bold'> {testimony.name}</span>
 								<span className='h-full font-normal break-all'>{testimony.content}</span>
@@ -100,7 +100,7 @@ function Dashboard () {
 
 			</section>
 
-			<section className='w-screen min-h-1/5 m-3'>
+			<section className='w-full min-h-1/5 '>
 				<News />
 			</section>
 
