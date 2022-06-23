@@ -6,13 +6,13 @@ import { getAllNews } from '../../features/news/newsSlice';
 
 const Card = ({ data }) => (
 	<div
-		className="shadow-lg grid grid-cols-2 space-x-3 p-3 overflow-hidden bg-blueOng rounded-3xl box-border border-solid border border-blue-700"
+		className="flex sm:shadow-lg sm:grid sm:grid-cols-2 sm:space-x-3 sm:p-3 sm:overflow-hidden sm:bg-blueOng sm:rounded-3xl sm:box-border sm:border-solid sm:border sm:border-blue-700"
 		style={{ backgroundColor: '#7E9AFD', width: '448px', height: '233px' }}
 	>
-		<div className="box-content overflow-hidden">
+		<div className="box-content overflow-scroll">
 			<img
 				alt={data.name}
-				className="rounded-3xl h-full w-full"
+				className="rounded-3xl hidden sm:flex  sm:w-full sm:h-full "
 				src={data.image}
 			/>
 		</div>
@@ -41,7 +41,7 @@ export const News = () => {
 		<>{pathname === '/'
 
 			? (<div className='flex flex-col w-screen min-h-1/5 '>
-				<div className='inline-flex flex-row items-end content-center justify-between px-20 py-1'>
+				<div className='inline-flex flex-row items-center content-center justify-between px-16 py-1'>
 					<span className='text-2xl font-black '>Novedades</span>
 					<div className='flex items-center'>
 						<Link to={'/news'} className='flex items-center no-underline' > Ver todos
