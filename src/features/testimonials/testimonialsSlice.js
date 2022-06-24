@@ -92,12 +92,33 @@ export const modifyTestimony = createAsyncThunk(
 	}
 );
 
+// Eliminar una testimonio
+export const deleteTestimony = createAsyncThunk(
+	'testimonials/deleteData',
+	async (id, thunkAPI) => {
+		try {
+			return axiosInstance(`/testimonials/${id}`, {}, 'DELETE');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
 export const testimonialsSlice = createSlice({
 	name: 'testimonials',
 	initialState,
 	reducers: {
-		resetOpenedNews: (state) => {
+		resetOpenedTestimony: (state) => {
 			state.openedTestimony = initialState.openedTestimony;
+		},
+		resetAllTestimonials: (state) => {
+			state.allTestimonials = initialState.allTestimonials;
 		}
 	},
 	extraReducers: (builder) => {

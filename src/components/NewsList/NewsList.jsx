@@ -7,7 +7,7 @@ import {
 	faSquareMinus
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { showAlert } from '../../features/alert/alertSlice';
+import Swal from 'sweetalert2';
 
 export const NewsList = () => {
 	const dispatch = useDispatch();
@@ -18,17 +18,26 @@ export const NewsList = () => {
 	}, []);
 
 	const handleNewsDelete = (id) => {
-		const alert = {
-			show: true,
-			text: `¿Esta seguro que desa eliminar la novedad ${id}?`,
-			title: `Eliminar la novedad ${id}`,
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
 			showCancelButton: true,
-			action: () => {
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if (result.isConfirmed) {
 				dispatch(deleteNews(id));
-				navigate('/backoffice/news');
+				Swal.fire(
+					'Deleted!',
+					'Your file has been deleted.',
+					'success'
+				).then(() => {
+					navigate('/backoffice/news');
+				});
 			}
-		};
-		dispatch(showAlert(alert));
+		});
 	};
 	return (
 		<div className='mb-10'>
