@@ -11,11 +11,12 @@ import {
 	createTestimony,
 	testimonialsActions
 	// getTestimony
+	, getTestimony
 } from '../../../../features/testimonials/testimonialsSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 
-const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 
 export const TestimonialsForm = () => {
 	/* TODO:
@@ -25,7 +26,7 @@ export const TestimonialsForm = () => {
   */
 
 	const testimony = useSelector(state => state.testimonials.openedTestimony);
-
+	const [imagePreview, setimagePreview] = useState({ preview: '', raw: '' });
 	const [image, setImage] = useState(undefined);
 	const [imgError, setImgError] = useState(false);
 	const dispatch = useDispatch();
@@ -34,27 +35,45 @@ export const TestimonialsForm = () => {
 	const { id: testimonyId } = useParams();
 
 	useEffect(() => {
-	// 	dispatch(getTestimony(testimonyId));
+		testimonyId === undefined || dispatch(getTestimony(testimonyId));
+	}, [testimonyId]);
+
+	useEffect(() => {
+		return () => {
+			dispatch(testimonialsActions.resetOpenedTestimony());
+		};
 	}, []);
+
+	useEffect(() => {
+		setImage(testimony.image);
+	}, [testimony]);
+
+	const handleImageChange = (e) => {
+		setimagePreview({
+			preview: URL.createObjectURL(e.target.files[0]),
+			raw: e.target.files[0]
+		});
+		setImage(e.target.files[0]);
+	};
 
 	const handleSubmit = (data) => {
 		setImgError(false);
 
 		if (!image) return setImgError(true);
 
-		if (image && (image.size > 50936250 || !supportedMimeTypes.includes(image.type))) {
+		if (typeof (image) === 'object' && (image.size > 50936250 || !supportedMimeTypes.includes(image.type))) {
 			return setImgError(true);
 		}
 
 		if (testimonyId >= 0 && testimony.name.length > 0) {
 			dispatch(modifyTestimony(testimonyId, data, image));
-			navigate('/testimonios');
+			navigate('/backoffice/testimonials');
 		} else {
 			dispatch(createTestimony(data, image));
-			navigate('/testimonios');
+			navigate('/backoffice/testimonials');
 		}
 
-		dispatch(testimonialsActions.resetOpenedNews());
+		dispatch(testimonialsActions.resetOpenedTestimony());
 	};
 
 	return (
@@ -71,24 +90,44 @@ export const TestimonialsForm = () => {
 				initialValues={testimony}
 				onSubmit={handleSubmit}
 			>
-				{({ errors, setFieldValue, values }) => (
+				{({ errors, setFieldValue, values, handleBlur, handleChange }) => (
 					<Form className="flex flex-col">
 						<div className="flex flex-col gap-1 mb-3">
 							<label>Imagen</label>
+							{imagePreview.preview
+								? (
+									<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '400px' }}>
+										<img src={imagePreview.preview} alt={'Imagen cargada'} height={'100%'} />
+									</div>
+								)
+								: image && (<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '90vw', maxHeight: '400px' }}>
+									<img src={testimony.image} alt={`Imagen de la noticia ${testimony.name}`} height={'100%'} />
+								</div>)
+							}
 							<input
+								accept="image/*"
+								id="upload-button"
 								type="file"
-								name='logo'
-								onChange={(e) => setImage(e.target.files[0])}
+								name='image'
+								onChange={e => { handleChange(e); handleImageChange(e); }}
 								placeholder='Logo'
+								className='hidden'
 							/>
-							{imgError ? <div className="text-red-800 font-bold my-1">Archivo faltante o no soportado</div> : null}
+							<label htmlFor='upload-button'>
+								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Upload your photo</h3>
+							</label>
+							{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}
 						</div>
+
 						<div className="flex flex-col gap-1 mb-3">
 							<label>Nombre</label>
 							<Field
 								className="form-login p-3"
 								type="text"
 								name="name"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.name}
 							/>
 							{errors.name ? <div className="text-red-800 font-bold my-1">{errors.name}</div> : null}
 						</div>
@@ -135,7 +174,7 @@ export const TestimonialsForm = () => {
 							type='submit'
 							className='mt-3 text-white bg-redOng hover:bg-redOng focus:ring rounded border-0 py-3 px-6 cursor-pointer hover:opacity-50'
 						>
-							{(testimonyId > 0 && testimony.name.length > 0) ? 'Modificar' : 'Crear'}
+							{(testimonyId > 0 && testimony?.name?.length > 0) ? 'Modificar' : 'Crear'}
 						</button>
 					</Form>
 				)}

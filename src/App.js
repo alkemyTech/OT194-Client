@@ -90,6 +90,10 @@ function App () {
 									element={<BackOfficeTestimonials />}
 								/>
 								<Route
+									path='/backoffice/testimonials/:id'
+									element={<TestimonialsForm />}
+								/>
+								<Route
 									path='/backoffice/news'
 									element={<NewsList />}
 								/>
