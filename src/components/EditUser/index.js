@@ -22,7 +22,7 @@ export const EditUserFormik = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (isError) dispatch(showAlert({ show: true, title: 'Error', text: message }));
+		if (isError) dispatch(showAlert({ show: true, title: 'Error', text: message, action: () => {} }));
 
 		if (isSuccess || user) {
 			navigate('/');
