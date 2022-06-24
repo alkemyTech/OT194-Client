@@ -30,7 +30,7 @@ export const createActivity = createAsyncThunk(
 
 // PATCH ACTIVITY
 export const updateActivity = createAsyncThunk(
-	'auth/login',
+	'activity/login',
 	async (data, thunkAPI) => {
 		try {
 			return await activityService.updateActivity(data);

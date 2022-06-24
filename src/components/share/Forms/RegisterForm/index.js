@@ -63,7 +63,7 @@ export const RegisterForm = ({
 		<button
 			type='submit'
 			className='shadow-md border-box border h-12 rounded-lg w-full border-transparent bg-redOng text-base text-white py-3 px-2 my-2'
-			disable={isSubmitting}
+			disable={isSubmitting ? 'true' : 'false'}
 		>Registrarse
 		</button>
 	</Form>

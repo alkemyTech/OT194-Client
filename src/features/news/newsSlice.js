@@ -22,8 +22,7 @@ export const getAllNews = createAsyncThunk(
 	'news/getAllData',
 	async (thunkAPI) => {
 		try {
-			const res = await axiosInstance('/news', {}, 'GET');
-			return res.data;
+			return await axiosInstance('/news', {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -35,6 +34,7 @@ export const getAllNews = createAsyncThunk(
 		}
 	}
 );
+
 // Obtener una novedad en especifico
 export const getNews = createAsyncThunk(
 	'news/getData',
@@ -117,13 +117,13 @@ export const newsSlice = createSlice({
 	name: 'news',
 	initialState,
 	reducers: {
-		// resetAuth: () => initialState,
-		// resetAuthReq: (state) => {
-		// 	state.isLoading = false;
-		// 	state.isError = false;
-		// 	state.isSuccess = false;
-		// 	state.message = '';
-		// },
+		resetNews: () => initialState,
+		resetNewsReq: (state) => {
+			state.isLoading = false;
+			state.isError = false;
+			state.isSuccess = false;
+			state.message = '';
+		},
 		resetOpenedNews: (state) => {
 			state.openedNews = initialState.openedNews;
 		}
@@ -151,7 +151,7 @@ export const newsSlice = createSlice({
 			.addCase(getNews.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.openedNews = action.payload.data;
+				state.openedNews = action.payload;
 			})
 			.addCase(getNews.rejected, (state, action) => {
 				state.isLoading = false;

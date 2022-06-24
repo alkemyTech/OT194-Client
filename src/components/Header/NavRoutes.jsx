@@ -19,7 +19,6 @@ export function NavRoutes () {
 			{navLinks.map((link, i) => (
 				<li key={i} className='m-2 text-lg'>
 					<NavLink
-						exact
 						style={{ textUnderlineOffset: '2px' }}
 						className={({ isActive }) => {
 							return isActive

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import organizationService from './organizationService';
+import { axiosInstance } from '../../helper/axiosInstance';
 
 const initialState = {
 	organizationData: null,
@@ -14,7 +14,7 @@ export const getOrganizationData = createAsyncThunk(
 	'organization/getOrganizationData',
 	async (thunkAPI) => {
 		try {
-			return await organizationService.getOrganizationData();
+			return await axiosInstance('/organizations/1/public', {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||

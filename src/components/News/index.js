@@ -55,7 +55,7 @@ export const News = () => {
 		<div className="p-4 mx-auto"
 			style={{ maxWidth: '1500px' }}>
 			<div className="flex flex-wrap gap-4 justify-center">
-				{allNews.length && allNews.slice(0, (pathname === '/' ? 2 : allNews.length - 1)).map(data => (
+				{Array.isArray(allNews) && allNews.slice(0, (pathname === '/' ? 2 : allNews.length - 1)).map(data => (
 					<Card key={data.id} data={data} />
 				))}
 			</div>

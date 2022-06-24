@@ -11,6 +11,7 @@ function Dashboard () {
 	useEffect(() => {
 		dispatch(getAllTestimonials());
 	}, []);
+
 	const staff = [{
 		imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Mar%C3%ADa+Irola.jpg',
 		name: 'María Irola',
@@ -85,9 +86,9 @@ function Dashboard () {
 				</div>
 
 				<div className='flex  flex-row justify-center flex-wrap space-evenly'>
-					{	testimonials.slice(0, 5).map((testimony) => {
+					{	testimonials.slice(0, 5).map((testimony, i) => {
 						return (
-							<div key={testimony.name} className=' m-4 bg-yellowOng flex flex-col text-black testimony-card'>
+							<div key={`${testimony.name}${i}`} className=' m-4 bg-yellowOng flex flex-col text-black testimony-card'>
 								<img className='w-16 h-16 rounded-full ' src={testimony.image} alt="Person" />
 								<span className='text-l pb-2 font-bold'> {testimony.name}</span>
 								<span className='h-full font-normal break-all'>{testimony.content}</span>

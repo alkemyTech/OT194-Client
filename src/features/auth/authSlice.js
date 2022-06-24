@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import authService from './authService';
 import { axiosInstance } from '../../helper/axiosInstance';
 
 // Get state from localStorage
@@ -30,7 +29,7 @@ export const register = createAsyncThunk(
 	'auth/register',
 	async (user, thunkAPI) => {
 		try {
-			return await authService.register(user);
+			return await axiosInstance('/auth/register', user, 'POST');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||
@@ -46,7 +45,7 @@ export const login = createAsyncThunk(
 	'auth/login',
 	async (user, thunkAPI) => {
 		try {
-			return await authService.login(user);
+			return await axiosInstance('/auth/login', user, 'POST');
 		} catch (error) {
 			const message =
 			(error.response && error.response.data && error.response.data.message) ||
