@@ -66,7 +66,7 @@ export const TestimonialsForm = () => {
 		}
 
 		if (testimonyId >= 0 && testimony.name.length > 0) {
-			dispatch(modifyTestimony(testimonyId, data, image));
+			dispatch(modifyTestimony(data));
 			navigate('/backoffice/testimonials');
 		} else {
 			dispatch(createTestimony(data, image));
