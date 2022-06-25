@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { OptionCard } from '../components/Backoffice/OptionCard';
-import { FaNewspaper, FaList, FaTable, FaComments, FaSitemap, FaSlideshare, FaUsers, FaUserFriends, FaUsersSlash } from 'react-icons/fa';
+import { FaNewspaper, FaList, FaComments, FaSitemap, FaUsers, FaUser, FaUserSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { CardDeleteUser } from '../components/Backoffice/CardDeleteUser';
 
@@ -12,8 +12,8 @@ export const BackOfficeScreen = () => {
 		return (
 			<div className='flex justify-center items-center'>
 				<div className='flex gap-14 flex-wrap justify-center items-center my-14' style={ { width: '80%', height: '80%' } }>
-					<OptionCard title={'Usuario'} icon={<FaUsers size={70} />} />
-					<CardDeleteUser title={'Delete Account'} icon={<FaUsersSlash size={70} />} />
+					<Link to ={'/backoffice/usuario'}><OptionCard title={'Editar usuario'} icon={<FaUser size={70} />} /></Link>
+					<CardDeleteUser title={'Eliminar cuenta'} icon={<FaUserSlash size={70} />} />
 				</div>
 			</div>
 		);
@@ -22,14 +22,11 @@ export const BackOfficeScreen = () => {
 	return (
 		<div className='flex justify-center items-center'>
 			<div className='flex gap-14 flex-wrap justify-center items-center my-14' style={ { width: '80%', height: '80%' } }>
-				<Link to ={'/backoffice/news'}> <OptionCard title={'Novedades'} icon={<FaNewspaper size={70} />} /> </Link>
-				<OptionCard title={'Actividades'} icon={<FaList size={70} />} />
-				<OptionCard title={'Categorias'} icon={<FaTable size={70} />} />
+				<Link to ={'/backoffice/news'}><OptionCard title={'Novedades'} icon={<FaNewspaper size={70} />} /></Link>
+				<Link to ={'/backoffice/actividades'}><OptionCard title={'Actividades'} icon={<FaList size={70} />} /></Link>
 				<Link to={'/backoffice/testimonials'}><OptionCard title={'Testimonios'} icon={<FaComments size={70} />} /></Link>
 				<Link to={'/backoffice/organization'}><OptionCard title={'Organizacion'} icon={<FaSitemap size={70} />} /></Link>
-				<OptionCard title={'Slides'} icon={<FaSlideshare size={70} />} />
-				<OptionCard title={'Usuarios'} icon={<FaUsers size={70} />} />
-				<OptionCard title={'Miembros'} icon={<FaUserFriends size={70} />} />
+				<Link to={'/backoffice/usuarios'}><OptionCard title={'Usuarios'} icon={<FaUsers size={70} />} /></Link>
 			</div>
 		</div>
 	);
