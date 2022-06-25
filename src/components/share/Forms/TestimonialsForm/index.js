@@ -5,23 +5,20 @@ import { PropTypes } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { testimonialsFormSchema } from '../../Forms/TestimonialsForm/schemaTestimonialsForm';
 import '../../../../custom.css';
-
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
 	modifyTestimony,
 	createTestimony,
 	testimonialsActions
-	// getTestimony
 	, getTestimony
 } from '../../../../features/testimonials/testimonialsSlice';
-import { useNavigate, useParams } from 'react-router-dom';
+
 import { Field, Form, Formik } from 'formik';
 
 const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 
 export const TestimonialsForm = () => {
 	/* TODO:
-    Falta testear la conexion con los endpoints
-    Falta traer el testimonio correctamente
     Falta subir la imagen correctamente
   */
 
@@ -31,6 +28,7 @@ export const TestimonialsForm = () => {
 	const [imgError, setImgError] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const { id: testimonyId } = useParams();
 
@@ -67,10 +65,10 @@ export const TestimonialsForm = () => {
 
 		if (testimonyId >= 0 && testimony.name.length > 0) {
 			dispatch(modifyTestimony(data));
-			navigate('/backoffice/testimonials');
+			location.pathname === '/testimonios/add' ? navigate('/testimonios') : navigate('/backoffice/testimonials');
 		} else {
 			dispatch(createTestimony(data, image));
-			navigate('/backoffice/testimonials');
+			location.pathname === '/testimonios/add' ? navigate('/testimonios') : navigate('/backoffice/testimonials');
 		}
 
 		dispatch(testimonialsActions.resetOpenedTestimony());
@@ -165,6 +163,7 @@ export const TestimonialsForm = () => {
 								data={values.content}
 								onChange={(event, editor) => {
 									const data = editor.getData();
+									console.log(editor.data.get());
 									setFieldValue('content', data);
 								}}
 							/>
