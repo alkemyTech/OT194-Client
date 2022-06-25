@@ -60,8 +60,7 @@ export const getUserData = createAsyncThunk(
 	'auth/getUserData',
 	async (thunkAPI) => {
 		try {
-			const { id } = thunkAPI.getState((state) => state.auth.user);
-			return axiosInstance(`/user/${id}`, {}, 'GET');
+			return axiosInstance('/auth/me', {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||
@@ -75,9 +74,25 @@ export const getUserData = createAsyncThunk(
 // DELETE User
 export const deleteUserData = createAsyncThunk(
 	'auth/deleteUserData',
-	async (thunkAPI) => {
+	async (user, thunkAPI) => {
 		try {
-			return axiosInstance('/users', {}, 'PATCH');
+			return axiosInstance(`/users/${user.id}`, {}, 'DELETE');
+		} catch (error) {
+			const message =
+				(error.response && error.response.data && error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// Edit User
+export const editUserData = createAsyncThunk(
+	'auth/editUserData',
+	async (obj, thunkAPI) => {
+		try {
+			return axiosInstance(`/users/${obj.userId}`, { ...obj.values }, 'PUT');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||
@@ -154,15 +169,33 @@ export const authSlice = createSlice({
 			.addCase(deleteUserData.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
+				state.user = null;
 				state.remember = null;
 				localStorage.removeItem('user');
-				state.user = null;
+				sessionStorage.removeItem('user');
 				localStorage.removeItem('remember');
+				sessionStorage.removeItem('remember');
 			})
 			.addCase(deleteUserData.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+			})
+		// Edit user
+			.addCase(editUserData.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(editUserData.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.user = action.payload;
+				localStorage.setItem('user', JSON.stringify(action.payload));
+				sessionStorage.setItem('user', JSON.stringify(action.payload));
+			})
+			.addCase(editUserData.rejected, (state, action) => {
+				state.message = action.payload;
+				state.isLoading = false;
+				state.isError = true;
 			});
 	}
 });

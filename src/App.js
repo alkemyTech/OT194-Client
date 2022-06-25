@@ -28,6 +28,7 @@ import { ContactUs } from './pages/ContactUs';
 import { NewsList } from './components/NewsList/NewsList';
 import { NewsForm } from './components/share/Forms/NewsForm';
 import { TestimonialsForm } from './components/share/Forms/TestimonialsForm';
+import BackOfficeEditUser from './pages/BackOfficeEditUser';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -80,6 +81,7 @@ function App () {
 						<Route element={<ProtectRoute />} >
 							<Route path='/backoffice' element={<BackOfficeScreen/>} />
 							<Route path='/profile' element={<UserProfile />} />
+							<Route path='/backoffice/usuario' element={<BackOfficeEditUser />} />
 							<Route element={<AdminCheck />} >
 								<Route
 									path='/backoffice/organization'
