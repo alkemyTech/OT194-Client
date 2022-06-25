@@ -53,12 +53,9 @@ export const getTestimony = createAsyncThunk(
 // Crear un testimonio
 export const createTestimony = createAsyncThunk(
 	'testimonials/createData',
-	async (data, image, thunkAPI) => { // TODO Arreglar - puede recibir información en un solo argumento, data e image tienen que ser propiedades de un objeto un objeto
+	async (data, thunkAPI) => { // TODO Arreglar - puede recibir información en un solo argumento, data e image tienen que ser propiedades de un objeto un objeto
 		try {
-			if (image) {
-				// logica para subir imagen
-			}
-			return axiosInstance('/testimonials', data, 'POST');
+			return axiosInstance('/testimonials', { ...data }, 'POST');
 		} catch (error) {
 			const message =
 				(error.response &&

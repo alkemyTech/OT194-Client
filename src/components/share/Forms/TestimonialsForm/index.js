@@ -23,7 +23,7 @@ export const TestimonialsForm = () => {
   */
 
 	const testimony = useSelector(state => state.testimonials.openedTestimony);
-	const [imagePreview, setimagePreview] = useState({ preview: '', raw: '' });
+	const [imagePreview, setimagePreview] = useState(undefined);
 	const [image, setImage] = useState(undefined);
 	const [imgError, setImgError] = useState(false);
 	const dispatch = useDispatch();
@@ -47,11 +47,15 @@ export const TestimonialsForm = () => {
 	}, [testimony]);
 
 	const handleImageChange = (e) => {
-		setimagePreview({
-			preview: URL.createObjectURL(e.target.files[0]),
-			raw: e.target.files[0]
-		});
-		setImage(e.target.files[0]);
+		const fileReader = new FileReader();
+		fileReader.onload = () => {
+			if (fileReader.readyState === 2) {
+				localStorage.setItem('file', fileReader.result);
+				setimagePreview(fileReader.result);
+				setImage(fileReader.result);
+			}
+		};
+		fileReader.readAsDataURL(e.target.files[0]);
 	};
 
 	const handleSubmit = (data) => {
@@ -92,10 +96,10 @@ export const TestimonialsForm = () => {
 					<Form className="flex flex-col">
 						<div className="flex flex-col gap-1 mb-3">
 							<label>Imagen</label>
-							{imagePreview.preview
+							{imagePreview
 								? (
 									<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '400px' }}>
-										<img src={imagePreview.preview} alt={'Imagen cargada'} height={'100%'} />
+										<img src={imagePreview} alt={'Imagen cargada'} height={'100%'} />
 									</div>
 								)
 								: image && (<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '90vw', maxHeight: '400px' }}>
@@ -107,7 +111,7 @@ export const TestimonialsForm = () => {
 								id="upload-button"
 								type="file"
 								name='image'
-								onChange={e => { handleChange(e); handleImageChange(e); }}
+								onChange={e => { handleImageChange(e); }}
 								placeholder='Logo'
 								className='hidden'
 							/>
