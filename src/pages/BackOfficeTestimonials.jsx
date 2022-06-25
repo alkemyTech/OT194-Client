@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
-import { getAllTestimonials } from '../features/testimonials/testimonialsSlice';
+import { getAllTestimonials, deleteTestimony, testimonialsActions } from '../features/testimonials/testimonialsSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 export const BackOfficeTestimonials = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const testimonials = useSelector(state => state.testimonials.allTestimonials);
 
 	useEffect(() => {
@@ -11,11 +15,31 @@ export const BackOfficeTestimonials = () => {
 	}, []);
 
 	const handleDeleteTestimony = (id) => {
-		// Logica para eliminar (No existe endpoint)
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				dispatch(deleteTestimony(id));
+				testimonialsActions.resetAllTestimonials();
+				Swal.fire(
+					'Deleted!',
+					'Your file has been deleted.',
+					'success'
+				).then(() => {
+					navigate('/backoffice/testimonials');
+				});
+			}
+		});
 	};
 
 	const handleEditTestimony = (id) => {
-		// Logica para editar (No existe endpoint)
+		navigate(`/backoffice/testimonials/${id}`);
 	};
 
 	return (

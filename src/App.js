@@ -15,7 +15,7 @@ import { NotFound } from './pages/NotFound';
 import { BackOfficeOrganization } from './pages/BackOfficeOrganization';
 import { NewsDetail } from './pages/NewsDetail';
 import { UserProfile } from './pages/UserProfile';
-import { News } from './components/News';
+import { News } from './pages/News';
 import { ContactsList } from './components/ContactsList/ContactsList';
 import Spinner from './components/Spinner';
 import { BackOfficeTestimonials } from './pages/BackOfficeTestimonials';
@@ -90,6 +90,10 @@ function App () {
 								<Route
 									path='/backoffice/testimonials'
 									element={<BackOfficeTestimonials />}
+								/>
+								<Route
+									path='/backoffice/testimonials/:id'
+									element={<TestimonialsForm />}
 								/>
 								<Route
 									path='/backoffice/news'
