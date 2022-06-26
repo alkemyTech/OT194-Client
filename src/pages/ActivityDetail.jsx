@@ -12,19 +12,19 @@ export const ActivityDetail = () => {
 	};
 
 	return (
-		<div className="flex flex-col mx-auto mb-20" style={{ width: '95vw', maxWidth: '1000px' }} >
-			<h1 className="mx-auto font-medium text-neutral-800 font-sans">Detalles de la actividad</h1>
-			<div className="my-2 w-full rounded-lg overflow-hidden flex items-center bg-neutral-300" style={{ height: 'fit-content', maxHeight: '500px' }}>
+		<div className="flex flex-col items-center mx-auto mb-20" style={{ width: '95%', maxWidth: '1000px' }} >
+			<h1 className="mx-auto font-medium text-neutral-800">Detalles de la actividad</h1>
+			<div className="my-2 w-2/5 rounded-lg bg-neutral-300" >
 				{
 					details?.image
-						? <img className="flex" src={details?.image} alt={`Imagen sobre ${details?.name}`} width={'100%'}/>
-						: <div className="flex bg-neutral-800 font-sans text-white w-full items-center justify-center" style={{ height: '500px' }}>
+						? <img className=" w-full " src={details?.image} alt={`Imagen sobre ${details?.name}`} />
+						: <div className="flex bg-neutral-800  text-white w-full items-center justify-center" style={{ height: '500px' }}>
 							<p>Imagen no encontrada</p>
 						</div>
 				}
 			</div>
 			<div className="flex flex-col px-3 md:px-5">
-				<h2 className="font-sans">{details ? details?.name : 'Se ha producido un error inesperado'}</h2>
+				<h2 className="">{details ? details?.name : 'Se ha producido un error inesperado'}</h2>
 				<p className="m-0 p-0 font-medium text-lg">{details ? details?.content : 'La novedad solicitad no fue encontrada.'}</p>
 				<a className="mx-auto sm:mx-0 mb-4 mt-8" href={'/'}>
 					<button className="hover:scale-105 transition-transform appearance-none border border-transparent text-base w-44 text rounded-lg cursor-pointer bg-redOng text-white py-3">
