@@ -25,8 +25,10 @@ export const axiosInstance = async (endpoint, data = {}, method = 'GET') => {
 		}
 	});
 
-	if (response.status >= 400) throw new Error(response);
-
+	if (response.status >= 400) {
+		console.log(response.data);
+		throw new Error(response);
+	}
 	localStorage.removeItem('file');
 	return response.data;
 };
