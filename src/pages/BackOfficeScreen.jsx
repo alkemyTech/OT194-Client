@@ -23,7 +23,7 @@ export const BackOfficeScreen = () => {
 		<div className='flex justify-center items-center'>
 			<div className='flex gap-14 flex-wrap justify-center items-center my-14' style={ { width: '80%', height: '80%' } }>
 				<Link to ={'/backoffice/news'}><OptionCard title={'Novedades'} icon={<FaNewspaper size={70} />} /></Link>
-				<Link to ={'/backoffice/actividades'}><OptionCard title={'Actividades'} icon={<FaList size={70} />} /></Link>
+				<Link to ={'/backoffice/activities'}><OptionCard title={'Actividades'} icon={<FaList size={70} />} /></Link>
 				<Link to={'/backoffice/testimonials'}><OptionCard title={'Testimonios'} icon={<FaComments size={70} />} /></Link>
 				<Link to={'/backoffice/organization'}><OptionCard title={'Organizacion'} icon={<FaSitemap size={70} />} /></Link>
 				<Link to={'/backoffice/usuarios'}><OptionCard title={'Usuarios'} icon={<FaUsers size={70} />} /></Link>
