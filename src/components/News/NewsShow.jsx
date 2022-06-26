@@ -19,7 +19,7 @@ export const NewsShow = ({ isLimited, isCentered, className }) => {
 					? allNews.slice(0, (isLimited ? 2 : allNews.length)).map(data => (
 						<NewsCard key={data.id} data={data} />
 					))
-					: <p>No hay testimonios disponibles</p>
+					: <p>No hay novedades disponibles</p>
 			}
 		</div>
 	);
