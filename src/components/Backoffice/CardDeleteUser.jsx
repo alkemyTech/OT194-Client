@@ -24,12 +24,14 @@ export const CardDeleteUser = ({ title, icon }) => {
 					text: 'Recuerda que no podrás recuperarla una vez eliminada',
 					showCancelButton: true
 				}).then((dismiss) => {
-					if (dismiss.isConfirmed) dispatch(deleteUserData(user));
-					Swal.fire({
-						icon: 'info',
-						title: 'Cuenta eliminada',
-						text: 'La cuenta ha sido eliminada con éxito'
-					});
+					if (dismiss.isConfirmed) {
+						dispatch(deleteUserData(user));
+						Swal.fire({
+							icon: 'info',
+							title: 'Cuenta eliminada',
+							text: 'La cuenta ha sido eliminada con éxito'
+						});
+					}
 				});
 			};
 		});
