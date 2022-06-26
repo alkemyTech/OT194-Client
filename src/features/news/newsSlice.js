@@ -58,10 +58,7 @@ export const createNews = createAsyncThunk(
 	'news/createData',
 	async (data, thunkAPI) => {
 		try {
-			if (data.image) {
-				// logica para subir imagen
-			}
-			return axiosInstance('/news', data, 'POST');
+			return axiosInstance('/news', { ...data }, 'POST');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -76,13 +73,11 @@ export const createNews = createAsyncThunk(
 
 // Editar una novedad
 export const modifyNews = createAsyncThunk(
-	'news/modifyData',
+	'testimonials/modifyData',
 	async (data, thunkAPI) => {
+		console.log(data);
 		try {
-			if (data.image) {
-				// logica para subir imagen
-			}
-			return axiosInstance(`/news/${data.id}`, data, 'PUT');
+			return axiosInstance(`/news/${data.id}`, { ...data }, 'PUT');
 		} catch (error) {
 			const message =
 				(error.response &&

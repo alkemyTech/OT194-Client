@@ -14,9 +14,13 @@ export const TestimonialsShow = ({ isLimited, isCentered, className }) => {
 
 	return (
 		<div className={`${className} flex flex-wrap gap-4`}>
-			{testimonials.length && testimonials.slice(0, (isLimited ? 5 : testimonials.length)).map(data => (
-				<TestimonyCard key={data.id} data={data} />
-			))}
+			{
+				testimonials.length >= 1
+					? testimonials.slice(0, (isLimited ? 5 : testimonials.length)).map(data => (
+						<TestimonyCard key={data.id} data={data} />
+					))
+					: <p>No hay testimonios disponibles</p>
+			}
 		</div>
 	);
 };

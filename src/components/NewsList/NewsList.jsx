@@ -18,6 +18,7 @@ export const NewsList = () => {
 	}, []);
 
 	const handleNewsDelete = (id) => {
+		console.log(id);
 		Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert this!",
@@ -27,7 +28,7 @@ export const NewsList = () => {
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
-			if (result.isConfirmed) {
+			if (result.value) {
 				dispatch(deleteNews(id));
 				Swal.fire(
 					'Deleted!',

@@ -67,11 +67,11 @@ export const TestimonialsForm = () => {
 			return setImgError(true);
 		}
 
-		if (testimonyId >= 0 && testimony.name.length > 0) {
+		if (testimonyId && testimony.name.length > 0) {
 			dispatch(modifyTestimony(data));
 			location.pathname === '/testimonios/add' ? navigate('/testimonios') : navigate('/backoffice/testimonials');
 		} else {
-			dispatch(createTestimony(data, image));
+			dispatch(createTestimony(data));
 			location.pathname === '/testimonios/add' ? navigate('/testimonios') : navigate('/backoffice/testimonials');
 		}
 
@@ -131,7 +131,7 @@ export const TestimonialsForm = () => {
 								onBlur={handleBlur}
 								value={values.name}
 							/>
-							{errors.name ? <div className="text-red-800 font-bold my-1">{errors.name}</div> : null}
+							{errors.name && !values?.name ? <div className="text-red-800 font-bold my-1">{errors.name}</div> : null}
 						</div>
 						<div className="flex flex-col gap-1 mb-3">
 							<label>Contenido</label>
@@ -167,7 +167,6 @@ export const TestimonialsForm = () => {
 								data={values.content}
 								onChange={(event, editor) => {
 									const data = editor.getData();
-									console.log(editor.data.get());
 									setFieldValue('content', data);
 								}}
 							/>
