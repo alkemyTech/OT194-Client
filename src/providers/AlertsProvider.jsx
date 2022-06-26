@@ -18,10 +18,7 @@ const AlertsProvider = (props) => {
 				text = {alert.text}
 				title = {alert.title}
 				showCancelButton = {alert.showCancelButton}
-				onConfirm= {() => {
-					alert.action();
-					confirm();
-				}}
+				onConfirm= {confirm}
 			/>
 		</>
 	);
