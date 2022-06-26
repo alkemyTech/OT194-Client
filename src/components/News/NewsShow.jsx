@@ -14,9 +14,13 @@ export const NewsShow = ({ isLimited, isCentered, className }) => {
 
 	return (
 		<div className={`${className} flex flex-wrap gap-4`}>
-			{allNews.length && allNews.slice(0, (isLimited ? 2 : allNews.length)).map(data => (
-				<NewsCard key={data.id} data={data} />
-			))}
+			{
+				allNews.length >= 1
+					? allNews.slice(0, (isLimited ? 2 : allNews.length)).map(data => (
+						<NewsCard key={data.id} data={data} />
+					))
+					: <p>No hay testimonios disponibles</p>
+			}
 		</div>
 	);
 };
