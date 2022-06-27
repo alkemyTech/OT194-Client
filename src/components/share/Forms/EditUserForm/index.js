@@ -139,10 +139,10 @@ export const EditUserForm = () => {
 							{errors.lastName && !values?.lastName ? <div className="text-red-800 font-bold my-1">{errors.lastName}</div> : null}
 
 						</div>
-						<div className="flex flex-col gap-1 mb-3">
+						<div className=" flex-col hidden gap-1 mb-3">
 							<label className='text-left'>Email</label>
 							<input
-								className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
+								className="w-full shadow appearance-none hidden border rounded py-3 box-border px-4 text-gray-700"
 								onChange={handleChange}
 								onBlur={handleBlur}
 								placeholder='Email'
