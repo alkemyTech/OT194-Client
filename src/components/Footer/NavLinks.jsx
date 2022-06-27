@@ -6,9 +6,9 @@ function NavLinks () {
 		{ title: 'Inicio', route: '/' },
 		{ title: 'Nosotros', route: '/nosotros' },
 		{ title: 'Novedades', route: '/news' },
+		{ title: 'Actividades', route: '/actividades' },
 		{ title: 'Testimonios', route: '/testimonios' },
-		{ title: 'Contacto', route: '/contacto' },
-		{ title: 'Contribuye', route: '/contribuye' }
+		{ title: 'Contacto', route: '/contacto' }
 	];
 
 	return (

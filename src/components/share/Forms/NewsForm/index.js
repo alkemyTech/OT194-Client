@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PropTypes } from 'prop-types';
@@ -11,27 +12,20 @@ import {
 	createNews,
 	newsActions
 } from '../../../../features/news/newsSlice';
-
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 
 const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 
 export const NewsForm = () => {
-	/* TODO:
-    Falta testear la conexion con los endpoints
-    Falta traer la novedad correctamente - se rompe todo por el endpoint
-    Falta subir la imagen correctamente
-    Las categorias estan harcodeadas tal y como lo pedia la story
-  */
-
 	const news = useSelector(state => state.news.openedNews);
 
-	const [imagePreview, setimagePreview] = useState({ preview: '', raw: '' });
+	const [imagePreview, setimagePreview] = useState(undefined);
 	const [image, setImage] = useState(undefined);
 	const [imgError, setImgError] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const { id: newsId } = useParams();
 
@@ -50,32 +44,35 @@ export const NewsForm = () => {
 	}, [news]);
 
 	const handleImageChange = (e) => {
-		setimagePreview({
-			preview: URL.createObjectURL(e.target.files[0]),
-			raw: e.target.files[0]
-		});
-		setImage(e.target.files[0]);
+		const fileReader = new FileReader();
+		fileReader.onload = () => {
+			if (fileReader.readyState === 2) {
+				localStorage.setItem('file', fileReader.result);
+				setimagePreview(fileReader.result);
+				setImage(fileReader.result);
+			}
+		};
+		fileReader.readAsDataURL(e.target.files[0]);
 	};
 
-	const handleSubmit = (data) => {
+	const handleSubmit = async (data) => {
 		setImgError(false);
-
-		if (typeof (image) === 'object' && (image.size > 50936250 || !supportedMimeTypes.includes(image.type))) {
-			return setImgError(true);
-		}
 
 		if (!image) {
 			return setImgError(true);
 		}
 
-		if (newsId >= 0 && news.name.length > 0) {
+		if (typeof (image) === 'object' && (image.size > 50936250 || !supportedMimeTypes.includes(image.type))) {
+			return setImgError(true);
+		}
+
+		if (newsId && location.pathname !== '/backoffice/news/create') {
 			dispatch(modifyNews(data));
 			navigate('/backoffice/news');
 		} else {
 			dispatch(createNews(data));
 			navigate('/backoffice/news');
 		}
-
 		dispatch(newsActions.resetOpenedNews());
 	};
 
@@ -97,10 +94,10 @@ export const NewsForm = () => {
 					<Form className="flex flex-col  md:m-5">
 						<div className="flex flex-col gap-1 mb-3">
 							<label>Imagen</label>
-							{imagePreview.preview
+							{imagePreview
 								? (
 									<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '400px' }}>
-										<img src={imagePreview.preview} alt={'Imagen cargada'} height={'100%'} />
+										<img src={imagePreview} alt={'Imagen cargada'} height={'100%'} />
 									</div>
 								)
 								: image && (<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '90vw', maxHeight: '400px' }}>
@@ -112,12 +109,12 @@ export const NewsForm = () => {
 								id="upload-button"
 								type="file"
 								name='image'
-								onChange={e => { handleChange(e); handleImageChange(e); }}
+								onChange={e => { handleImageChange(e); }}
 								placeholder='Logo'
 								className='hidden'
 							/>
 							<label htmlFor='upload-button'>
-								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Upload your photo</h3>
+								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Cargar una imagen</h3>
 							</label>
 							{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}
 						</div>
@@ -133,11 +130,7 @@ export const NewsForm = () => {
 								value={values.name}
 								data-testid="test-id-form-control"
 							/>
-							{errors.name && (
-								<h5 className="text-redOng m-0 ml-1 text-left" data-testid="test-id-error-text">
-									{errors.name}
-								</h5>
-							)}
+							{errors.name && !values?.name ? <div className="text-red-800 font-bold my-1 text-left">{errors.name}</div> : null}
 
 						</div>
 						<div className="flex flex-col gap-1 mb-3">
@@ -177,13 +170,14 @@ export const NewsForm = () => {
 									setFieldValue('content', data);
 								}}
 							/>
+							<span className="text-start">{values.content && `${values.content.length - 7} Caracteres`}</span>
 							{errors.content ? <div className="text-red-800 font-bold my-1 text-left">{errors.content}</div> : null}
 						</div>
 						<button
 							type='submit'
 							className='mt-3 text-white bg-redOng hover:bg-redOng focus:ring rounded border-0 py-3 px-6 cursor-pointer hover:opacity-50'
 						>
-							{(newsId > 0) ? 'Modificar' : 'Crear'}
+							{(location.pathname !== '/backoffice/news/create') ? 'Modificar' : 'Crear'}
 						</button>
 					</Form>
 				)}

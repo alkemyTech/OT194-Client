@@ -1,20 +1,34 @@
 import axios from 'axios';
+const { v4: UUIDV4 } = require('uuid');
 
-export const axiosInstance = (endpoint, data = {}, method = 'GET') => {
-	const user = localStorage.getItem('user');
-	const token = (JSON.parse(user).token);
-	return axios({
+export const axiosInstance = async (endpoint, data = {}, method = 'GET') => {
+	const user = JSON.parse(localStorage.getItem('user'));
+	const token = user ? user.token : '';
+	const storageFile = localStorage.getItem('file');
+	let contentType = 'application/json';
+	let formData = data;
+	if (storageFile) {
+		contentType = 'multipart/form-data';
+		formData = new FormData();
+		for (const key in data) { formData.append(key, data[key]); }
+		const file = await (await fetch(storageFile)).blob();
+		formData.append('file', file, `${UUIDV4()}.jpeg`);
+	}
+
+	const response = await axios({
 		method,
 		url: `${endpoint}`,
-		data,
+		data: formData,
 		headers: {
-			authorization: `Bearer ${token}`
+			authorization: `Bearer ${token}`,
+			'Content-Type': contentType
 		}
-	})
-		.then((response) =>
-			response
-		)
-		.catch((error) =>
-			error.response
-		);
+	});
+
+	if (response.status >= 400) {
+		console.log(response.data);
+		throw new Error(response);
+	}
+	localStorage.removeItem('file');
+	return response.data;
 };

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import activityService from './activitiesService';
+import { axiosInstance } from '../../helper/axiosInstance';
 
 const initialState = {
 	activities: [],
@@ -10,12 +10,12 @@ const initialState = {
 	message: ''
 };
 
-// POST ACTIVITY
+// Create Activity
 export const createActivity = createAsyncThunk(
-	'/activities',
+	'activities/createActivity',
 	async (data, thunkAPI) => {
 		try {
-			return await activityService.createActivity(data);
+			return await axiosInstance('/activities', { ...data }, 'POST');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -28,12 +28,66 @@ export const createActivity = createAsyncThunk(
 	}
 );
 
-// PATCH ACTIVITY
-export const updateActivity = createAsyncThunk(
-	'auth/login',
+// GET ACTIVITIES
+export const getActivities = createAsyncThunk(
+	'activities/getAllData',
+	async (thunkAPI) => {
+		try {
+			return await axiosInstance('/activities', {}, 'GET');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// DELETE ACTIVITIES
+export const deleteActivity = createAsyncThunk(
+	'activities/deleteData',
+	async (id, thunkAPI) => {
+		try {
+			return axiosInstance(`/activities/${id}`, {}, 'DELETE');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// EDIT ACTIVITIES
+export const modifyActivity = createAsyncThunk(
+	'testimonials/modifyData',
 	async (data, thunkAPI) => {
 		try {
-			return await activityService.updateActivity(data);
+			return axiosInstance(`/activities/${data.id}`, { ...data }, 'PUT');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// GET ACTIVITY
+export const getActivity = createAsyncThunk(
+	'activities/getDataById',
+	async (id, thunkAPI) => {
+		try {
+			return await axiosInstance(`/activities/${id}`, {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -51,62 +105,76 @@ export const activitiesSlice = createSlice({
 	initialState,
 	reducers: {
 		resetActivities: () => initialState,
-		resetActivitiesReq: (state) => {}
+		resetActivitiesReq: (state) => {
+			state.isLoading = false;
+			state.isError = false;
+			state.isSuccess = false;
+			state.message = '';
+		},
+		resetActivity: (state) => {
+			state.openedNews = initialState.activity;
+		}
 	},
 	extraReducers: (builder) => {
 		builder
-			// Create waiting
+		// Create Activity
 			.addCase(createActivity.pending, (state) => {
 				state.isLoading = true;
-				state.isSuccess = false;
-				state.isError = false;
-				state.message = '';
 			})
-
-			// Create success
 			.addCase(createActivity.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.isError = false;
-				state.message = '';
-				state.activities = [...state.activities, action.payload];
+				state.activities.push(action.payload);
 			})
-			// Create failed
 			.addCase(createActivity.rejected, (state, action) => {
 				state.isLoading = false;
-				state.isSuccess = false;
 				state.isError = true;
 				state.message = action.payload;
 			})
-
-			.addCase(updateActivity.pending, (state, action) => {
+		// GetAll
+			.addCase(getActivities.pending, (state) => {
 				state.isLoading = true;
-				state.isSuccess = false;
-				state.isError = false;
-				state.message = '';
 			})
-			.addCase(updateActivity.fulfilled, (state, action) => {
+			.addCase(getActivities.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.isError = false;
-				state.message = '';
-
-				state.activities = state.activities.map((activity) => {
-					if (activity.id === action.payload.id) {
-						return action.payload;
-					}
-					return activity;
-				});
+				state.activities = action.payload;
 			})
-			.addCase(updateActivity.rejected, (state, action) => {
+			.addCase(getActivities.rejected, (state, action) => {
 				state.isLoading = false;
-				state.isSuccess = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+		// GetOne
+			.addCase(getActivity.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getActivity.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.activity = action.payload;
+			})
+			.addCase(getActivity.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+		// Modify
+			.addCase(modifyActivity.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(modifyActivity.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+			})
+			.addCase(modifyActivity.rejected, (state, action) => {
+				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
 			});
 	}
 });
 
-export const { resetAactivities, resetActivitiesReq } = activitiesSlice.actions;
+export const activitiesActions = activitiesSlice.actions;
 
 export default activitiesSlice.reducer;

@@ -7,6 +7,7 @@ import componentsSlice from '../features/components/componentsSlice';
 import testimonialssSlice from '../features/testimonials/testimonialsSlice';
 import organizationSlice from '../features/organization/organizationSlice';
 import contactsSlice from '../features/contacts/contactsSlice';
+import slidesSlice from '../features/slides/slidesSlice';
 
 export default configureStore({
 	reducer: {
@@ -17,6 +18,7 @@ export default configureStore({
 		components: componentsSlice,
 		testimonials: testimonialssSlice,
 		organization: organizationSlice,
-		contacts: contactsSlice
+		contacts: contactsSlice,
+		slides: slidesSlice
 	}
 });

@@ -35,21 +35,21 @@ export const LoginForm = ({
 		/>
 		<div className='flex'>
 			<input
-				className='h-5'
+				className='h-5 hover:cursor-pointer'
 				onChange={handleChange}
 				type="checkbox"
 				name="rememberMe"
 				id="rememberMe"
 				defaultChecked={values.rememberMe}
 			/>
-			<label htmlFor="rememberMe" className='text-lg'>
+			<label htmlFor="rememberMe" className='text-lg hover:cursor-pointer'>
       Recordarme
 			</label>
 		</div>
 		<button
 			type="submit"
-			className="shadow-md border border-box rounded-lg text-base h-12 w-full border-transparent bg-redOng text-white py-3 px-2 my-2"
-			disable={isSubmitting}
+			className="shadow-md border border-box rounded-lg text-base h-12 w-full border-transparent bg-redOng text-white py-3 px-2 my-2 hover:cursor-pointer"
+			disable={isSubmitting ? 'true' : 'false'}
 		>Iniciar sesión
 		</button>
 	</Form>

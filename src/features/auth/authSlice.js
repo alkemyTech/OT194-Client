@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import authService from './authService';
 import { axiosInstance } from '../../helper/axiosInstance';
 
 // Get state from localStorage
@@ -19,6 +18,8 @@ if (remember) {
 const initialState = {
 	user: user || null,
 	remember: remember || null,
+	usersData: '',
+	userData: '',
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
@@ -30,7 +31,7 @@ export const register = createAsyncThunk(
 	'auth/register',
 	async (user, thunkAPI) => {
 		try {
-			return await authService.register(user);
+			return await axiosInstance('/auth/register', user, 'POST');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||
@@ -46,7 +47,7 @@ export const login = createAsyncThunk(
 	'auth/login',
 	async (user, thunkAPI) => {
 		try {
-			return await authService.login(user);
+			return await axiosInstance('/auth/login', user, 'POST');
 		} catch (error) {
 			const message =
 			(error.response && error.response.data && error.response.data.message) ||
@@ -61,8 +62,7 @@ export const getUserData = createAsyncThunk(
 	'auth/getUserData',
 	async (thunkAPI) => {
 		try {
-			const { id } = thunkAPI.getState((state) => state.auth.user);
-			return axiosInstance(`/user/${id}`, {}, 'GET');
+			return axiosInstance('/auth/me', {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||
@@ -73,12 +73,96 @@ export const getUserData = createAsyncThunk(
 	}
 );
 
-// DELETE User
-export const deleteUserData = createAsyncThunk(
-	'auth/deleteUserData',
+// GET ALL USERS
+export const getAllUsers = createAsyncThunk(
+	'users/getUsersData',
 	async (thunkAPI) => {
 		try {
-			return axiosInstance('/users', {}, 'PATCH');
+			return await axiosInstance('/users', {}, 'GET');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// GET ONE USER AS ADMIN
+export const getUserAsAdmin = createAsyncThunk(
+	'users/getUserData',
+	async (id, thunkAPI) => {
+		try {
+			return axiosInstance(`/users/${id}`, {}, 'GET');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// DELETE User como user
+export const deleteUserData = createAsyncThunk(
+	'auth/deleteUserData',
+	async (user, thunkAPI) => {
+		try {
+			return axiosInstance(`/users/${user.id}`, {}, 'DELETE');
+		} catch (error) {
+			const message =
+				(error.response && error.response.data && error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// DELETE User como ADMIN
+export const deleteUserAsAdmin = createAsyncThunk(
+	'auth/deleteUserAsAdmin',
+	async (id, thunkAPI) => {
+		try {
+			return axiosInstance(`/users/${id}`, {}, 'DELETE');
+		} catch (error) {
+			const message =
+				(error.response && error.response.data && error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// Edit User
+export const editUserData = createAsyncThunk(
+	'auth/editUserData',
+	async (data, thunkAPI) => {
+		try {
+			return axiosInstance(`/users/${data.id}`, { ...data }, 'PUT');
+		} catch (error) {
+			const message =
+				(error.response && error.response.data && error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// Edit User as Admin
+export const editUserAsAdminData = createAsyncThunk(
+	'auth/editUserAsAdminData',
+	async (data, thunkAPI) => {
+		try {
+			return axiosInstance(`/users/${data.id}`, { ...data }, 'PUT');
 		} catch (error) {
 			const message =
 				(error.response && error.response.data && error.response.data.message) ||
@@ -112,6 +196,10 @@ export const authSlice = createSlice({
 			state.user = null;
 			localStorage.removeItem('remember');
 			sessionStorage.removeItem('remember');
+		},
+		resetUserData: (state) => {
+			state.userData = '';
+			state.usersData = '';
 		}
 	},
 	extraReducers: (builder) => {
@@ -148,25 +236,84 @@ export const authSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 			})
-			// DELETE
+			// GetAll
+			.addCase(getAllUsers.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getAllUsers.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.usersData = action.payload;
+			})
+			.addCase(getAllUsers.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			// Get User as Admin
+			.addCase(getUserAsAdmin.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getUserAsAdmin.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.userData = action.payload;
+			})
+			.addCase(getUserAsAdmin.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			// DELETE AS USER
 			.addCase(deleteUserData.pending, (state) => {
 				state.isLoading = true;
 			})
 			.addCase(deleteUserData.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
+				state.user = null;
 				state.remember = null;
 				localStorage.removeItem('user');
-				state.user = null;
+				sessionStorage.removeItem('user');
 				localStorage.removeItem('remember');
+				sessionStorage.removeItem('remember');
 			})
 			.addCase(deleteUserData.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+			})
+		// Edit user
+			.addCase(editUserData.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(editUserData.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.user = action.payload;
+				localStorage.setItem('user', JSON.stringify(action.payload));
+				sessionStorage.setItem('user', JSON.stringify(action.payload));
+			})
+			.addCase(editUserData.rejected, (state, action) => {
+				state.message = action.payload;
+				state.isLoading = false;
+				state.isError = true;
+			})
+			// Edit user as admin
+			.addCase(editUserAsAdminData.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(editUserAsAdminData.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+			})
+			.addCase(editUserAsAdminData.rejected, (state, action) => {
+				state.message = action.payload;
+				state.isLoading = false;
+				state.isError = true;
 			});
 	}
 });
 
-export const { resetAuth, resetAuthReq, setRemember, logout } = authSlice.actions;
+export const { resetAuth, resetAuthReq, setRemember, logout, resetUserData } = authSlice.actions;
 export default authSlice.reducer;

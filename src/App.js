@@ -15,7 +15,7 @@ import { NotFound } from './pages/NotFound';
 import { BackOfficeOrganization } from './pages/BackOfficeOrganization';
 import { NewsDetail } from './pages/NewsDetail';
 import { UserProfile } from './pages/UserProfile';
-import { News } from './components/News';
+import { News } from './pages/News';
 import { ContactsList } from './components/ContactsList/ContactsList';
 import Spinner from './components/Spinner';
 import { BackOfficeTestimonials } from './pages/BackOfficeTestimonials';
@@ -28,6 +28,14 @@ import { ContactUs } from './pages/ContactUs';
 import { NewsList } from './components/NewsList/NewsList';
 import { NewsForm } from './components/share/Forms/NewsForm';
 import { TestimonialsForm } from './components/share/Forms/TestimonialsForm';
+import BackOfficeEditUser from './pages/BackOfficeEditUser';
+import { ActivitiesList } from './components/ActivitiesList/ActivitiesList';
+import { ActivitiesForm } from './components/share/Forms/ActivitiesForm';
+import { UsersList } from './components/UsersList/UsersList';
+import { EditUserForm } from './components/share/Forms/EditUserForm';
+import { SlidesList } from './components/SlidesList';
+import { SlidesForm } from './components/share/Forms/SlidesForm';
+import { Activities } from './pages/Activities';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -70,24 +78,28 @@ function App () {
 						<Route path='/nosotros' element={<Staff />} />
 						<Route path='/news' element={<News/>} />
 						<Route path='/news/:id' element={<NewsDetail />} />
+						<Route path='/actividades' element={<Activities />} />
 						<Route path='/actividades/:id' element={<ActivityDetail />} />
 						<Route path='/testimonios' element={<Testimonios />} />
 						<Route path='/testimonios/add' element={<TestimonialsForm />} />
 						<Route path='/contacto' element={<ContactUs />} />
-						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/register' element={<Register />} />
 						<Route element={<ProtectRoute />} >
 							<Route path='/backoffice' element={<BackOfficeScreen/>} />
 							<Route path='/profile' element={<UserProfile />} />
+							<Route path='/backoffice/usuario' element={<BackOfficeEditUser />} />
 							<Route element={<AdminCheck />} >
-								<Route
-									path='/backoffice/organization'
+								<Route	path='/backoffice/organization'
 									element={<BackOfficeOrganization />}
 								/>
 								<Route
 									path='/backoffice/testimonials'
 									element={<BackOfficeTestimonials />}
+								/>
+								<Route
+									path='/backoffice/testimonials/:id'
+									element={<TestimonialsForm />}
 								/>
 								<Route
 									path='/backoffice/news'
@@ -100,6 +112,34 @@ function App () {
 								<Route
 									path='/backoffice/news/:id'
 									element={<NewsForm />}
+								/>
+								<Route
+									path='/backoffice/activities'
+									element={<ActivitiesList />}
+								/>
+								<Route
+									path='/backoffice/activities/create'
+									element={<ActivitiesForm />}
+								/>
+								<Route
+									path='/backoffice/activities/:id'
+									element={<ActivitiesForm />}
+								/>
+								<Route
+									path='/backoffice/usuarios'
+									element={<UsersList />}
+								/>
+								<Route
+									path='/backoffice/usuarios/:id'
+									element={<EditUserForm />}
+								/>
+								<Route
+									path='/backoffice/slides'
+									element={<SlidesList />}
+								/>
+								<Route
+									path='/backoffice/slides/:id'
+									element={<SlidesForm />}
 								/>
 							</Route>
 						</Route>

@@ -1,46 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteNews, getAllNews } from '../../features/news/newsSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { getAllNews } from '../../features/news/newsSlice';
+import { Link } from 'react-router-dom';
 import {
-	faPenToSquare,
-	faSquareMinus
+	faPenToSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Swal from 'sweetalert2';
 
-export const NewsList = () => {
+export const SlidesList = () => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const news = useSelector(state => state.news.allNews);
-
 	useEffect(() => {
 		dispatch(getAllNews());
 	}, []);
 
-	const handleNewsDelete = (id) => {
-		Swal.fire({
-			title: 'Estas seguro?',
-			text: 'No podras revertir esta accion!',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Si eliminarlo!',
-			cancelButtonText: 'Cancelar'
-		}).then((result) => {
-			if (result.value) {
-				dispatch(deleteNews(id));
-				Swal.fire(
-					'Deleted!',
-					'Your file has been deleted.',
-					'success'
-				).then(() => {
-					navigate('/backoffice/news');
-				});
-			}
-		});
-	};
 	return (
 		<div className='mb-10'>
 			<div
@@ -62,9 +35,6 @@ export const NewsList = () => {
 							<th className='bg-blue-100 border text-left px-8 py-4 text-sm hidden sm:table-cell'>
 							Editar
 							</th>
-							<th className='bg-blue-100 border text-left px-8 py-4 text-sm hidden sm:table-cell'>
-							Eliminar
-							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -77,35 +47,24 @@ export const NewsList = () => {
 								<td className='border px-4 py-4 text-sm relative'>
 									{item.createdAt.slice(0, 10)}
 									<span className=' absolute top-0 right-1 sm:hidden'>
-										<Link to={`/backoffice/news/${item.id}`}>
+										<Link to={`/backoffice/slides/${item.id}`}>
 											<FontAwesomeIcon className='mx-2 text-lg text-blue-600' icon={faPenToSquare} />
 										</Link>
-										<span onClick={() => handleNewsDelete(item.id)} className='p-0.5'>
-											<FontAwesomeIcon className='text-lg text-red-600' icon={faSquareMinus} />
-										</span>
+
 									</span>
 								</td>
 								<td className='text-center hidden sm:table-cell'>
 									<Link
 										className='border-0 px-6 py-2 rounded bg-blueOng text-white cursor-pointer text-md no-underline'
-										to={`/backoffice/news/${item.id}`}
-									>Editar</Link>
+										to={`/backoffice/slides/${item.id}`}
+									>Diapositivas</Link>
 								</td>
-								<td className='text-center hidden sm:table-cell'>
-									<button
-										className='border-0 px-6 py-2.5 rounded bg-redOng text-white cursor-pointer text-md no-underline'
-										onClick={() => handleNewsDelete(item.id)}
-									>Eliminar</button>
-								</td>
+
 							</tr>
 						))}
 					</tbody>
 				</table>
 			</div>
-			<Link
-				className='border-0 px-6 py-2 rounded bg-green-400 text-white cursor-pointer text-md no-underline'
-				to={'/backoffice/news/create'}
-			>Crear Entry</Link>
 		</div>
 	);
 };

@@ -9,9 +9,9 @@ export function NavRoutes () {
 		{ text: 'Inicio', route: '/' },
 		{ text: 'Nosotros', route: '/nosotros' },
 		{ text: 'Novedades', route: '/news' },
+		{ text: 'Actividades', route: '/actividades' },
 		{ text: 'Testimonios',	route: '/testimonios' },
-		{ text: 'Contacto', route: '/contacto' },
-		{ text: 'Contribuye', route: '/contribuye' }
+		{ text: 'Contacto', route: '/contacto' }
 	];
 
 	return (
@@ -19,7 +19,6 @@ export function NavRoutes () {
 			{navLinks.map((link, i) => (
 				<li key={i} className='m-2 text-lg'>
 					<NavLink
-						exact
 						style={{ textUnderlineOffset: '2px' }}
 						className={({ isActive }) => {
 							return isActive

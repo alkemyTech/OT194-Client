@@ -19,8 +19,7 @@ export const getAllTestimonials = createAsyncThunk(
 	'testimonials/getAllData',
 	async (thunkAPI) => {
 		try {
-			const res = await axiosInstance('/testimonials/', {}, 'GET');
-			return res.data;
+			return await axiosInstance('/testimonials/', {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -54,12 +53,10 @@ export const getTestimony = createAsyncThunk(
 // Crear un testimonio
 export const createTestimony = createAsyncThunk(
 	'testimonials/createData',
-	async (data, image, thunkAPI) => {
+	async (data, thunkAPI) => {
 		try {
-			if (image) {
-				// logica para subir imagen
-			}
-			return axiosInstance('/testimonials', data, 'POST');
+			await axiosInstance('/testimonials', { ...data }, 'POST');
+			return await axiosInstance('/testimonials/', {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -75,12 +72,28 @@ export const createTestimony = createAsyncThunk(
 // Editar un testimonio
 export const modifyTestimony = createAsyncThunk(
 	'testimonials/modifyData',
-	async (id, data, image, thunkAPI) => {
+	async (data, thunkAPI) => {
+		console.log(data);
 		try {
-			if (image) {
-				// logica para subir imagen
-			}
-			return axiosInstance(`/testimonials/${id}`, data, 'PATCH');
+			return axiosInstance(`/testimonials/${data.id}`, { ...data }, 'PUT');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+// Eliminar una testimonio
+export const deleteTestimony = createAsyncThunk(
+	'testimonials/deleteData',
+	async (id, thunkAPI) => {
+		try {
+			return axiosInstance(`/testimonials/${id}`, {}, 'DELETE');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -97,8 +110,11 @@ export const testimonialsSlice = createSlice({
 	name: 'testimonials',
 	initialState,
 	reducers: {
-		resetOpenedNews: (state) => {
+		resetOpenedTestimony: (state) => {
 			state.openedTestimony = initialState.openedTestimony;
+		},
+		resetAllTestimonials: (state) => {
+			state.allTestimonials = initialState.allTestimonials;
 		}
 	},
 	extraReducers: (builder) => {

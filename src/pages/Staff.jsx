@@ -1,49 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { StaffShow } from '../components/Staff/StaffShow';
 
 export const Staff = () => {
-	const staff = [
-		{
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Mar%C3%ADa+Irola.jpg',
-			name: 'María Irola',
-			position: 'Fundadora / Presidenta'
-		},
-		{
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Marita+Gomez.jpeg',
-			name: 'Marita Gomez',
-			position: 'Fundadora / Nutricionista'
-		}, {
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Miriam+Rodriguez.jpg',
-			name: 'Miriam Rodriguez',
-			position: 'Terapista Ocupacional'
-		}, {
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Cecilia+Mendez.jpeg',
-			name: 'Cecilia Mendez',
-			position: 'Psicopedagoga'
-		},
-		{
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Marco+Fernandez.jpg',
-			name: 'Mario Fuentes',
-			position: 'Profesor Educación Física'
-		},
-		{
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Mar%C3%ADa+Irola.jpg',
-			name: 'María Irola',
-			position: 'Fundadora / Presidenta'
-		},
-		{
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Marita+Gomez.jpeg',
-			name: 'Marita Gomez',
-			position: 'Fundadora / Nutricionista'
-		}, {
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Miriam+Rodriguez.jpg',
-			name: 'Miriam Rodriguez',
-			position: 'Terapista Ocupacional'
-		}, {
-			imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Cecilia+Mendez.jpeg',
-			name: 'Cecilia Mendez',
-			position: 'Psicopedagoga'
-		}
-	];
+	const founder = {
+		imageUrl: 'https://alkemytestingongbucket.s3.sa-east-1.amazonaws.com/Miembros+del+Equipo/Mar%C3%ADa+Irola.jpg',
+		name: 'María Irola',
+		position: 'Fundadora / Presidenta'
+	};
 
 	return (
 		<div
@@ -61,22 +25,25 @@ export const Staff = () => {
 						minHeight: '400px'
 					}}
 				>
-					<h1 className="m-0 mt-4 mx-auto lg:mx-0">{staff[0].name}</h1>
-					<h2 className="m-0 mt-1 mx-auto lg:mx-0 font-medium text-neutral-800">Rol que desempeña</h2>
+					<h1 className="m-0 mt-4 mx-auto lg:mx-0">{founder.name}</h1>
+					<h2 className="m-0 mt-1 mx-auto lg:mx-0 font-medium text-neutral-800">Presidente / Fundadora</h2>
 					<p className="m-0 mt-1 text-center lg:text-left text-neutral-700 text-lg mb-5">
-            Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.
-					</p>
+					Presidente María estudió economía y se especializó en economía para el
+					desarrollo. Comenzó como voluntaria en la fundación y fue quien promovió el
+					crecimiento y la organización de la institución acompañando la transformación
+					de un simple comedor barrial al centro comunitario de atención integral que es
+					hoy en día					</p>
 					<button
 						type='submit'
 						className='mt-auto mx-auto lg:mx-0 text-white bg-redOng hover:bg-redOng text-2xl font-bold rounded-2xl border-0 py-3 px-9 cursor-pointer hover:opacity-90'
 					>
-						¡Quiero ser parte!
+						<Link className='font-englebert text-white visited:text-white no-underline ' to='/contacto'> ¡Quiero ser parte! </Link>
 					</button>
 				</div>
 				<div
 					className='mx-auto lg:mx-0 bg-no-repeat bg-cover bg-center object-contain text-center flex flex-col justify-end text-white rounded-2xl'
 					style={{
-						backgroundImage: `url(${staff[0].imageUrl})`,
+						backgroundImage: `url(${founder.imageUrl})`,
 						minHeight: '400px',
 						height: '400px',
 						width: '400px',
@@ -84,26 +51,7 @@ export const Staff = () => {
 					}}
 				/>
 			</div>
-			<div className='flex justify-center gap-5 flex-wrap'>
-				{
-					staff.map((person, i) => {
-						return (
-							<div
-								key={`${person.name}${i}`}
-								className='bg-no-repeat bg-cover bg-center object-contain text-center flex flex-col justify-end text-white rounded-2xl'
-								style={{
-									backgroundImage: `url(${person.imageUrl})`,
-									minHeight: '200px',
-									minWidth: '200px'
-								}}
-							>
-								<span className='text-xl font-bold'> {person.name}</span>
-								<span className='pb-2'> {person.position}</span>
-							</div>
-						);
-					})
-				}
-			</div>
+			<StaffShow className="justify-center" />
 		</div>
 	);
 };
