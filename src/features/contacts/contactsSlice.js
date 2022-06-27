@@ -16,7 +16,8 @@ export const createContact = createAsyncThunk(
 	'contacts/createData',
 	async (data, thunkAPI) => {
 		try {
-			return axiosInstance('/contacts', data, 'POST');
+			const resp = await axiosInstance('/contacts', data, 'POST');
+			return resp;
 		} catch (error) {
 			const resMessage =
 				(error.response &&

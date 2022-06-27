@@ -58,8 +58,12 @@ export const createNews = createAsyncThunk(
 	'news/createData',
 	async (data, thunkAPI) => {
 		try {
-			await axiosInstance('/news', { ...data }, 'POST');
-			return await axiosInstance('/news', {}, 'GET');
+			console.log('ENTRO a CREATE NEWS');
+			const myData = 	await axiosInstance('/news', { ...data }, 'POST');
+			console.log(myData);
+			const allData = await axiosInstance('/news', {}, 'GET');
+			console.log('ALL DATA', allData);
+			return allData;
 		} catch (error) {
 			const message =
 				(error.response &&
