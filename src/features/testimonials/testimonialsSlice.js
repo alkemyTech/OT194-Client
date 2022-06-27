@@ -55,7 +55,8 @@ export const createTestimony = createAsyncThunk(
 	'testimonials/createData',
 	async (data, thunkAPI) => {
 		try {
-			return axiosInstance('/testimonials', { ...data }, 'POST');
+			await axiosInstance('/testimonials', { ...data }, 'POST');
+			return await axiosInstance('/testimonials/', {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response &&

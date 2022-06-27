@@ -58,7 +58,9 @@ export const createNews = createAsyncThunk(
 	'news/createData',
 	async (data, thunkAPI) => {
 		try {
-			return axiosInstance('/news', { ...data }, 'POST');
+			await axiosInstance('/news', { ...data }, 'POST');
+			const allData = await axiosInstance('/news', {}, 'GET');
+			return allData;
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -75,9 +77,9 @@ export const createNews = createAsyncThunk(
 export const modifyNews = createAsyncThunk(
 	'testimonials/modifyData',
 	async (data, thunkAPI) => {
-		console.log(data);
 		try {
-			return axiosInstance(`/news/${data.id}`, { ...data }, 'PUT');
+			await axiosInstance(`/news/${data.id}`, { ...data }, 'PUT');
+			return await axiosInstance('/news', {}, 'GET');
 		} catch (error) {
 			const message =
 				(error.response &&

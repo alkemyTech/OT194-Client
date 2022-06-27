@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { ContactForm } from '../components/share/Forms/ContactForm';
 import { contactFormSchema } from '../components/share/Forms/ContactForm/schemaContactForm';
 import { createContact } from '../features/contacts/contactsSlice';
+import Swal from 'sweetalert2';
 
 export const ContactUs = () => {
 	const startValues = {
@@ -12,6 +13,16 @@ export const ContactUs = () => {
 		message: ''
 	};
 	const dispatch = useDispatch();
+	const handleSubmit = async (values) => {
+		const data = await dispatch(createContact(values));
+		if (data.meta.requestStatus === 'fulfilled') {
+			Swal.fire(
+				'Enviado!',
+				'El contacto se ha establecido',
+				'success'
+			);
+		};
+	};
 
 	return (
 		<div className="flex flex-col mx-auto my-14 overflow-hidden gap-8" style={{ width: '85vw', maxWidth: '600px' }}>
@@ -31,9 +42,9 @@ export const ContactUs = () => {
 					enableReinitialize
 					initialValues={startValues}
 					validationSchema={contactFormSchema}
-					onSubmit={(values, { setSubmitting }) => {
-						dispatch(createContact(values));
-						setSubmitting(false);
+					onSubmit={(values, { resetForm }) => {
+						handleSubmit(values);
+						resetForm();
 					}}
 					component={ContactForm}
 				/>

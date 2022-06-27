@@ -49,7 +49,6 @@ export const EditUserForm = () => {
 	};
 
 	const handleSubmit = (data) => {
-		console.log(data);
 		setImgError(false);
 
 		if (!image) {
@@ -106,7 +105,7 @@ export const EditUserForm = () => {
 								className='hidden'
 							/>
 							<label htmlFor='upload-button'>
-								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Upload your photo</h3>
+								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Seleccionar Imagen</h3>
 							</label>
 							{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}
 						</div>

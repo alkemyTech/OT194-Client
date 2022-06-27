@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { StaffShow } from '../components/Staff/StaffShow';
 
 export const Staff = () => {
@@ -33,7 +34,7 @@ export const Staff = () => {
 						type='submit'
 						className='mt-auto mx-auto lg:mx-0 text-white bg-redOng hover:bg-redOng text-2xl font-bold rounded-2xl border-0 py-3 px-9 cursor-pointer hover:opacity-90'
 					>
-						¡Quiero ser parte!
+						<Link className='font-englebert text-white visited:text-white no-underline ' to='/contacto'> ¡Quiero ser parte! </Link>
 					</button>
 				</div>
 				<div

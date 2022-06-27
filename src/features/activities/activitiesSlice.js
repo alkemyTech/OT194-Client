@@ -50,7 +50,6 @@ export const deleteActivity = createAsyncThunk(
 export const modifyActivity = createAsyncThunk(
 	'testimonials/modifyData',
 	async (data, thunkAPI) => {
-		console.log(data);
 		try {
 			return axiosInstance(`/activities/${data.id}`, { ...data }, 'PUT');
 		} catch (error) {

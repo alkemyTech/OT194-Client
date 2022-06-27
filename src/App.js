@@ -35,6 +35,7 @@ import { UsersList } from './components/UsersList/UsersList';
 import { EditUserForm } from './components/share/Forms/EditUserForm';
 import { SlidesList } from './components/SlidesList';
 import { SlidesForm } from './components/share/Forms/SlidesForm';
+import { Activities } from './pages/Activities';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -77,11 +78,11 @@ function App () {
 						<Route path='/nosotros' element={<Staff />} />
 						<Route path='/news' element={<News/>} />
 						<Route path='/news/:id' element={<NewsDetail />} />
+						<Route path='/actividades' element={<Activities />} />
 						<Route path='/actividades/:id' element={<ActivityDetail />} />
 						<Route path='/testimonios' element={<Testimonios />} />
 						<Route path='/testimonios/add' element={<TestimonialsForm />} />
 						<Route path='/contacto' element={<ContactUs />} />
-						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/register' element={<Register />} />
 						<Route element={<ProtectRoute />} >
@@ -89,8 +90,7 @@ function App () {
 							<Route path='/profile' element={<UserProfile />} />
 							<Route path='/backoffice/usuario' element={<BackOfficeEditUser />} />
 							<Route element={<AdminCheck />} >
-								<Route
-									path='/backoffice/organization'
+								<Route	path='/backoffice/organization'
 									element={<BackOfficeOrganization />}
 								/>
 								<Route
