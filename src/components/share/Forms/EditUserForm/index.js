@@ -49,7 +49,6 @@ export const EditUserForm = () => {
 	};
 
 	const handleSubmit = (data) => {
-		console.log(data);
 		setImgError(false);
 
 		if (!image) {
