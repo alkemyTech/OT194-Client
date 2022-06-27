@@ -18,20 +18,13 @@ export const EditUserFormik = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (isError) {
-			dispatch(showAlert({
-				show: true,
-				title: 'Error',
-				text: message,
-				action: () => {}
-			}));
-		}
+		if (isError) dispatch(showAlert({ show: true, title: 'Error', text: message }));
+
 		if (isSuccess) {
 			dispatch(showAlert({
 				show: true,
 				title: 'Usuario modificado',
-				text: 'Información actualizada con éxito',
-				action: () => {}
+				text: 'Información actualizada con éxito'
 			}));
 		}
 

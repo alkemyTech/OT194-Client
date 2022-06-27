@@ -22,7 +22,7 @@ export const RegisterFormik = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (isError) dispatch(showAlert({ show: true, title: 'Error', text: message, action: () => {} }));
+		if (isError) dispatch(showAlert({ show: true, title: 'Error', text: message }));
 
 		if (isSuccess || user) {
 			navigate('/');

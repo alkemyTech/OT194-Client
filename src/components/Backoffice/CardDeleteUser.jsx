@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaArrowRight } from 'react-icons/fa';
-import { showAlert } from '../../features/alert/alertSlice';
-import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
+import { useSelector, useDispatch } from 'react-redux';
 import { deleteUserData } from '../../features/auth/authSlice';
 
 export const CardDeleteUser = ({ title, icon }) => {
-	const dispatch = useDispatch();
 	const [isHovering, setisHovering] = useState(false);
+	const { user } = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
 
 	const handleUserDelete = () => {
-		const alert = {
-			show: true,
-			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			showCancelButton: true,
-			action: () => {
-				dispatch(deleteUserData());
-			}
-		};
-		dispatch(showAlert(alert));
+		Swal.fire({
+			icon: 'warning',
+			title: '¿Quieres eliminar tu cuenta?',
+			text: 'No podrás recuperarla una vez eliminada',
+			showCancelButton: true
+		}).then((dismiss) => {
+			if (dismiss.isConfirmed) {
+				Swal.fire({
+					icon: 'question',
+					title: '¿Confirmas querer eliminar tu cuenta?',
+					text: 'Recuerda que no podrás recuperarla una vez eliminada',
+					showCancelButton: true
+				}).then((dismiss) => {
+					if (dismiss.isConfirmed) {
+						dispatch(deleteUserData(user));
+						Swal.fire({
+							icon: 'info',
+							title: 'Cuenta eliminada',
+							text: 'La cuenta ha sido eliminada con éxito'
+						});
+					}
+				});
+			};
+		});
 	};
 
 	return (

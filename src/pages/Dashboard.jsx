@@ -49,7 +49,7 @@ function Dashboard () {
 				<div className='flex flex-col gap-4'>
 					<div className='w-full flex items-center justify-between'>
 						<span className='text-2xl font-black'>Novedades</span>
-						<Link to={'novedades'} className='no-underline'>Ver todos</Link>
+						<Link to={'news'} className='no-underline'>Ver todos</Link>
 					</div>
 					<NewsShow isLimited className="justify-center md:justify-start" />
 				</div>
