@@ -74,12 +74,10 @@ export const NewsForm = () => {
 
 		if (newsId && news.name.length > 0) {
 			dispatch(modifyNews(data));
-			navigate('/backoffice/news');
 		} else {
 			dispatch(createNews(data));
-			navigate('/backoffice/news');
 		}
-
+		navigate('/backoffice/news');
 		dispatch(newsActions.resetOpenedNews());
 	};
 
@@ -120,8 +118,9 @@ export const NewsForm = () => {
 								placeholder='Logo'
 								className='hidden'
 							/>
-							<label htmlFor='upload-button'>
+							<label htmlFor='upload-button'className='mt-3 mx-auto text-white bg-redOng hover:bg-redOng focus:ring rounded w-1/2 border-0 py-3 px-6 cursor-pointer hover:opacity-50' >
 								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Upload your photo</h3>
+
 							</label>
 							{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}
 						</div>

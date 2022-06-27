@@ -77,7 +77,6 @@ function App () {
 						<Route path='/testimonios' element={<Testimonios />} />
 						<Route path='/testimonios/add' element={<TestimonialsForm />} />
 						<Route path='/contacto' element={<ContactUs />} />
-						<Route path='/contribuye' element={<h1>CONTRIBUYE</h1>} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/register' element={<Register />} />
 						<Route element={<ProtectRoute />} >
@@ -85,8 +84,7 @@ function App () {
 							<Route path='/profile' element={<UserProfile />} />
 							<Route path='/backoffice/usuario' element={<BackOfficeEditUser />} />
 							<Route element={<AdminCheck />} >
-								<Route
-									path='/backoffice/organization'
+								<Route	path='/backoffice/organization'
 									element={<BackOfficeOrganization />}
 								/>
 								<Route

@@ -18,8 +18,8 @@ function Dashboard () {
 					<p className="m-0 mt-2 text-center md:text-left text-neutral-700 text-xl mb-5">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing dignissim ac et eleifend lacus, rhoncus, dignissim sagittis. Tellus ac a, elementum ut. Tellus a morbi tincidunt ultricies malesuada eget turpis. Lacus enim non enim, velit hac turpis interdum arcu. Suspendisse at vel ultrices amet orci enim lectus porttitor ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing dignissim ac et eleifend lacus, rhoncus, dignissim sagittis. Tellus ac a, elementum ut. Tellus a morbi tincidunt ultricies malesuada eget turpis. Lacus enim non enim.
 					</p>
-					<button className='mt-auto mx-auto md:mx-0 text-white bg-redOng hover:bg-redOng text-lg font-bold rounded-2xl border-0 py-3 px-14 cursor-pointer hover:opacity-90'>
-						Contactanos
+					<button className='mt-auto mx-auto  md:mx-0 text-white bg-redOng hover:bg-redOng text-lg font-bold rounded-2xl border-0 py-3 px-14 cursor-pointer hover:opacity-90'>
+						<Link className='font-englebert visited:text-white no-underline ' to={'contacto'}> Contactanos </Link>
 					</button>
 				</div>
 				<div className='mx-auto lg:mx-0 flex flex-col justify-end text-white my-auto lg:w-2/4'>

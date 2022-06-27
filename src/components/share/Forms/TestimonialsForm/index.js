@@ -9,8 +9,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
 	modifyTestimony,
 	createTestimony,
-	testimonialsActions
-	, getTestimony
+	testimonialsActions,
+	getTestimony
 } from '../../../../features/testimonials/testimonialsSlice';
 
 import { Field, Form, Formik } from 'formik';
@@ -69,11 +69,10 @@ export const TestimonialsForm = () => {
 
 		if (testimonyId && testimony.name.length > 0) {
 			dispatch(modifyTestimony(data));
-			location.pathname === '/testimonios/add' ? navigate('/testimonios') : navigate('/backoffice/testimonials');
 		} else {
 			dispatch(createTestimony(data));
-			location.pathname === '/testimonios/add' ? navigate('/testimonios') : navigate('/backoffice/testimonials');
 		}
+		location.pathname === '/testimonios/add' ? navigate('/testimonios') : navigate('/backoffice/testimonials');
 
 		dispatch(testimonialsActions.resetOpenedTestimony());
 	};
@@ -115,7 +114,7 @@ export const TestimonialsForm = () => {
 								placeholder='Logo'
 								className='hidden'
 							/>
-							<label htmlFor='upload-button'>
+							<label htmlFor='upload-button' className='mt-3 mx-auto text-white bg-redOng hover:bg-redOng focus:ring rounded w-1/2 border-0 py-3 px-6 cursor-pointer hover:opacity-50'>
 								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Upload your photo</h3>
 							</label>
 							{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}

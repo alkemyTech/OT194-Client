@@ -10,8 +10,7 @@ export function NavRoutes () {
 		{ text: 'Nosotros', route: '/nosotros' },
 		{ text: 'Novedades', route: '/news' },
 		{ text: 'Testimonios',	route: '/testimonios' },
-		{ text: 'Contacto', route: '/contacto' },
-		{ text: 'Contribuye', route: '/contribuye' }
+		{ text: 'Contacto', route: '/contacto' }
 	];
 
 	return (
