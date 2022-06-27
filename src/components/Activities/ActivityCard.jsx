@@ -24,7 +24,7 @@ export const ActivityCard = ({ data }) => {
 					{parse(data.content.slice(0, 135))}{dots}
 				</div>
 				<Link to={`/actividades/${data.id}`}>
-					<button className="cursor-pointer drop-shadow-md w-full bg-red-700 text-white appearance-none py-2.5 border rounded-lg border-transparent ease-in-out duration-200 hover:bg-white hover:border-blue-700 hover:text-black">
+					<button className="cursor-pointer drop-shadow-md w-full bg-red-700 text-white appearance-none py-2.5 border rounded-lg border-transparent ease-in-out duration-200 hover:bg-white hover:border-red-700 hover:text-black">
             Ver Actividad
 					</button>
 				</Link>
