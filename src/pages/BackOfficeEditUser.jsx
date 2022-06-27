@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { EditUserFormik } from '../components/EditUser';
+
 import Spinner from '../components/Spinner';
+import { EditUserFormik } from '../components/EditUser';
 
 function BackOfficeEditUser () {
 	const { isLoading } = useSelector((state) => state.auth);

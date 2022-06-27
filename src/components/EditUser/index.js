@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetAuthReq, editUserData } from '../../features/auth/authSlice';
 import { Formik } from 'formik';
-import { EditUserForm } from '../share/Forms/EditUserForm';
-import { editUserFormSchema } from '../share/Forms/EditUserForm/schemaEditUserForm';
+import { EditUserFormAsUser } from '../share/Forms/EditUserAsUser';
+import { editUserFormAsUserSchema } from '../share/Forms/EditUserAsUser/schemaEditUserAsUserForm';
 import { showAlert } from '../../features/alert/alertSlice';
 
 export const EditUserFormik = () => {
@@ -41,12 +41,12 @@ export const EditUserFormik = () => {
 				data-testid="login-test-id-formik"
 				enableReinitialize
 				initialValues={startValues}
-				validationSchema={editUserFormSchema}
+				validationSchema={editUserFormAsUserSchema}
 				onSubmit={(values, { setSubmitting }) => {
-					dispatch(editUserData({ values, userId: user.id }));
+					dispatch(editUserData({ ...values, id: user.id }));
 					setSubmitting(false);
 				}}
-				component={EditUserForm}
+				component={EditUserFormAsUser}
 				validateOnChange={false}
 				validateOnBlur={false}
 			/>
