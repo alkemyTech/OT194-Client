@@ -116,19 +116,19 @@ export const ActivitiesForm = () => {
 						</div>
 
 						<div className="flex flex-col gap-1 mb-3">
-							<label>Nombre</label>
+							<label className='text-left'>Titulo</label>
 							<Field
 								className="form-login p-3"
-								type="text"
 								name="name"
+								type="text"
 								onChange={handleChange}
 								onBlur={handleBlur}
 								value={values.name}
 							/>
-							{errors.name && !values?.name ? <div className="text-red-800 font-bold my-1">{errors.name}</div> : null}
+							{errors.name && !values?.name ? <div className="text-red-800 font-bold my-1 text-left">{errors.name}</div> : null}
 						</div>
 						<div className="flex flex-col gap-1 mb-3">
-							<label>Contenido</label>
+							<label className='text-left'>Contenido</label>
 							<CKEditor
 								editor={ClassicEditor}
 								config={{
@@ -164,7 +164,8 @@ export const ActivitiesForm = () => {
 									setFieldValue('content', data);
 								}}
 							/>
-							{errors.content ? <div className="text-red-800 font-bold my-1">{errors.content}</div> : null}
+							<span className="text-start">{values.content && `${values.content.length - 7} Caracteres`}</span>
+							{errors.content ? <div className="text-red-800 font-bold my-1 text-left">{errors.content}</div> : null}
 						</div>
 						<button
 							type='submit'
