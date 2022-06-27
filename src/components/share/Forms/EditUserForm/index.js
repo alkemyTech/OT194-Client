@@ -61,10 +61,10 @@ export const EditUserForm = () => {
 
 		if (userId && user.firstName.length > 0 && user.lastName.length > 0) {
 			dispatch(editUserAsAdminData(data));
-			navigate('/backoffice/usuarios');
 		}
 
 		dispatch(resetUserData());
+		navigate('/backoffice/usuarios');
 	};
 
 	return (

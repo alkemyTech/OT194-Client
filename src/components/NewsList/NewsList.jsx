@@ -13,6 +13,7 @@ export const NewsList = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const news = useSelector(state => state.news.allNews);
+
 	useEffect(() => {
 		dispatch(getAllNews());
 	}, []);

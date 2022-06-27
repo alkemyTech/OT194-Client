@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FaArrowRight } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteUserData } from '../../features/auth/authSlice';
+import { deleteUserData, logout, resetAuth } from '../../features/auth/authSlice';
 
 export const CardDeleteUser = ({ title, icon }) => {
 	const [isHovering, setisHovering] = useState(false);
@@ -26,6 +26,8 @@ export const CardDeleteUser = ({ title, icon }) => {
 				}).then((dismiss) => {
 					if (dismiss.isConfirmed) {
 						dispatch(deleteUserData(user));
+						resetAuth();
+						logout();
 						Swal.fire({
 							icon: 'info',
 							title: 'Cuenta eliminada',

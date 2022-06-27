@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers, deleteUserAsAdmin } from '../../features/auth/authSlice';
+import { getAllUsers, deleteUserAsAdmin, resetUserData } from '../../features/auth/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import {
 	faPenToSquare,
@@ -36,6 +36,7 @@ export const UsersList = () => {
 					'success'
 				).then(() => {
 					navigate('/backoffice/usuarios');
+					dispatch(resetUserData());
 				});
 			}
 		});
