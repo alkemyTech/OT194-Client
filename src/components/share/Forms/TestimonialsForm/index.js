@@ -121,14 +121,14 @@ export const TestimonialsForm = () => {
 								placeholder='Logo'
 								className='hidden'
 							/>
-							<label htmlFor='upload-button' className='mt-3 mx-auto text-white bg-redOng hover:bg-redOng focus:ring rounded w-1/2 border-0 py-3 px-6 cursor-pointer hover:opacity-50'>
-								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Seleccionar Imagen</h3>
+							<label htmlFor='upload-button'>
+								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Cargar una imagen</h3>
 							</label>
 							{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}
 						</div>
 
 						<div className="flex flex-col gap-1 mb-3">
-							<label>Nombre</label>
+							<label className="text-left">Nombre</label>
 							<Field
 								className="form-login p-3"
 								type="text"
@@ -137,10 +137,10 @@ export const TestimonialsForm = () => {
 								onBlur={handleBlur}
 								value={values.name}
 							/>
-							{errors.name && !values?.name ? <div className="text-red-800 font-bold my-1">{errors.name}</div> : null}
+							{errors.name && !values?.name ? <div className="text-left text-red-800 font-bold my-1">{errors.name}</div> : null}
 						</div>
 						<div className="flex flex-col gap-1 mb-3">
-							<label>Contenido</label>
+							<label className="text-left">Contenido</label>
 							<CKEditor
 								editor={ClassicEditor}
 								config={{
@@ -176,7 +176,8 @@ export const TestimonialsForm = () => {
 									setFieldValue('content', data);
 								}}
 							/>
-							{errors.content ? <div className="text-red-800 font-bold my-1">{errors.content}</div> : null}
+							<span className="text-left">{values.content && `${values.content.length - 7} Caracteres`}</span>
+							{errors.content ? <div className="text-left text-red-800 font-bold my-1">{errors.content}</div> : null}
 						</div>
 						<button
 							type='submit'

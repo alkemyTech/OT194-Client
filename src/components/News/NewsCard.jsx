@@ -12,7 +12,7 @@ export const NewsCard = ({ data }) => {
 			<div className="box-content overflow-hidden">
 				<img
 					alt={data.name}
-					className="rounded-3xl h-full w-full bg-neutral-100"
+					className="rounded-3xl h-full w-full bg-neutral-100 flex justify-center items-center overflow-hidden"
 					src={data.image}
 				/>
 			</div>
