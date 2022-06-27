@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../../../custom.css';
 import {
-
 	newsActions
 } from '../../../../features/news/newsSlice';
 
@@ -33,8 +32,6 @@ export const SlidesForm = () => {
 		};
 	}, []);
 
-	// const [imagePreview, setimagePreview] = useState({ 0: {}, 1: {}, 2: {} });
-
 	useEffect(() => {
 		setImages(slides.map((e) => e.imageUrl));
 	}, [slides]);
@@ -46,7 +43,7 @@ export const SlidesForm = () => {
 				const imageUrl = fileReader.result;
 				const newImages = images;
 				newImages[i] = imageUrl;
-				setImages(newImages);
+				setImages([...newImages]);
 			}
 		};
 		fileReader.readAsDataURL(e.target.files[0]);
@@ -69,114 +66,109 @@ export const SlidesForm = () => {
 				return setImgError(true);
 			}
 		});
-		if (slides) {
-			slides.forEach((slide, i) => {
-				if (slide.imageUrl !== images[i]) {
-					localStorage.setItem('file', images[i]);
-				}
-				dispatch(modifySlide({ slide: { ...slide, text: altTexts[i] }, newsId }));
-				localStorage.removeItem('file');
-			});
-			navigate('/backoffice/slides');
-		} else {
-			slides.forEach((slide, i) => {
-				if (slide.imageUrl !== images[i]) {
-					localStorage.setItem('file', images[i]);
-				}
-				dispatch(createSlide({ slide: { text: altTexts[i], ...slide }, newsId }));
-				localStorage.removeItem('file');
-			});
-			navigate('/backoffice/slides');
-		}
 
+		altTexts.forEach((text, i) => {
+			const slide = {
+				text,
+				id: slides[i]?.id || null,
+				order: i
+			};
+
+			if (!slides[i]) {
+				if (!images[i]) return;
+				console.log('creando');
+				localStorage.setItem('file', images[i]);
+				dispatch(createSlide({ slide, newsId }));
+				localStorage.removeItem('file');
+				navigate('/backoffice/slides');
+			} else {
+				if (slides[i]?.text === text && slides[i]?.imageUrl === images[i]) return;
+
+				console.log('modificando');
+				if (slides[i]?.imageUrl !== images[i]) {
+					localStorage.setItem('file', images[i]);
+				}
+				dispatch(modifySlide({ slide, newsId }));
+				localStorage.removeItem('file');
+				navigate('/backoffice/slides');
+			}
+		});
 		dispatch(newsActions.resetOpenedNews());
 	};
 	return (
 		<>
-			{slides.length > 0 &&
-		<div
-			className='mx-auto'
-			style={{
-				maxWidth: '1000px',
-				width: '80%'
-			}}
-		>
-			<Formik
-				enableReinitialize
-				// initialValues={slides}
-				initialValues={{
-					text0: slides[0].text,
-					text1: slides[1].text,
-					text2: slides[2].text
+			<div
+				className='mx-auto'
+				style={{
+					maxWidth: '1000px',
+					width: '80%'
 				}}
-				onSubmit={handleSubmit}
 			>
-				{({ errors, values, handleBlur, handleChange }) => (
-					<Form className="flex flex-col  md:m-5">
-						{ slides.map((slide, i) =>
-							<>
-								<div className="flex flex-col gap-1 mb-3">
-									<label>{`Imagen slide ${i}`}</label>
-									{/* {imagePreview.i?.length
-										? (
-											<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '400px' }}>
-												<img src={imagePreview[i]} alt={'Imagen cargada'} height={'100%'} />
-											</div>
-										)
-										: image[i] && (<div className="my-2 w-full rounded-lg overflow-hidden flex justify-center bg-neutral-300" style={{ height: '90vw', maxHeight: '400px' }}>
-											<img src={slide.imageUrl} alt={`Imagen de la noticia ${slide.text}`} height={'100%'} />
-										</div>)
-									} */}
-									<input
-										accept="image/*"
-										id="upload-button"
-										type="file"
-										name='imageUrl'
-										onChange={e => { handleImageChange(e, i); }}
-										placeholder='Logo'
-										className='hidden'
-									/>
-									<label htmlFor='upload-button'>
-										<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Upload your photo</h3>
-									</label>
-									{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}
-								</div>
-								<div className="flex flex-col gap-1 mb-3">
-									<label className='text-left'>Texto alternativo</label>
-									<input
-										className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										placeholder='Texto alternativo'
-										name={`text${i}`}
-										type='text'
-										value={i === 0 ? values.text0 : i === 1 ? values.text1 : values.text2}
-										data-testid="test-id-form-control"
-									/>
-								</div>
-								<div className="flex-col gap-1 mb-3 hidden">
-									<label className='text-left'>Orden</label>
-									<input
-										className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
-										name={`order${i}`}
-										type='number'
-										onChange={handleChange}
-										value={i}
-										data-testid="test-id-form-control"
-									/>
-								</div>
-							</>
-						)}
-						<button
-							type='submit'
-							className='mt-3 text-white bg-redOng hover:bg-redOng focus:ring rounded border-0 py-3 px-6 cursor-pointer hover:opacity-50'
-						>
-							{(slides) ? 'Modificar' : 'Crear'}
-						</button>
-					</Form>
-				)}
-			</Formik>
-		</div>}
+				<Formik
+					enableReinitialize
+					initialValues={{
+						text0: slides[0]?.text,
+						text1: slides[1]?.text,
+						text2: slides[2]?.text
+					}}
+					onSubmit={handleSubmit}
+				>
+					{({ errors, values, handleBlur, handleChange }) => (
+						<Form className="flex flex-col gap-9 md:m-5">
+							{ [0, 1, 2].map((slide, i) =>
+								<>
+									<div className="flex flex-col">
+										<h2 className="text-left m-0 mb-1">{`Diapositiva ${i + 1}`}</h2>
+										<div className="flex flex-col gap-1 mb-3">
+											<label className='text-left'>Texto alternativo</label>
+											<input
+												className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
+												onChange={handleChange}
+												onBlur={handleBlur}
+												placeholder='Texto alternativo'
+												name={`text${i}`}
+												type='text'
+												value={i === 0 ? values.text0 : i === 1 ? values.text1 : values.text2}
+												data-testid="test-id-form-control"
+											/>
+										</div>
+										<input
+											accept="image/*"
+											id="upload-button"
+											type="file"
+											name='imageUrl'
+											onChange={e => { handleImageChange(e, i); }}
+											className='hidden'
+										/>
+										<label className="flex items-center gap-2 -mt-5" htmlFor='upload-button'>
+											<h3 className="text-left whitespace-nowrap text-white p-1.5 rounded-lg bg-red-500 cursor-pointer hover:bg-red-400" htmlFor>Seleccionar imagen</h3>
+											<p className="text-left m-0">{images[i]?.slice(0, 5) !== 'https' ? 'Archivo Cargado' : 'No hay archivo cargado'}</p>
+										</label>
+										{imgError ? <div className="text-red-800 font-bold mt-1 text-left">Archivo no soportado</div> : null}
+									</div>
+									<div className="flex-col gap-1 hidden">
+										<label className='text-left'>Orden</label>
+										<input
+											className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
+											name={`order${i}`}
+											type='number'
+											onChange={handleChange}
+											value={i}
+											data-testid="test-id-form-control"
+										/>
+									</div>
+								</>
+							)}
+							<button
+								type='submit'
+								className='mt-3 text-white bg-redOng hover:bg-redOng focus:ring rounded border-0 py-3 px-6 cursor-pointer hover:opacity-50'
+							>
+								{(slides) ? 'Modificar' : 'Crear'}
+							</button>
+						</Form>
+					)}
+				</Formik>
+			</div>
 		</>
 	);
 };

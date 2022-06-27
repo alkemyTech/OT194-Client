@@ -34,7 +34,8 @@ export const createSlide = createAsyncThunk(
 	'slides/createData',
 	async (data, thunkAPI) => {
 		try {
-			return axiosInstance(`/slides/${data.slide.id}`, { ...data.slide }, 'POST');
+			console.log(data);
+			return axiosInstance(`/slides/${data.newsId}`, { ...data.slide }, 'POST');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -52,7 +53,7 @@ export const modifySlide = createAsyncThunk(
 	'slides/modifyData',
 	async (data, thunkAPI) => {
 		try {
-			console.log(data.slide);
+			console.log(data);
 			return axiosInstance(`/slides/${data.slide.id}`, { ...data.slide }, 'PUT');
 		} catch (error) {
 			const message =

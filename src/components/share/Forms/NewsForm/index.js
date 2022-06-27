@@ -66,11 +66,12 @@ export const NewsForm = () => {
 		}
 
 		if (newsId && news.name.length > 0) {
-			await dispatch(modifyNews(data));
+			dispatch(modifyNews(data));
+			navigate('/backoffice/news');
 		} else {
-			await dispatch(createNews(data));
+			dispatch(createNews(data));
+			navigate('/backoffice/slides');
 		}
-		navigate('/backoffice/news');
 		dispatch(newsActions.resetOpenedNews());
 	};
 
@@ -128,7 +129,7 @@ export const NewsForm = () => {
 								value={values.name}
 								data-testid="test-id-form-control"
 							/>
-							{errors.name && !values?.name ? <div className="text-red-800 font-bold my-1">{errors.name}</div> : null}
+							{errors.name && !values?.name ? <div className="text-red-800 font-bold my-1 text-left">{errors.name}</div> : null}
 
 						</div>
 						<div className="flex flex-col gap-1 mb-3">

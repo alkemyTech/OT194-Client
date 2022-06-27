@@ -22,7 +22,7 @@ export const NewsDetail = () => {
 			<div className="my-2 w-full overflow-hidden flex items-center " style={{ height: 'fit-content', maxHeight: '500px' }}>
 				<Slider arr={newsDetails?.Slides || []}/>
 			</div>
-			<div className="flex flex-col px-5 md:px-8 w-1/2 mx-auto items-start">
+			<div className="flex flex-col px-5 md:px-8 w-3/4 mx-auto items-start">
 				<h2 className="font-sans">{title}</h2>
 				<div className="special-p w-full text-left overflow-hidden">{newsDetails?.content ? parse(newsDetails?.content) : 'La novedad solicitad no fue encontrada.'}</div>
 				<a className="sm:mx-0 mb-4 mt-8" href={'/'}>
