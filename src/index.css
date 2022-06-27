@@ -8,6 +8,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.no-margin-p p {
+  margin: 0
+}
+
 .form-login {
 	font-size:small;
 }
