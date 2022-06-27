@@ -121,7 +121,7 @@ export const NewsForm = () => {
 								className='hidden'
 							/>
 							<label htmlFor='upload-button'>
-								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Upload your photo</h3>
+								<h3 className="text-center  cursor-pointer hover:text-blue-600" htmlFor>Cargar una imagen</h3>
 							</label>
 							{imgError ? <div className="text-red-800 font-bold my-1 text-left">Archivo no soportado</div> : null}
 						</div>
@@ -177,7 +177,7 @@ export const NewsForm = () => {
 									setFieldValue('content', data);
 								}}
 							/>
-							<span className="text-start">{values.content && `${values.content.length - 7} / 233 Caracteres`}</span>
+							<span className="text-start">{values.content && `${values.content.length - 7} Caracteres`}</span>
 							{errors.content ? <div className="text-red-800 font-bold my-1 text-left">{errors.content}</div> : null}
 						</div>
 						<button
