@@ -1,8 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { TestimonialsShow } from '../components/Testimonials/TestimonialsShow';
 
 function Testimonios () {
+	const user = useSelector((state) => state.auth.user);
+
 	return (
 		<section className='m-8 flex flex-col px-5 mx-auto'
 			style={{
@@ -14,9 +17,14 @@ function Testimonios () {
 				<TestimonialsShow className="justify-center" />
 			</div>
 			<div className="flex flex-col items-center gap-3">
-				<Link to={'/testimonios/add'}>
-					<button className='bg-redOng font-medium text-lg text-white border-none py-2 cursor-pointer rounded-lg px-10'>¡Agregar mi Testimonio!</button>
-				</Link>
+				{user && (
+					<>
+						<Link to={'/testimonios/add'}>
+							<button className='bg-redOng font-medium text-lg text-white border-none py-2 cursor-pointer rounded-lg px-10'>¡Agregar mi Testimonio!</button>
+						</Link>
+					</>
+				)}
+
 				<Link to={'/'}>
 					<button className='text-black font-medium bg-white border border-solid border-black text-sm py-2 cursor-pointer rounded-lg px-10 hover:bg-neutral-700 hover:border-white hover:text-white transition-colors'>Ir al inicio</button>
 				</Link>
