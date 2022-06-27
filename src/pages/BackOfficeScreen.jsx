@@ -11,16 +11,16 @@ export const BackOfficeScreen = () => {
 	return (
 		<div className='flex justify-center items-center'>
 			<div className='flex gap-14 flex-wrap justify-center items-center my-14' style={ { width: '80%', height: '80%' } }>
-				<Link to ={'/backoffice/usuario'}><OptionCard title={'Editar usuario'} icon={<FaUser size={70} />} /></Link>
+				<Link className="no-underline" to ={'/backoffice/usuario'}><OptionCard title={'Editar usuario'} icon={<FaUser size={70} />} /></Link>
 				<CardDeleteUser title={'Eliminar cuenta'} icon={<FaUserSlash size={70} />} />
 				{user?.roleId === 2 &&
 				<>
-					<Link to ={'/backoffice/news'}><OptionCard title={'Novedades'} icon={<FaNewspaper size={70} />} /></Link>
-					<Link to ={'/backoffice/activities'}><OptionCard title={'Actividades'} icon={<FaList size={70} />} /></Link>
-					<Link to={'/backoffice/testimonials'}><OptionCard title={'Testimonios'} icon={<FaComments size={70} />} /></Link>
-					<Link to={'/backoffice/organization'}><OptionCard title={'Organizacion'} icon={<FaSitemap size={70} />} /></Link>
-					<Link to={'/backoffice/usuarios'}><OptionCard title={'Usuarios'} icon={<FaUsers size={70} />} /></Link>
-					<Link to={'/backoffice/slides'}><OptionCard title={'Slides'} icon={<FaSlideshare size={70} />} /></Link>
+					<Link className="no-underline" to ={'/backoffice/news'}><OptionCard title={'Novedades'} icon={<FaNewspaper size={70} />} /></Link>
+					<Link className="no-underline" to ={'/backoffice/activities'}><OptionCard title={'Actividades'} icon={<FaList size={70} />} /></Link>
+					<Link className="no-underline" to={'/backoffice/testimonials'}><OptionCard title={'Testimonios'} icon={<FaComments size={70} />} /></Link>
+					<Link className="no-underline" to={'/backoffice/organization'}><OptionCard title={'Organizacion'} icon={<FaSitemap size={70} />} /></Link>
+					<Link className="no-underline" to={'/backoffice/usuarios'}><OptionCard title={'Usuarios'} icon={<FaUsers size={70} />} /></Link>
+					<Link className="no-underline" to={'/backoffice/slides'}><OptionCard title={'Slides'} icon={<FaSlideshare size={70} />} /></Link>
 				</>
 				}
 

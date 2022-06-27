@@ -13,7 +13,6 @@ export const SlidesList = () => {
 	useEffect(() => {
 		dispatch(getAllNews());
 	}, []);
-	console.log(news);
 
 	return (
 		<div className='mb-10'>

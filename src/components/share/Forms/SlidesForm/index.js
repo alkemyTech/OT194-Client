@@ -43,14 +43,22 @@ export const SlidesForm = () => {
 		const fileReader = new FileReader();
 		fileReader.onload = () => {
 			if (fileReader.readyState === 2) {
-				slides[i].imageUrl = fileReader.result;
+				const imageUrl = fileReader.result;
+				const newImages = images;
+				newImages[i] = imageUrl;
+				setImages(newImages);
 			}
-			console.log(slides[i].imageUrl);
 		};
 		fileReader.readAsDataURL(e.target.files[0]);
 	};
 
 	const handleSubmit = (data) => {
+		const altTexts = [
+			data.text0,
+			data.text1,
+			data.text2
+		];
+
 		images.forEach(image => {
 			setImgError(false);
 			if (!image) {
@@ -62,17 +70,23 @@ export const SlidesForm = () => {
 			}
 		});
 		if (slides) {
-			data.forEach((slide, i) => {
-				slide.imageUrl !== images[i] &&	localStorage.setItem('file', slide.imageUrl);
-				dispatch(modifySlide(data));
+			slides.forEach((slide, i) => {
+				if (slide.imageUrl !== images[i]) {
+					localStorage.setItem('file', images[i]);
+				}
+				dispatch(modifySlide({ slide: { ...slide, text: altTexts[i] }, newsId }));
+				localStorage.removeItem('file');
 			});
-			navigate('/backoffice/news');
+			navigate('/backoffice/slides');
 		} else {
-			data.forEach((slide, i) => {
-				slide.imageUrl !== images[i] && localStorage.setItem('file', slide.imageUrl);
-				dispatch(createSlide(data));
+			slides.forEach((slide, i) => {
+				if (slide.imageUrl !== images[i]) {
+					localStorage.setItem('file', images[i]);
+				}
+				dispatch(createSlide({ slide: { text: altTexts[i], ...slide }, newsId }));
+				localStorage.removeItem('file');
 			});
-			navigate('/backoffice/news');
+			navigate('/backoffice/slides');
 		}
 
 		dispatch(newsActions.resetOpenedNews());
@@ -89,7 +103,12 @@ export const SlidesForm = () => {
 		>
 			<Formik
 				enableReinitialize
-				initialValues={slides}
+				// initialValues={slides}
+				initialValues={{
+					text0: slides[0].text,
+					text1: slides[1].text,
+					text2: slides[2].text
+				}}
 				onSubmit={handleSubmit}
 			>
 				{({ errors, values, handleBlur, handleChange }) => (
@@ -97,7 +116,6 @@ export const SlidesForm = () => {
 						{ slides.map((slide, i) =>
 							<>
 								<div className="flex flex-col gap-1 mb-3">
-
 									<label>{`Imagen slide ${i}`}</label>
 									{/* {imagePreview.i?.length
 										? (
@@ -130,19 +148,20 @@ export const SlidesForm = () => {
 										onChange={handleChange}
 										onBlur={handleBlur}
 										placeholder='Texto alternativo'
-										name='text'
+										name={`text${i}`}
 										type='text'
-										value={(values[i].text)}
+										value={i === 0 ? values.text0 : i === 1 ? values.text1 : values.text2}
 										data-testid="test-id-form-control"
 									/>
 								</div>
-								<div className="flex flex-col gap-1 mb-3">
+								<div className="flex-col gap-1 mb-3 hidden">
 									<label className='text-left'>Orden</label>
 									<input
 										className="w-full shadow appearance-none border rounded py-3 box-border px-4 text-gray-700"
-										name='order'
+										name={`order${i}`}
 										type='number'
-										value={values[i].order}
+										onChange={handleChange}
+										value={i}
 										data-testid="test-id-form-control"
 									/>
 								</div>
