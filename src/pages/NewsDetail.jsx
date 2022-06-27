@@ -24,7 +24,7 @@ export const NewsDetail = () => {
 			</div>
 			<div className="flex flex-col px-5 md:px-8 w-1/2 mx-auto items-start">
 				<h2 className="font-sans">{title}</h2>
-				<div className="special-p w-full text-left overflow-hidden">{newsDetails ? parse(newsDetails?.content) : 'La novedad solicitad no fue encontrada.'}</div>
+				<div className="special-p w-full text-left overflow-hidden">{newsDetails?.content ? parse(newsDetails?.content) : 'La novedad solicitad no fue encontrada.'}</div>
 				<a className="sm:mx-0 mb-4 mt-8" href={'/'}>
 					<button className="hover:scale-105 transition-transform appearance-none border border-transparent text-base w-44 text rounded-lg cursor-pointer bg-redOng text-white py-3">
             Volver al inicio

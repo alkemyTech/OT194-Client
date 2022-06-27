@@ -33,6 +33,7 @@ import { ActivitiesList } from './components/ActivitiesList/ActivitiesList';
 import { ActivitiesForm } from './components/share/Forms/ActivitiesForm';
 import { UsersList } from './components/UsersList/UsersList';
 import { EditUserForm } from './components/share/Forms/EditUserForm';
+import { Activities } from './pages/Activities';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -75,6 +76,7 @@ function App () {
 						<Route path='/nosotros' element={<Staff />} />
 						<Route path='/news' element={<News/>} />
 						<Route path='/news/:id' element={<NewsDetail />} />
+						<Route path='/actividades' element={<Activities />} />
 						<Route path='/actividades/:id' element={<ActivityDetail />} />
 						<Route path='/testimonios' element={<Testimonios />} />
 						<Route path='/testimonios/add' element={<TestimonialsForm />} />
