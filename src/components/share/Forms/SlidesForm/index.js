@@ -142,7 +142,7 @@ export const SlidesForm = () => {
 										/>
 										<label className="flex items-center gap-2 -mt-5" htmlFor={`upload-button${i}`}>
 											<h3 className="text-left whitespace-nowrap text-white p-1.5 rounded-lg bg-red-500 cursor-pointer hover:bg-red-400" htmlFor>Seleccionar imagen</h3>
-											<p className="text-left m-0">{images[i]?.slice(0, 5) !== 'https' ? 'Archivo Cargado' : 'No hay archivo cargado'}</p>
+											<p className="text-left m-0">{images[i]?.slice(0, 4) === 'data' ? 'Archivo Cargado' : 'No hay archivo cargado'}</p>
 										</label>
 										{imgError ? <div className="text-red-800 font-bold mt-1 text-left">Archivo no soportado</div> : null}
 									</div>
