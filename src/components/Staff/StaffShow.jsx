@@ -51,8 +51,8 @@ export const StaffShow = ({ isLimited, isCentered, className }) => {
 		<div className={`${className} flex flex-wrap gap-4`}>
 			{
 				staff.length >= 1
-					? staff.slice(0, (isLimited ? 5 : staff.length)).map(data => (
-						<StaffCard key={data.id} data={data} />
+					? staff.slice(0, (isLimited ? 5 : staff.length)).map((data, i) => (
+						<StaffCard key={i} data={data} />
 					))
 					: <p>No hay miembros</p>
 			}

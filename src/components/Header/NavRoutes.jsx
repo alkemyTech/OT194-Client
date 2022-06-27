@@ -9,6 +9,7 @@ export function NavRoutes () {
 		{ text: 'Inicio', route: '/' },
 		{ text: 'Nosotros', route: '/nosotros' },
 		{ text: 'Novedades', route: '/news' },
+		{ text: 'Actividades', route: '/actividades' },
 		{ text: 'Testimonios',	route: '/testimonios' },
 		{ text: 'Contacto', route: '/contacto' }
 	];

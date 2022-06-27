@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ActivitiesShow } from '../components/Activities/ActivitiesShow';
 import { NewsShow } from '../components/News/NewsShow';
 import { StaffShow } from '../components/Staff/StaffShow';
 import { TestimonialsShow } from '../components/Testimonials/TestimonialsShow';
@@ -7,7 +8,7 @@ import { TestimonialsShow } from '../components/Testimonials/TestimonialsShow';
 function Dashboard () {
 	return (
 		<div className='flex flex-col overflow-hidden mx-auto my-9'
-			style={{ width: '95vw', maxWidth: '1200px' }}
+			style={{ width: '90vw', maxWidth: '1200px' }}
 		>
 			<div className="flex flex-col-reverse lg:flex-row items-start justify-between mb-20 lg:mb-14 gap-4 lg:gap-10">
 				<div
@@ -35,23 +36,30 @@ function Dashboard () {
 				<div className='flex flex-col gap-4'>
 					<div className='w-full flex items-center justify-between'>
 						<span className='text-2xl font-black'>Nuestro Staff</span>
-						<Link to={'nosotros'} className='no-underline'>Ver todos</Link>
+						<Link to={'nosotros'} className='no-underline text-black visited:text-black hover:text-neutral-500'>Ver todos</Link>
 					</div>
 					<StaffShow isLimited className="justify-center md:justify-start" />
 				</div>
 				<div className='flex flex-col gap-4'>
 					<div className='w-full flex items-center justify-between'>
 						<span className='text-2xl font-black'>Testimonios</span>
-						<Link to={'testimonios'} className='no-underline'>Ver todos</Link>
+						<Link to={'testimonios'} className='no-underline text-black visited:text-black hover:text-neutral-500'>Ver todos</Link>
 					</div>
 					<TestimonialsShow isLimited className="justify-center md:justify-start" />
 				</div>
 				<div className='flex flex-col gap-4'>
 					<div className='w-full flex items-center justify-between'>
 						<span className='text-2xl font-black'>Novedades</span>
-						<Link to={'news'} className='no-underline'>Ver todos</Link>
+						<Link to={'news'} className='no-underline text-black visited:text-black hover:text-neutral-500'>Ver todos</Link>
 					</div>
 					<NewsShow isLimited className="justify-center md:justify-start" />
+				</div>
+				<div className='flex flex-col gap-4'>
+					<div className='w-full flex items-center justify-between'>
+						<span className='text-2xl font-black'>Actividades</span>
+						<Link to={'actividades'} className='no-underline text-black visited:text-black hover:text-neutral-500'>Ver todos</Link>
+					</div>
+					<ActivitiesShow isLimited className="justify-center md:justify-start" />
 				</div>
 			</div>
 		</div>

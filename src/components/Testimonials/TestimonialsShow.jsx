@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getAllTestimonials } from '../../features/testimonials/testimonialsSlice';
 import { TestimonyCard } from './TestimonyCard';
 
-export const TestimonialsShow = ({ isLimited, isCentered, className }) => {
+export const TestimonialsShow = ({ isLimited, className }) => {
 	const dispatch = useDispatch();
 	const testimonials = useSelector(state => state.testimonials.allTestimonials);
 
@@ -27,6 +27,5 @@ export const TestimonialsShow = ({ isLimited, isCentered, className }) => {
 
 TestimonialsShow.propTypes = {
 	isLimited: PropTypes.bool,
-	isCentered: PropTypes.bool,
 	className: PropTypes.string
 };
