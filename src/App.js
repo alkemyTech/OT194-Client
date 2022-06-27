@@ -118,6 +118,10 @@ function App () {
 									element={<ActivitiesList />}
 								/>
 								<Route
+									path='/backoffice/activities/create'
+									element={<ActivitiesForm />}
+								/>
+								<Route
 									path='/backoffice/activities/:id'
 									element={<ActivitiesForm />}
 								/>

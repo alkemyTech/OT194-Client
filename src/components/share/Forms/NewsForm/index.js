@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PropTypes } from 'prop-types';
@@ -11,8 +12,7 @@ import {
 	createNews,
 	newsActions
 } from '../../../../features/news/newsSlice';
-
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 
 const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -25,6 +25,7 @@ export const NewsForm = () => {
 	const [imgError, setImgError] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const { id: newsId } = useParams();
 
@@ -65,12 +66,12 @@ export const NewsForm = () => {
 			return setImgError(true);
 		}
 
-		if (newsId && news.name.length > 0) {
+		if (newsId && location.pathname !== '/backoffice/news/create') {
 			dispatch(modifyNews(data));
 			navigate('/backoffice/news');
 		} else {
 			dispatch(createNews(data));
-			navigate('/backoffice/slides');
+			navigate('/backoffice/news');
 		}
 		dispatch(newsActions.resetOpenedNews());
 	};
@@ -176,7 +177,7 @@ export const NewsForm = () => {
 							type='submit'
 							className='mt-3 text-white bg-redOng hover:bg-redOng focus:ring rounded border-0 py-3 px-6 cursor-pointer hover:opacity-50'
 						>
-							{(newsId > 0) ? 'Modificar' : 'Crear'}
+							{(location.pathname !== '/backoffice/news/create') ? 'Modificar' : 'Crear'}
 						</button>
 					</Form>
 				)}

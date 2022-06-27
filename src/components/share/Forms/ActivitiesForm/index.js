@@ -3,13 +3,13 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PropTypes } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import {
-	getActivity
-	, activitiesActions
-	, modifyActivity
+	getActivity,
+	activitiesActions,
+	modifyActivity,
+	createActivity
 } from '../../../../features/activities/activitiesSlice';
-
 import { Field, Form, Formik } from 'formik';
 import { activitiesFormSchema } from './schemaActivitiesForm';
 
@@ -22,6 +22,7 @@ export const ActivitiesForm = () => {
 	const [imgError, setImgError] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const { id: activityId } = useParams();
 
@@ -60,11 +61,11 @@ export const ActivitiesForm = () => {
 			return setImgError(true);
 		}
 
-		if (activityId && activity.name.length > 0) {
+		if (location.pathname !== '/backoffice/activities/create') {
 			dispatch(modifyActivity(data));
 			navigate('/backoffice/activities');
 		} else {
-			// dispatch(createTestimony(data));
+			dispatch(createActivity(data));
 			navigate('/backoffice/activities');
 		}
 
@@ -169,7 +170,7 @@ export const ActivitiesForm = () => {
 							type='submit'
 							className='mt-3 text-white bg-redOng hover:bg-redOng focus:ring rounded border-0 py-3 px-6 cursor-pointer hover:opacity-50'
 						>
-							{(activityId > 0 && activity?.name?.length > 0) ? 'Modificar' : 'Crear'}
+							{(location.pathname !== '/backoffice/activities/create') ? 'Modificar' : 'Crear'}
 						</button>
 					</Form>
 				)}

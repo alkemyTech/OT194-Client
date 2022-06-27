@@ -10,6 +10,24 @@ const initialState = {
 	message: ''
 };
 
+// Create Activity
+export const createActivity = createAsyncThunk(
+	'activities/createActivity',
+	async (data, thunkAPI) => {
+		try {
+			return await axiosInstance('/activities', { ...data }, 'POST');
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
 // GET ACTIVITIES
 export const getActivities = createAsyncThunk(
 	'activities/getAllData',
@@ -99,6 +117,20 @@ export const activitiesSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
+		// Create Activity
+			.addCase(createActivity.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(createActivity.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.activities.push(action.payload);
+			})
+			.addCase(createActivity.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
 		// GetAll
 			.addCase(getActivities.pending, (state) => {
 				state.isLoading = true;

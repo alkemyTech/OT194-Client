@@ -107,7 +107,7 @@ export const ActivitiesList = () => {
 		</div>
 		<Link
 			className='border-0 px-6 py-2 rounded bg-green-400 text-white cursor-pointer text-md no-underline'
-			to={'/backoffice/news/create'}
+			to={'/backoffice/activities/create'}
 		>Crear Entry</Link>
 	</div>
 	);

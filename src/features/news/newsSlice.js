@@ -58,9 +58,7 @@ export const createNews = createAsyncThunk(
 	'news/createData',
 	async (data, thunkAPI) => {
 		try {
-			await axiosInstance('/news', { ...data }, 'POST');
-			const allData = await axiosInstance('/news', {}, 'GET');
-			return allData;
+			return await axiosInstance('/news', { ...data }, 'POST');
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -162,6 +160,7 @@ export const newsSlice = createSlice({
 			.addCase(createNews.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
+				state.allNews.push(action.payload);
 			})
 			.addCase(createNews.rejected, (state, action) => {
 				state.isLoading = false;
