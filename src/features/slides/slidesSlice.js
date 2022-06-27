@@ -14,7 +14,6 @@ const initialState = {
 export const getAllSlides = createAsyncThunk(
 	'slides/getAllData',
 	async (id, thunkAPI) => {
-		console.log(id);
 		try {
 			return await axiosInstance(`/slides/${id}`, {}, 'GET');
 		} catch (error) {
