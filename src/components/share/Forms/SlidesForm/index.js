@@ -134,13 +134,13 @@ export const SlidesForm = () => {
 										</div>
 										<input
 											accept="image/*"
-											id="upload-button"
+											id={`upload-button${i}`}
 											type="file"
-											name='imageUrl'
-											onChange={e => { handleImageChange(e, i); }}
+											name={`imageUrl${i}`}
+											onChange={e => handleImageChange(e, i)}
 											className='hidden'
 										/>
-										<label className="flex items-center gap-2 -mt-5" htmlFor='upload-button'>
+										<label className="flex items-center gap-2 -mt-5" htmlFor={`upload-button${i}`}>
 											<h3 className="text-left whitespace-nowrap text-white p-1.5 rounded-lg bg-red-500 cursor-pointer hover:bg-red-400" htmlFor>Seleccionar imagen</h3>
 											<p className="text-left m-0">{images[i]?.slice(0, 5) !== 'https' ? 'Archivo Cargado' : 'No hay archivo cargado'}</p>
 										</label>
