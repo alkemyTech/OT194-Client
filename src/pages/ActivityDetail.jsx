@@ -1,6 +1,5 @@
 import React from 'react';
-// import { useParams } from 'react-router-dom';
-// import { useFetch } from '../hooks/useFetch';
+const parse = require('html-react-parser');
 
 export const ActivityDetail = () => {
 	// Todavia no existe el endpoint para obtener una actividad en particular
@@ -25,7 +24,7 @@ export const ActivityDetail = () => {
 			</div>
 			<div className="flex flex-col px-3 md:px-5">
 				<h2 className="font-sans">{details ? details?.name : 'Se ha producido un error inesperado'}</h2>
-				<p className="m-0 p-0 font-medium text-lg">{details ? details?.content : 'La novedad solicitad no fue encontrada.'}</p>
+				<p className="m-0 p-0 font-medium text-lg special-p">{details ? parse(details?.content) : 'La novedad solicitad no fue encontrada.'}</p>
 				<a className="mx-auto sm:mx-0 mb-4 mt-8" href={'/'}>
 					<button className="hover:scale-105 transition-transform appearance-none border border-transparent text-base w-44 text rounded-lg cursor-pointer bg-redOng text-white py-3">
             Volver al inicio

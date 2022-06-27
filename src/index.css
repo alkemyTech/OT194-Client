@@ -8,6 +8,14 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.special-p p {
+  margin: 0;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+}
+
 .form-login {
 	font-size:small;
 }

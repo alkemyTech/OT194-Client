@@ -176,6 +176,7 @@ export const NewsForm = () => {
 									setFieldValue('content', data);
 								}}
 							/>
+							<span className="text-start">{values.content && `${values.content.length - 7} / 233 Caracteres`}</span>
 							{errors.content ? <div className="text-red-800 font-bold my-1 text-left">{errors.content}</div> : null}
 						</div>
 						<button
