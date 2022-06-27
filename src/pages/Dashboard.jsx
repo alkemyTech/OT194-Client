@@ -23,12 +23,12 @@ function Dashboard () {
 						<Link className='font-englebert text-white visited:text-white no-underline ' to={'contacto'}> Contactanos </Link>
 					</button>
 				</div>
-				<div className='mx-auto lg:mx-0 flex flex-col justify-end text-white my-auto lg:w-2/4'>
+				<div className='mx-auto lg:mx-0 flex flex-col justify-end text-white my-auto w-full sm:w-3/4 md:w-2/4 lg:w-2/4'>
 					<img
 						src="images/login-hands.png"
 						alt="manos unidas"
 						className="rounded-2xl"
-						style={{ height: '500px' }}
+						style={{ height: '100%', maxHeight: '500px' }}
 					/>
 				</div>
 			</div>

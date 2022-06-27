@@ -8,6 +8,17 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.hcardcol {
+  max-width: 448px !important;
+  max-height: 233px !important;
+  
+}
+
+.hcardrow {
+  max-width: 233px;
+  max-height: 448px;
+}
+
 .special-p p {
   margin: 0;
   text-align: left;

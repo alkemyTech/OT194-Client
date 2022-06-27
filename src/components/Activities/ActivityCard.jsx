@@ -6,17 +6,17 @@ const parse = require('html-react-parser');
 export const ActivityCard = ({ data }) => {
 	return (
 		<div
-			className="shadow-lg grid grid-cols-2 space-x-3 p-3 overflow-hidden bg-redOng rounded-3xl box-border border-solid border border-red-700"
-			style={{ width: '448px', height: '233px' }}
+			className="shadow-lg flex flex-col md:flex-row w-[233px] h-[448px] md:w-[448px] md:h-[233px] p-3 gap-2 overflow-hidden bg-redOng rounded-3xl box-border border-solid border border-red-700"
+			style={{ maxWidth: '448px', maxHeight: '448px' }}
 		>
-			<div className="box-content overflow-hidden">
+			<div className="box-content overflow-hidden h-1/2 md:h-full md:w-1/2">
 				<img
 					alt={data.name}
 					className="rounded-3xl h-full w-full bg-neutral-100 flex justify-center items-center overflow-hidden"
 					src={data.image}
 				/>
 			</div>
-			<div className="flex flex-col justify-between p-2.5">
+			<div className="flex flex-col justify-between box-border p-2.5 h-1/2 md:h-full md:w-1/2">
 				<div className="m-0 font-medium text-base text-left special-p" >
 					{parse(data.content.slice(0, 135))}
 				</div>
