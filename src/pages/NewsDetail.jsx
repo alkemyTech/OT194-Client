@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Slider from '../components/Slider';
-import { getNews } from '../features/news/newsSlice';
+import { getNews, newsActions } from '../features/news/newsSlice';
+
 const parse = require('html-react-parser');
 
 export const NewsDetail = () => {
@@ -14,6 +15,13 @@ export const NewsDetail = () => {
 	useEffect(() => {
 		dispatch(getNews(newsId));
 	}, [newsId]);
+
+	useEffect(() => {
+		return () => {
+			dispatch(newsActions.resetOpenedNews());
+		};
+	}, []);
+
 	const title = newsDetails?.name ? newsDetails?.name.trim().replace(/^\w/, (c) => c.toUpperCase()) : 'Se ha producido un error inesperado';
 	return (
 

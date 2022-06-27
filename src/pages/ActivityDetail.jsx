@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getActivity } from '../features/activities/activitiesSlice';
+import { activitiesActions, getActivity } from '../features/activities/activitiesSlice';
 const parse = require('html-react-parser');
 
 export const ActivityDetail = () => {
@@ -9,6 +9,12 @@ export const ActivityDetail = () => {
 	const activityDetails = useSelector(state => state.activities.activity);
 
 	const { id: newsId } = useParams();
+
+	useEffect(() => {
+		return () => {
+			dispatch(activitiesActions.resetActivities());
+		};
+	}, []);
 
 	useEffect(() => {
 		dispatch(getActivity(newsId));

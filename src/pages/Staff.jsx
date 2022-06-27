@@ -26,10 +26,13 @@ export const Staff = () => {
 					}}
 				>
 					<h1 className="m-0 mt-4 mx-auto lg:mx-0">{founder.name}</h1>
-					<h2 className="m-0 mt-1 mx-auto lg:mx-0 font-medium text-neutral-800">Rol que desempeña</h2>
+					<h2 className="m-0 mt-1 mx-auto lg:mx-0 font-medium text-neutral-800">Presidente / Fundadora</h2>
 					<p className="m-0 mt-1 text-center lg:text-left text-neutral-700 text-lg mb-5">
-            Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.Texto con descripcion de la persona y rol que desempeña.
-					</p>
+					Presidente María estudió economía y se especializó en economía para el
+					desarrollo. Comenzó como voluntaria en la fundación y fue quien promovió el
+					crecimiento y la organización de la institución acompañando la transformación
+					de un simple comedor barrial al centro comunitario de atención integral que es
+					hoy en día					</p>
 					<button
 						type='submit'
 						className='mt-auto mx-auto lg:mx-0 text-white bg-redOng hover:bg-redOng text-2xl font-bold rounded-2xl border-0 py-3 px-9 cursor-pointer hover:opacity-90'
