@@ -18,13 +18,6 @@ import { Form, Formik } from 'formik';
 const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 
 export const NewsForm = () => {
-	/* TODO:
-    Falta testear la conexion con los endpoints
-    Falta traer la novedad correctamente - se rompe todo por el endpoint
-    Falta subir la imagen correctamente
-    Las categorias estan harcodeadas tal y como lo pedia la story
-  */
-
 	const news = useSelector(state => state.news.openedNews);
 
 	const [imagePreview, setimagePreview] = useState(undefined);

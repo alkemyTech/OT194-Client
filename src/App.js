@@ -33,6 +33,8 @@ import { ActivitiesList } from './components/ActivitiesList/ActivitiesList';
 import { ActivitiesForm } from './components/share/Forms/ActivitiesForm';
 import { UsersList } from './components/UsersList/UsersList';
 import { EditUserForm } from './components/share/Forms/EditUserForm';
+import { SlidesList } from './components/SlidesList';
+import { SlidesForm } from './components/share/Forms/SlidesForm';
 
 function App () {
 	const { remember } = useSelector((state) => state.auth);
@@ -126,6 +128,14 @@ function App () {
 								<Route
 									path='/backoffice/usuarios/:id'
 									element={<EditUserForm />}
+								/>
+								<Route
+									path='/backoffice/slides'
+									element={<SlidesList />}
+								/>
+								<Route
+									path='/backoffice/slides/:id'
+									element={<SlidesForm />}
 								/>
 							</Route>
 						</Route>

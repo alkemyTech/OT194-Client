@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { OptionCard } from '../components/Backoffice/OptionCard';
-import { FaNewspaper, FaList, FaComments, FaSitemap, FaUsers, FaUser, FaUserSlash } from 'react-icons/fa';
+import { FaNewspaper, FaList, FaComments, FaSitemap, FaUsers, FaUser, FaUserSlash, FaSlideshare } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { CardDeleteUser } from '../components/Backoffice/CardDeleteUser';
 
@@ -20,6 +20,7 @@ export const BackOfficeScreen = () => {
 					<Link to={'/backoffice/testimonials'}><OptionCard title={'Testimonios'} icon={<FaComments size={70} />} /></Link>
 					<Link to={'/backoffice/organization'}><OptionCard title={'Organizacion'} icon={<FaSitemap size={70} />} /></Link>
 					<Link to={'/backoffice/usuarios'}><OptionCard title={'Usuarios'} icon={<FaUsers size={70} />} /></Link>
+					<Link to={'/backoffice/slides'}><OptionCard title={'Slides'} icon={<FaSlideshare size={70} />} /></Link>
 				</>
 				}
 
